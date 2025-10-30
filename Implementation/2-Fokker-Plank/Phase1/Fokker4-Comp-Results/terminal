@@ -1,0 +1,1069 @@
+  Step 900/1000: t=0.900, points=122, mass=1.000000, max(p)=27.6726
+  Step 1000/1000: t=1.000, points=124, mass=1.000000, max(p)=35.1658
+
+Final mesh statistics:
+  Final points: 124
+  Max points reached: 136
+  Refinement levels: [0 1 2]
+   ✓ Complete.
+
+3. Running Uniform Mesh Method...
+   ✓ Complete. Final L² norm: 1.084913
+
+======================================================================
+COMPARISON RESULTS:
+======================================================================
+
+1. Spectral Method:
+   L² Error: 9.576911e-04
+   L∞ Error: 1.648669e-03
+   Grid Points: 512
+
+2. AMR Method:
+   L² Error: 4.340893e+00
+   L∞ Error: 2.784179e+01
+   Final Points: 124
+   Max Points: 136
+   Efficiency: 4.13x reduction
+
+3. Uniform Mesh Method:
+   L² Error: 9.132737e-03
+   L∞ Error: 1.565353e-02
+   Grid Points: 200
+
+======================================================================
+ACCURACY RANKING:
+  1. Spectral: 9.576911e-04
+  2. Uniform: 9.132737e-03
+  3. AMR: 4.340893e+00
+======================================================================
+
+Comparison plot saved to: NumericalMethods-Comparison\BAJAJ_methods_comparison.png
+
+[2/14] Comparing methods for: HDFCBank-Data
+
+======================================================================
+INITIALIZING COMPARATOR: HDFCBank
+======================================================================
+Parameters:
+  μ (drift): 0.1577
+  σ (volatility): 0.2232
+  Domain: [6.112, 7.898]
+  x0: 6.872 (S0: 965.15)
+
+======================================================================
+RUNNING COMPARISON: HDFCBank
+======================================================================
+
+1. Running Spectral Method...
+WARNING: Stability conditions may be violated!
+  CFL = 0.0381
+  Diffusion stability = 2.0480
+   ✓ Complete. Final L² norm: 1.262133
+
+2. Running AMR Method...
+
+Adaptive Mesh Solver:
+  Initial points: 100
+  Time steps: 1000
+  Adaptation frequency: every 20 steps
+  Step 100/1000: t=0.100, points=137, mass=1.000000, max(p)=19.2218
+  Step 200/1000: t=0.200, points=130, mass=1.000000, max(p)=32.7714
+  Step 300/1000: t=0.300, points=126, mass=1.000000, max(p)=25.2576
+  Step 400/1000: t=0.400, points=125, mass=1.000000, max(p)=25.4727
+  Step 500/1000: t=0.500, points=125, mass=1.000000, max(p)=31.1418
+  Step 600/1000: t=0.600, points=125, mass=1.000000, max(p)=30.0815
+  Step 700/1000: t=0.700, points=123, mass=1.000000, max(p)=28.7911
+  Step 800/1000: t=0.800, points=123, mass=1.000000, max(p)=25.9806
+  Step 900/1000: t=0.900, points=124, mass=1.000000, max(p)=25.9925
+  Step 1000/1000: t=1.000, points=126, mass=1.000000, max(p)=28.0218
+
+Final mesh statistics:
+  Final points: 126
+  Max points reached: 137
+  Refinement levels: [0 1 2]
+   ✓ Complete.
+
+3. Running Uniform Mesh Method...
+   ✓ Complete. Final L² norm: 1.247624
+
+======================================================================
+COMPARISON RESULTS:
+======================================================================
+
+1. Spectral Method:
+   L² Error: 1.267889e-03
+   L∞ Error: 2.344381e-03
+   Grid Points: 512
+
+2. AMR Method:
+   L² Error: 4.098358e+00
+   L∞ Error: 2.746592e+01
+   Final Points: 126
+   Max Points: 137
+   Efficiency: 4.06x reduction
+
+3. Uniform Mesh Method:
+   L² Error: 1.246876e-02
+   L∞ Error: 2.291333e-02
+   Grid Points: 200
+
+======================================================================
+ACCURACY RANKING:
+  1. Spectral: 1.267889e-03
+  2. Uniform: 1.246876e-02
+  3. AMR: 4.098358e+00
+======================================================================
+
+Comparison plot saved to: NumericalMethods-Comparison\HDFCBank_methods_comparison.png
+
+[3/14] Comparing methods for: Hindalco-Data
+
+======================================================================
+INITIALIZING COMPARATOR: Hindalco
+======================================================================
+Parameters:
+  μ (drift): 0.2254
+  σ (volatility): 0.3862
+  Domain: [5.266, 8.355]
+  x0: 6.660 (S0: 780.35)
+
+======================================================================
+RUNNING COMPARISON: Hindalco
+======================================================================
+
+1. Running Spectral Method...
+WARNING: Stability conditions may be violated!
+  CFL = 0.0250
+  Diffusion stability = 2.0480
+   ✓ Complete. Final L² norm: 0.730062
+
+2. Running AMR Method...
+
+Adaptive Mesh Solver:
+  Initial points: 100
+  Time steps: 1000
+  Adaptation frequency: every 20 steps
+  Step 100/1000: t=0.100, points=135, mass=1.000000, max(p)=9.2020
+  Step 200/1000: t=0.200, points=128, mass=1.000000, max(p)=18.4011
+  Step 300/1000: t=0.300, points=125, mass=1.000000, max(p)=22.2959
+  Step 400/1000: t=0.400, points=123, mass=1.000000, max(p)=16.6853
+  Step 500/1000: t=0.500, points=121, mass=1.000000, max(p)=24.3635
+  Step 600/1000: t=0.600, points=124, mass=1.000000, max(p)=16.7961
+  Step 700/1000: t=0.700, points=125, mass=1.000000, max(p)=17.8884
+  Step 800/1000: t=0.800, points=124, mass=1.000000, max(p)=18.9678
+  Step 900/1000: t=0.900, points=124, mass=1.000000, max(p)=21.3197
+  Step 1000/1000: t=1.000, points=125, mass=1.000000, max(p)=16.2384
+
+Final mesh statistics:
+  Final points: 125
+  Max points reached: 135
+  Refinement levels: [0 1 2]
+   ✓ Complete.
+
+3. Running Uniform Mesh Method...
+   ✓ Complete. Final L² norm: 0.724523
+
+======================================================================
+COMPARISON RESULTS:
+======================================================================
+
+1. Spectral Method:
+   L² Error: 4.776522e-04
+   L∞ Error: 6.668479e-04
+   Grid Points: 512
+
+2. AMR Method:
+   L² Error: 3.081331e+00
+   L∞ Error: 1.496132e+01
+   Final Points: 125
+   Max Points: 135
+   Efficiency: 4.10x reduction
+
+3. Uniform Mesh Method:
+   L² Error: 6.097427e-03
+   L∞ Error: 8.545331e-03
+   Grid Points: 200
+
+======================================================================
+ACCURACY RANKING:
+  1. Spectral: 4.776522e-04
+  2. Uniform: 6.097427e-03
+  3. AMR: 3.081331e+00
+======================================================================
+
+Comparison plot saved to: NumericalMethods-Comparison\Hindalco_methods_comparison.png
+
+[4/14] Comparing methods for: HUL-Data
+
+======================================================================
+INITIALIZING COMPARATOR: HUL
+======================================================================
+Parameters:
+  μ (drift): 0.1390
+  σ (volatility): 0.2211
+  Domain: [7.072, 8.841]
+  x0: 7.842 (S0: 2544.90)
+
+======================================================================
+RUNNING COMPARISON: HUL
+======================================================================
+
+1. Running Spectral Method...
+WARNING: Stability conditions may be violated!
+  CFL = 0.0331
+  Diffusion stability = 2.0480
+   ✓ Complete. Final L² norm: 1.274008
+
+2. Running AMR Method...
+
+Adaptive Mesh Solver:
+  Initial points: 100
+  Time steps: 1000
+  Adaptation frequency: every 20 steps
+  Step 100/1000: t=0.100, points=136, mass=1.000000, max(p)=19.3586
+  Step 200/1000: t=0.200, points=128, mass=1.000000, max(p)=26.1345
+  Step 300/1000: t=0.300, points=127, mass=1.000000, max(p)=33.8023
+  Step 400/1000: t=0.400, points=125, mass=1.000000, max(p)=33.2989
+  Step 500/1000: t=0.500, points=124, mass=1.000000, max(p)=27.0427
+  Step 600/1000: t=0.600, points=125, mass=1.000000, max(p)=32.8375
+  Step 700/1000: t=0.700, points=125, mass=1.000000, max(p)=41.0717
+  Step 800/1000: t=0.800, points=124, mass=1.000000, max(p)=26.4923
+  Step 900/1000: t=0.900, points=125, mass=1.000000, max(p)=33.1350
+  Step 1000/1000: t=1.000, points=125, mass=1.000000, max(p)=40.9944
+
+Final mesh statistics:
+  Final points: 125
+  Max points reached: 136
+  Refinement levels: [0 1 2]
+   ✓ Complete.
+
+3. Running Uniform Mesh Method...
+   ✓ Complete. Final L² norm: 1.261236
+
+======================================================================
+COMPARISON RESULTS:
+======================================================================
+
+1. Spectral Method:
+   L² Error: 1.292259e-03
+   L∞ Error: 2.400649e-03
+   Grid Points: 512
+
+2. AMR Method:
+   L² Error: 4.490027e+00
+   L∞ Error: 3.574152e+01
+   Final Points: 125
+   Max Points: 136
+   Efficiency: 4.10x reduction
+
+3. Uniform Mesh Method:
+   L² Error: 1.110778e-02
+   L∞ Error: 2.052407e-02
+   Grid Points: 200
+
+======================================================================
+ACCURACY RANKING:
+  1. Spectral: 1.292259e-03
+  2. Uniform: 1.110778e-02
+  3. AMR: 4.490027e+00
+======================================================================
+
+Comparison plot saved to: NumericalMethods-Comparison\HUL_methods_comparison.png
+
+[5/14] Comparing methods for: ICICIBank-Data
+
+======================================================================
+INITIALIZING COMPARATOR: ICICIBank
+======================================================================
+Parameters:
+  μ (drift): 0.1842
+  σ (volatility): 0.3069
+  Domain: [6.129, 8.584]
+  x0: 7.219 (S0: 1365.20)
+
+======================================================================
+RUNNING COMPARISON: ICICIBank
+======================================================================
+
+1. Running Spectral Method...
+WARNING: Stability conditions may be violated!
+  CFL = 0.0286
+  Diffusion stability = 2.0480
+   ✓ Complete. Final L² norm: 0.918538
+
+2. Running AMR Method...
+
+Adaptive Mesh Solver:
+  Initial points: 100
+  Time steps: 1000
+  Adaptation frequency: every 20 steps
+  Step 100/1000: t=0.100, points=135, mass=1.000000, max(p)=12.2021
+  Step 200/1000: t=0.200, points=128, mass=1.000000, max(p)=17.3490
+  Step 300/1000: t=0.300, points=124, mass=1.000000, max(p)=19.9669
+  Step 400/1000: t=0.400, points=127, mass=1.000000, max(p)=25.5234
+  Step 500/1000: t=0.500, points=125, mass=1.000000, max(p)=23.8531
+  Step 600/1000: t=0.600, points=124, mass=1.000000, max(p)=19.4903
+  Step 700/1000: t=0.700, points=127, mass=1.000000, max(p)=25.4004
+  Step 800/1000: t=0.800, points=125, mass=1.000000, max(p)=22.6286
+  Step 900/1000: t=0.900, points=125, mass=1.000000, max(p)=18.2904
+  Step 1000/1000: t=1.000, points=127, mass=1.000000, max(p)=25.0606
+
+Final mesh statistics:
+  Final points: 127
+  Max points reached: 135
+  Refinement levels: [0 1 2]
+   ✓ Complete.
+
+3. Running Uniform Mesh Method...
+   ✓ Complete. Final L² norm: 0.910570
+
+======================================================================
+COMPARISON RESULTS:
+======================================================================
+
+1. Spectral Method:
+   L² Error: 6.943804e-04
+   L∞ Error: 1.093019e-03
+   Grid Points: 512
+
+2. AMR Method:
+   L² Error: 3.691660e+00
+   L∞ Error: 2.183553e+01
+   Final Points: 127
+   Max Points: 135
+   Efficiency: 4.03x reduction
+
+3. Uniform Mesh Method:
+   L² Error: 7.902975e-03
+   L∞ Error: 1.241133e-02
+   Grid Points: 200
+
+======================================================================
+ACCURACY RANKING:
+  1. Spectral: 6.943804e-04
+  2. Uniform: 7.902975e-03
+  3. AMR: 3.691660e+00
+======================================================================
+
+Comparison plot saved to: NumericalMethods-Comparison\ICICIBank_methods_comparison.png
+
+[6/14] Comparing methods for: Infosys-Data
+
+======================================================================
+INITIALIZING COMPARATOR: Infosys
+======================================================================
+Parameters:
+  μ (drift): 0.1378
+  σ (volatility): 0.2660
+  Domain: [6.315, 8.443]
+  x0: 7.277 (S0: 1446.60)
+
+======================================================================
+RUNNING COMPARISON: Infosys
+======================================================================
+
+1. Running Spectral Method...
+WARNING: Stability conditions may be violated!
+  CFL = 0.0247
+  Diffusion stability = 2.0480
+   ✓ Complete. Final L² norm: 1.059444
+
+2. Running AMR Method...
+
+Adaptive Mesh Solver:
+  Initial points: 100
+  Time steps: 1000
+  Adaptation frequency: every 20 steps
+  Step 100/1000: t=0.100, points=135, mass=1.000000, max(p)=13.3076
+  Step 200/1000: t=0.200, points=128, mass=1.000000, max(p)=27.2484
+  Step 300/1000: t=0.300, points=127, mass=1.000000, max(p)=27.6141
+  Step 400/1000: t=0.400, points=125, mass=1.000000, max(p)=22.2824
+  Step 500/1000: t=0.500, points=125, mass=1.000000, max(p)=34.2094
+  Step 600/1000: t=0.600, points=122, mass=1.000000, max(p)=22.2768
+  Step 700/1000: t=0.700, points=125, mass=1.000000, max(p)=32.8095
+  Step 800/1000: t=0.800, points=123, mass=1.000000, max(p)=20.6256
+  Step 900/1000: t=0.900, points=125, mass=1.000000, max(p)=34.6353
+  Step 1000/1000: t=1.000, points=125, mass=1.000000, max(p)=22.7226
+
+Final mesh statistics:
+  Final points: 125
+  Max points reached: 135
+  Refinement levels: [0 1 2]
+   ✓ Complete.
+
+3. Running Uniform Mesh Method...
+   ✓ Complete. Final L² norm: 1.051520
+
+======================================================================
+COMPARISON RESULTS:
+======================================================================
+
+1. Spectral Method:
+   L² Error: 8.998791e-04
+   L∞ Error: 1.523635e-03
+   Grid Points: 512
+
+2. AMR Method:
+   L² Error: 3.695953e+00
+   L∞ Error: 2.248830e+01
+   Final Points: 125
+   Max Points: 135
+   Efficiency: 4.10x reduction
+
+3. Uniform Mesh Method:
+   L² Error: 7.577960e-03
+   L∞ Error: 1.279239e-02
+   Grid Points: 200
+
+======================================================================
+ACCURACY RANKING:
+  1. Spectral: 8.998791e-04
+  2. Uniform: 7.577960e-03
+  3. AMR: 3.695953e+00
+======================================================================
+
+Comparison plot saved to: NumericalMethods-Comparison\Infosys_methods_comparison.png
+
+[7/14] Comparing methods for: ITC-Data
+
+======================================================================
+INITIALIZING COMPARATOR: ITC
+======================================================================
+Parameters:
+  μ (drift): 0.0795
+  σ (volatility): 0.2512
+  Domain: [5.045, 7.055]
+  x0: 6.002 (S0: 404.30)
+
+======================================================================
+RUNNING COMPARISON: ITC
+======================================================================
+
+1. Running Spectral Method...
+WARNING: Stability conditions may be violated!
+  CFL = 0.0122
+  Diffusion stability = 2.0480
+   ✓ Complete. Final L² norm: 1.121971
+
+2. Running AMR Method...
+
+Adaptive Mesh Solver:
+  Initial points: 100
+  Time steps: 1000
+  Adaptation frequency: every 20 steps
+  Step 100/1000: t=0.100, points=135, mass=1.000000, max(p)=15.4185
+  Step 200/1000: t=0.200, points=128, mass=1.000000, max(p)=24.7654
+  Step 300/1000: t=0.300, points=125, mass=1.000000, max(p)=22.8856
+  Step 400/1000: t=0.400, points=125, mass=1.000000, max(p)=21.1518
+  Step 500/1000: t=0.500, points=126, mass=1.000000, max(p)=23.5243
+  Step 600/1000: t=0.600, points=125, mass=1.000000, max(p)=24.4689
+  Step 700/1000: t=0.700, points=126, mass=1.000000, max(p)=21.3817
+  Step 800/1000: t=0.800, points=123, mass=1.000000, max(p)=21.7095
+  Step 900/1000: t=0.900, points=123, mass=1.000000, max(p)=21.9077
+  Step 1000/1000: t=1.000, points=123, mass=1.000000, max(p)=24.2855
+
+Final mesh statistics:
+  Final points: 123
+  Max points reached: 135
+  Refinement levels: [0 1 2]
+   ✓ Complete.
+
+3. Running Uniform Mesh Method...
+   ✓ Complete. Final L² norm: 1.117834
+
+======================================================================
+COMPARISON RESULTS:
+======================================================================
+
+1. Spectral Method:
+   L² Error: 1.003975e-03
+   L∞ Error: 1.749891e-03
+   Grid Points: 512
+
+2. AMR Method:
+   L² Error: 3.884810e+00
+   L∞ Error: 2.627151e+01
+   Final Points: 123
+   Max Points: 135
+   Efficiency: 4.16x reduction
+
+3. Uniform Mesh Method:
+   L² Error: 4.397791e-03
+   L∞ Error: 7.677767e-03
+   Grid Points: 200
+
+======================================================================
+ACCURACY RANKING:
+  1. Spectral: 1.003975e-03
+  2. Uniform: 4.397791e-03
+  3. AMR: 3.884810e+00
+======================================================================
+
+Comparison plot saved to: NumericalMethods-Comparison\ITC_methods_comparison.png
+
+[8/14] Comparing methods for: L&T-Data
+
+======================================================================
+INITIALIZING COMPARATOR: L&T
+======================================================================
+Parameters:
+  μ (drift): 0.1603
+  σ (volatility): 0.2680
+  Domain: [7.277, 9.421]
+  x0: 8.225 (S0: 3733.10)
+
+======================================================================
+RUNNING COMPARISON: L&T
+======================================================================
+
+1. Running Spectral Method...
+WARNING: Stability conditions may be violated!
+  CFL = 0.0297
+  Diffusion stability = 2.0480
+   ✓ Complete. Final L² norm: 1.051676
+
+2. Running AMR Method...
+
+Adaptive Mesh Solver:
+  Initial points: 100
+  Time steps: 1000
+  Adaptation frequency: every 20 steps
+  Step 100/1000: t=0.100, points=136, mass=1.000000, max(p)=15.8459
+  Step 200/1000: t=0.200, points=129, mass=1.000000, max(p)=19.8649
+  Step 300/1000: t=0.300, points=125, mass=1.000000, max(p)=23.6603
+  Step 400/1000: t=0.400, points=125, mass=1.000000, max(p)=31.4217
+  Step 500/1000: t=0.500, points=122, mass=1.000000, max(p)=24.2532
+  Step 600/1000: t=0.600, points=122, mass=1.000000, max(p)=26.7491
+  Step 700/1000: t=0.700, points=122, mass=1.000000, max(p)=34.3974
+  Step 800/1000: t=0.800, points=124, mass=1.000000, max(p)=21.5468
+  Step 900/1000: t=0.900, points=125, mass=1.000000, max(p)=30.3165
+  Step 1000/1000: t=1.000, points=125, mass=1.000000, max(p)=30.5074
+
+Final mesh statistics:
+  Final points: 125
+  Max points reached: 136
+  Refinement levels: [0 1 2]
+   ✓ Complete.
+
+3. Running Uniform Mesh Method...
+   ✓ Complete. Final L² norm: 1.042206
+
+======================================================================
+COMPARISON RESULTS:
+======================================================================
+
+1. Spectral Method:
+   L² Error: 8.875160e-04
+   L∞ Error: 1.497104e-03
+   Grid Points: 512
+
+2. AMR Method:
+   L² Error: 3.950554e+00
+   L∞ Error: 2.900209e+01
+   Final Points: 125
+   Max Points: 136
+   Efficiency: 4.10x reduction
+
+3. Uniform Mesh Method:
+   L² Error: 8.896745e-03
+   L∞ Error: 1.494614e-02
+   Grid Points: 200
+
+======================================================================
+ACCURACY RANKING:
+  1. Spectral: 8.875160e-04
+  2. Uniform: 8.896745e-03
+  3. AMR: 3.950554e+00
+======================================================================
+
+Comparison plot saved to: NumericalMethods-Comparison\L&T_methods_comparison.png
+
+[9/14] Comparing methods for: Nifty-50-Data
+
+======================================================================
+INITIALIZING COMPARATOR: Nifty-50
+======================================================================
+Parameters:
+  μ (drift): 0.1176
+  σ (volatility): 0.1644
+  Domain: [9.569, 10.884]
+  x0: 10.122 (S0: 24894.25)
+
+======================================================================
+RUNNING COMPARISON: Nifty-50
+======================================================================
+
+1. Running Spectral Method...
+WARNING: Stability conditions may be violated!
+  CFL = 0.0405
+  Diffusion stability = 2.0480
+   ✓ Complete. Final L² norm: 1.712124
+
+2. Running AMR Method...
+
+Adaptive Mesh Solver:
+  Initial points: 100
+  Time steps: 1000
+  Adaptation frequency: every 20 steps
+  Step 100/1000: t=0.100, points=136, mass=1.000000, max(p)=30.9303
+  Step 200/1000: t=0.200, points=130, mass=1.000000, max(p)=41.7569
+  Step 300/1000: t=0.300, points=126, mass=1.000000, max(p)=30.8691
+  Step 400/1000: t=0.400, points=125, mass=1.000000, max(p)=44.9612
+  Step 500/1000: t=0.500, points=125, mass=1.000000, max(p)=55.1441
+  Step 600/1000: t=0.600, points=125, mass=1.000000, max(p)=49.4663
+  Step 700/1000: t=0.700, points=125, mass=1.000000, max(p)=45.4509
+  Step 800/1000: t=0.800, points=125, mass=1.000000, max(p)=40.8296
+  Step 900/1000: t=0.900, points=126, mass=1.000000, max(p)=37.5808
+  Step 1000/1000: t=1.000, points=126, mass=1.000000, max(p)=36.5812
+
+Final mesh statistics:
+  Final points: 126
+  Max points reached: 136
+  Refinement levels: [0 1 2]
+   ✓ Complete.
+
+3. Running Uniform Mesh Method...
+   ✓ Complete. Final L² norm: 1.691248
+
+======================================================================
+COMPARISON RESULTS:
+======================================================================
+
+1. Spectral Method:
+   L² Error: 2.429128e-03
+   L∞ Error: 5.225742e-03
+   Grid Points: 512
+
+2. AMR Method:
+   L² Error: 4.699482e+00
+   L∞ Error: 3.865389e+01
+   Final Points: 126
+   Max Points: 136
+   Efficiency: 4.06x reduction
+
+3. Uniform Mesh Method:
+   L² Error: 1.626730e-02
+   L∞ Error: 3.480469e-02
+   Grid Points: 200
+
+======================================================================
+ACCURACY RANKING:
+  1. Spectral: 2.429128e-03
+  2. Uniform: 1.626730e-02
+  3. AMR: 4.699482e+00
+======================================================================
+
+Comparison plot saved to: NumericalMethods-Comparison\Nifty-50_methods_comparison.png
+
+[10/14] Comparing methods for: Reliance-Data
+
+======================================================================
+INITIALIZING COMPARATOR: Reliance
+======================================================================
+Parameters:
+  μ (drift): 0.2187
+  σ (volatility): 0.2721
+  Domain: [6.311, 8.488]
+  x0: 7.218 (S0: 1363.40)
+
+======================================================================
+RUNNING COMPARISON: Reliance
+======================================================================
+
+1. Running Spectral Method...
+WARNING: Stability conditions may be violated!
+  CFL = 0.0427
+  Diffusion stability = 2.0480
+   ✓ Complete. Final L² norm: 1.035706
+
+2. Running AMR Method...
+
+Adaptive Mesh Solver:
+  Initial points: 100
+  Time steps: 1000
+  Adaptation frequency: every 20 steps
+  Step 100/1000: t=0.100, points=138, mass=1.000000, max(p)=16.2113
+  Step 200/1000: t=0.200, points=129, mass=1.000000, max(p)=22.9351
+  Step 300/1000: t=0.300, points=125, mass=1.000000, max(p)=28.9534
+  Step 400/1000: t=0.400, points=125, mass=1.000000, max(p)=26.5279
+  Step 500/1000: t=0.500, points=125, mass=1.000000, max(p)=21.2834
+  Step 600/1000: t=0.600, points=125, mass=1.000000, max(p)=33.1112
+  Step 700/1000: t=0.700, points=125, mass=1.000000, max(p)=30.9495
+  Step 800/1000: t=0.800, points=126, mass=1.000000, max(p)=22.0971
+  Step 900/1000: t=0.900, points=126, mass=1.000000, max(p)=18.8737
+  Step 1000/1000: t=1.000, points=128, mass=1.000000, max(p)=20.2171
+
+Final mesh statistics:
+  Final points: 128
+  Max points reached: 138
+  Refinement levels: [0 1 2]
+   ✓ Complete.
+
+3. Running Uniform Mesh Method...
+   ✓ Complete. Final L² norm: 1.022369
+
+======================================================================
+COMPARISON RESULTS:
+======================================================================
+
+1. Spectral Method:
+   L² Error: 8.624835e-04
+   L∞ Error: 1.443618e-03
+   Grid Points: 512
+
+2. AMR Method:
+   L² Error: 3.625594e+00
+   L∞ Error: 2.158086e+01
+   Final Points: 128
+   Max Points: 138
+   Efficiency: 4.00x reduction
+
+3. Uniform Mesh Method:
+   L² Error: 1.222455e-02
+   L∞ Error: 2.033724e-02
+   Grid Points: 200
+
+======================================================================
+ACCURACY RANKING:
+  1. Spectral: 8.624835e-04
+  2. Uniform: 1.222455e-02
+  3. AMR: 3.625594e+00
+======================================================================
+
+Comparison plot saved to: NumericalMethods-Comparison\Reliance_methods_comparison.png
+
+[11/14] Comparing methods for: SBI-Data
+
+======================================================================
+INITIALIZING COMPARATOR: SBI
+======================================================================
+Parameters:
+  μ (drift): 0.1497
+  σ (volatility): 0.3275
+  Domain: [5.551, 8.172]
+  x0: 6.765 (S0: 867.30)
+
+======================================================================
+RUNNING COMPARISON: SBI
+======================================================================
+
+1. Running Spectral Method...
+WARNING: Stability conditions may be violated!
+  CFL = 0.0188
+  Diffusion stability = 2.0480
+   ✓ Complete. Final L² norm: 0.860700
+
+2. Running AMR Method...
+
+Adaptive Mesh Solver:
+  Initial points: 100
+  Time steps: 1000
+  Adaptation frequency: every 20 steps
+  Step 100/1000: t=0.100, points=135, mass=1.000000, max(p)=10.8309
+  Step 200/1000: t=0.200, points=130, mass=1.000000, max(p)=15.8008
+  Step 300/1000: t=0.300, points=126, mass=1.000000, max(p)=22.2788
+  Step 400/1000: t=0.400, points=125, mass=1.000000, max(p)=17.1248
+  Step 500/1000: t=0.500, points=124, mass=1.000000, max(p)=25.7992
+  Step 600/1000: t=0.600, points=125, mass=1.000000, max(p)=25.7381
+  Step 700/1000: t=0.700, points=124, mass=1.000000, max(p)=20.3353
+  Step 800/1000: t=0.800, points=125, mass=1.000000, max(p)=17.5055
+  Step 900/1000: t=0.900, points=125, mass=1.000000, max(p)=22.5578
+  Step 1000/1000: t=1.000, points=127, mass=1.000000, max(p)=25.8283
+
+Final mesh statistics:
+  Final points: 127
+  Max points reached: 135
+  Refinement levels: [0 1 2]
+   ✓ Complete.
+
+3. Running Uniform Mesh Method...
+   ✓ Complete. Final L² norm: 0.855797
+
+======================================================================
+COMPARISON RESULTS:
+======================================================================
+
+1. Spectral Method:
+   L² Error: 6.211117e-04
+   L∞ Error: 9.453499e-04
+   Grid Points: 512
+
+2. AMR Method:
+   L² Error: 3.613646e+00
+   L∞ Error: 2.335908e+01
+   Final Points: 127
+   Max Points: 135
+   Efficiency: 4.03x reduction
+
+3. Uniform Mesh Method:
+   L² Error: 5.204994e-03
+   L∞ Error: 7.935768e-03
+   Grid Points: 200
+
+======================================================================
+ACCURACY RANKING:
+  1. Spectral: 6.211117e-04
+  2. Uniform: 5.204994e-03
+  3. AMR: 3.613646e+00
+======================================================================
+
+Comparison plot saved to: NumericalMethods-Comparison\SBI_methods_comparison.png
+
+[12/14] Comparing methods for: TATAMotors-Data
+
+======================================================================
+INITIALIZING COMPARATOR: TATAMotors
+======================================================================
+Parameters:
+  μ (drift): 0.1189
+  σ (volatility): 0.4089
+  Domain: [4.974, 8.245]
+  x0: 6.574 (S0: 716.10)
+
+======================================================================
+RUNNING COMPARISON: TATAMotors
+======================================================================
+
+1. Running Spectral Method...
+WARNING: Stability conditions may be violated!
+  CFL = 0.0055
+  Diffusion stability = 2.0480
+   ✓ Complete. Final L² norm: 0.689561
+
+2. Running AMR Method...
+
+Adaptive Mesh Solver:
+  Initial points: 100
+  Time steps: 1000
+  Adaptation frequency: every 20 steps
+  Step 100/1000: t=0.100, points=135, mass=1.000000, max(p)=11.5248
+  Step 200/1000: t=0.200, points=129, mass=1.000000, max(p)=14.7810
+  Step 300/1000: t=0.300, points=127, mass=1.000000, max(p)=13.9019
+  Step 400/1000: t=0.400, points=125, mass=1.000000, max(p)=14.7996
+  Step 500/1000: t=0.500, points=123, mass=1.000000, max(p)=16.9072
+  Step 600/1000: t=0.600, points=125, mass=1.000000, max(p)=22.2842
+  Step 700/1000: t=0.700, points=124, mass=1.000000, max(p)=13.2054
+  Step 800/1000: t=0.800, points=125, mass=1.000000, max(p)=16.1067
+  Step 900/1000: t=0.900, points=125, mass=1.000000, max(p)=21.6737
+  Step 1000/1000: t=1.000, points=125, mass=1.000000, max(p)=21.2097
+
+Final mesh statistics:
+  Final points: 125
+  Max points reached: 135
+  Refinement levels: [0 1 2]
+   ✓ Complete.
+
+3. Running Uniform Mesh Method...
+   ✓ Complete. Final L² norm: 0.688446
+
+======================================================================
+COMPARISON RESULTS:
+======================================================================
+
+1. Spectral Method:
+   L² Error: 4.390109e-04
+   L∞ Error: 5.945790e-04
+   Grid Points: 512
+
+2. AMR Method:
+   L² Error: 3.312299e+00
+   L∞ Error: 1.876999e+01
+   Final Points: 125
+   Max Points: 135
+   Efficiency: 4.10x reduction
+
+3. Uniform Mesh Method:
+   L² Error: 1.607146e-03
+   L∞ Error: 2.220835e-03
+   Grid Points: 200
+
+======================================================================
+ACCURACY RANKING:
+  1. Spectral: 4.390109e-04
+  2. Uniform: 1.607146e-03
+  3. AMR: 3.312299e+00
+======================================================================
+
+Comparison plot saved to: NumericalMethods-Comparison\TATAMotors_methods_comparison.png
+
+[13/14] Comparing methods for: TataSteel-Data
+
+======================================================================
+INITIALIZING COMPARATOR: TataSteel
+======================================================================
+Parameters:
+  μ (drift): 0.2136
+  σ (volatility): 0.3628
+  Domain: [3.851, 6.754]
+  x0: 5.155 (S0: 173.21)
+
+======================================================================
+RUNNING COMPARISON: TataSteel
+======================================================================
+
+1. Running Spectral Method...
+WARNING: Stability conditions may be violated!
+  CFL = 0.0261
+  Diffusion stability = 2.0480
+   ✓ Complete. Final L² norm: 0.777014
+
+2. Running AMR Method...
+
+Adaptive Mesh Solver:
+  Initial points: 100
+  Time steps: 1000
+  Adaptation frequency: every 20 steps
+  Step 100/1000: t=0.100, points=135, mass=1.000000, max(p)=9.3389
+  Step 200/1000: t=0.200, points=130, mass=1.000000, max(p)=18.4356
+  Step 300/1000: t=0.300, points=130, mass=1.000000, max(p)=22.2074
+  Step 400/1000: t=0.400, points=125, mass=1.000000, max(p)=17.0395
+  Step 500/1000: t=0.500, points=124, mass=1.000000, max(p)=16.6383
+  Step 600/1000: t=0.600, points=123, mass=1.000000, max(p)=25.0095
+  Step 700/1000: t=0.700, points=122, mass=1.000000, max(p)=16.0258
+  Step 800/1000: t=0.800, points=124, mass=1.000000, max(p)=24.4685
+  Step 900/1000: t=0.900, points=125, mass=1.000000, max(p)=14.9715
+  Step 1000/1000: t=1.000, points=126, mass=1.000000, max(p)=23.1228
+
+Final mesh statistics:
+  Final points: 126
+  Max points reached: 135
+  Refinement levels: [0 1 2]
+   ✓ Complete.
+
+3. Running Uniform Mesh Method...
+   ✓ Complete. Final L² norm: 0.770865
+
+======================================================================
+COMPARISON RESULTS:
+======================================================================
+
+1. Spectral Method:
+   L² Error: 5.258215e-04
+   L∞ Error: 7.586572e-04
+   Grid Points: 512
+
+2. AMR Method:
+   L² Error: 3.491638e+00
+   L∞ Error: 2.032679e+01
+   Final Points: 126
+   Max Points: 135
+   Efficiency: 4.06x reduction
+
+3. Uniform Mesh Method:
+   L² Error: 6.572669e-03
+   L∞ Error: 9.499820e-03
+   Grid Points: 200
+
+======================================================================
+ACCURACY RANKING:
+  1. Spectral: 5.258215e-04
+  2. Uniform: 6.572669e-03
+  3. AMR: 3.491638e+00
+======================================================================
+
+Comparison plot saved to: NumericalMethods-Comparison\TataSteel_methods_comparison.png
+
+[14/14] Comparing methods for: TCS-Data
+
+======================================================================
+INITIALIZING COMPARATOR: TCS
+======================================================================
+Parameters:
+  μ (drift): 0.1070
+  σ (volatility): 0.2333
+  Domain: [7.120, 8.986]
+  x0: 7.973 (S0: 2901.90)
+
+======================================================================
+RUNNING COMPARISON: TCS
+======================================================================
+
+1. Running Spectral Method...
+WARNING: Stability conditions may be violated!
+  CFL = 0.0219
+  Diffusion stability = 2.0480
+   ✓ Complete. Final L² norm: 1.207652
+
+2. Running AMR Method...
+
+Adaptive Mesh Solver:
+  Initial points: 100
+  Time steps: 1000
+  Adaptation frequency: every 20 steps
+  Step 100/1000: t=0.100, points=134, mass=1.000000, max(p)=13.5504
+  Step 200/1000: t=0.200, points=129, mass=1.000000, max(p)=32.0692
+  Step 300/1000: t=0.300, points=124, mass=1.000000, max(p)=24.6949
+  Step 400/1000: t=0.400, points=122, mass=1.000000, max(p)=38.1338
+  Step 500/1000: t=0.500, points=124, mass=1.000000, max(p)=29.7013
+  Step 600/1000: t=0.600, points=124, mass=1.000000, max(p)=26.6085
+  Step 700/1000: t=0.700, points=125, mass=1.000000, max(p)=37.0835
+  Step 800/1000: t=0.800, points=124, mass=1.000000, max(p)=25.2798
+  Step 900/1000: t=0.900, points=125, mass=1.000000, max(p)=36.3929
+  Step 1000/1000: t=1.000, points=124, mass=1.000000, max(p)=30.6045
+
+Final mesh statistics:
+  Final points: 124
+  Max points reached: 134
+  Refinement levels: [0 1 2]
+   ✓ Complete.
+
+3. Running Uniform Mesh Method...
+   ✓ Complete. Final L² norm: 1.199630
+
+======================================================================
+COMPARISON RESULTS:
+======================================================================
+
+1. Spectral Method:
+   L² Error: 1.160163e-03
+   L∞ Error: 2.098333e-03
+   Grid Points: 512
+
+2. AMR Method:
+   L² Error: 4.069658e+00
+   L∞ Error: 3.036654e+01
+   Final Points: 124
+   Max Points: 134
+   Efficiency: 4.13x reduction
+
+3. Uniform Mesh Method:
+   L² Error: 7.495144e-03
+   L∞ Error: 1.351746e-02
+   Grid Points: 200
+
+======================================================================
+ACCURACY RANKING:
+  1. Spectral: 1.160163e-03
+  2. Uniform: 7.495144e-03
+  3. AMR: 4.069658e+00
+======================================================================
+
+Comparison plot saved to: NumericalMethods-Comparison\TCS_methods_comparison.png
+
+================================================================================
+COMPARISON COMPLETE
+================================================================================
+Total stocks analyzed: 14
+
+Best method by stock:
+  BAJAJ: Spectral (L²: 9.58e-04)
+  HDFCBank: Spectral (L²: 1.27e-03)
+  Hindalco: Spectral (L²: 4.78e-04)
+  HUL: Spectral (L²: 1.29e-03)
+  ICICIBank: Spectral (L²: 6.94e-04)
+  Infosys: Spectral (L²: 9.00e-04)
+  ITC: Spectral (L²: 1.00e-03)
+  L&T: Spectral (L²: 8.88e-04)
+  Nifty-50: Spectral (L²: 2.43e-03)
+  Reliance: Spectral (L²: 8.62e-04)
+  SBI: Spectral (L²: 6.21e-04)
+  TATAMotors: Spectral (L²: 4.39e-04)
+  TataSteel: Spectral (L²: 5.26e-04)
+  TCS: Spectral (L²: 1.16e-03)
+
+Results saved to: NumericalMethods-Comparison/
+
+✅ Comparison complete!
+Summary saved to: NumericalMethods-Comparison/numerical_methods_summary.csv
+(modelEnv) PS E:\Modelling\Project\Notebook> 

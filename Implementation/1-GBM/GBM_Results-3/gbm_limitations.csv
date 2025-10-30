@@ -1,0 +1,15 @@
+asset,vol_clustering_present,autocorrelation_present,excess_kurtosis,is_normal,n_obs
+BAJAJ,True,False,8.629193407972464,False,2664
+HDFCBank,True,True,10.679243414909314,False,2665
+Hindalco,True,True,3.8384425039791825,False,2664
+HUL,True,True,6.570513146723359,False,2664
+ICICIBank,True,True,9.321260052236044,False,2664
+Infosys,True,False,9.932527727286221,False,2664
+ITC,True,True,8.20033691064288,False,2665
+L&T,True,False,10.096094894858625,False,2664
+Nifty-50,True,True,20.310972928249974,False,2665
+Reliance,True,False,8.410416725881175,False,2665
+SBI,True,True,12.315625474447781,False,2665
+TATAMotors,True,False,6.759812629736135,False,2664
+TataSteel,True,False,3.332087511135536,False,2665
+TCS,True,False,3.6362877655593806,False,2664

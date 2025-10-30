@@ -1,0 +1,394 @@
+(modelEnv) PS E:\Modelling\Project\Notebook> python .\test.py
+================================================================================
+STEP 2.2: DENSITY DISTANCE METRICS - COMPLETE ANALYSIS
+================================================================================
+
+1. LOADING STOCK DATA...
+Loaded BAJAJ: (2664, 8)
+Loaded HDFCBank: (2665, 8)
+Loaded Hindalco: (2664, 8)
+Loaded HUL: (2664, 8)
+Loaded ICICIBank: (2664, 8)
+Loaded Infosys: (2664, 8)
+Loaded ITC: (2665, 8)
+Loaded L&T: (2664, 8)
+Loaded Nifty-50: (2665, 8)
+Loaded Reliance: (2665, 8)
+Loaded SBI: (2665, 8)
+Loaded TATAMotors: (2664, 8)
+Loaded TataSteel: (2665, 8)
+Loaded TCS: (2664, 8)
+
+Total stocks loaded: 14
+BAJAJ: 2663 returns computed
+HDFCBank: 2664 returns computed
+Hindalco: 2663 returns computed
+HUL: 2663 returns computed
+ICICIBank: 2663 returns computed
+Infosys: 2663 returns computed
+ITC: 2664 returns computed
+L&T: 2663 returns computed
+Nifty-50: 2664 returns computed
+Reliance: 2664 returns computed
+SBI: 2664 returns computed
+TATAMotors: 2663 returns computed
+TataSteel: 2664 returns computed
+TCS: 2663 returns computed
+
+✓ Computed returns for 14 stocks
+
+2. VALIDATING DISTANCE METRICS...
+
+=== VALIDATION RESULTS ===
+                                         wasserstein  ks_statistic  ks_pvalue  hellinger
+Identical (N(0,1) vs N(0,1))                0.065884         0.045   0.263472   0.130466
+Shifted Mean (N(0,1) vs N(0.5,1))           0.486502         0.207   0.000000   0.206274
+Different Variance (N(0,1) vs N(0,2))       0.875656         0.201   0.000000   0.371683
+Different Distribution (N(0,1) vs t(5))     0.242401         0.074   0.008353   0.165543
+
+3. ANALYZING STOCK DISTRIBUTIONS...
+✓ Pairwise distance matrices computed
+
+=== NORMALITY COMPARISON ===
+                mean       std wasserstein   ks_stat   ks_pval hellinger is_normal
+BAJAJ       0.000475  0.016216      0.0026  0.079234       0.0  0.121492     False
+HDFCBank    0.000522   0.01406    0.002193  0.071697  0.000002  0.123779     False
+Hindalco    0.000595  0.024326    0.002952  0.058581  0.000214  0.107478     False
+HUL         0.000456   0.01393    0.001803  0.067968  0.000009  0.112499     False
+ICICIBank   0.000534  0.019324    0.003405  0.083365       0.0  0.136107     False
+Infosys     0.000399  0.016753    0.002677  0.071724  0.000002   0.12585     False
+ITC         0.000189  0.015822    0.002313  0.066441  0.000016  0.127632     False
+L&T         0.000486  0.016877    0.002792  0.075103  0.000001  0.136138     False
+Nifty-50    0.000408  0.010354    0.001909   0.08033       0.0  0.130934     False
+Reliance    0.000722  0.017142    0.002724  0.066066  0.000018  0.118867     False
+SBI          0.00038  0.020632    0.003534  0.076577       0.0  0.126774     False
+TATAMotors   0.00013  0.025751    0.004198  0.073977  0.000001  0.137281     False
+TataSteel   0.000581  0.022854      0.0031  0.070195  0.000004   0.12064     False
+TCS         0.000312  0.014696    0.002127  0.071724  0.000002  0.119713     False
+
+Stocks consistent with normality (KS p > 0.05): False
+
+4. CREATING VISUALIZATIONS...
+
+5. COMPARING DISTRIBUTION MODELS...
+
+Comparing models for BAJAJ...
+  distribution  log_likelihood           AIC           BIC   delta_AIC   delta_BIC
+1            t     7450.431729 -14894.863457 -14877.201832    0.000000    0.000000
+2      laplace     7434.183934 -14864.367869 -14852.593451   30.495589   24.608380
+3       cauchy     7209.340247 -14414.680494 -14402.906077  480.182963  474.295754
+0       normal     7197.655481 -14391.310962 -14379.536545  503.552495  497.665286
+
+Comparing models for HDFCBank...
+  distribution  log_likelihood           AIC           BIC   delta_AIC   delta_BIC
+1            t     7898.575642 -15791.151285 -15773.488533    0.000000    0.000000
+2      laplace     7867.069244 -15730.138488 -15718.363320   61.012797   55.125213
+3       cauchy     7660.345246 -15316.690491 -15304.915323  474.460794  468.573210
+0       normal     7580.434010 -15156.868020 -15145.092852  634.283265  628.395681
+
+Comparing models for Hindalco...
+  distribution  log_likelihood           AIC           BIC   delta_AIC   delta_BIC
+1            t     6254.475406 -12502.950811 -12485.289186    0.000000    0.000000
+2      laplace     6241.281605 -12478.563210 -12466.788793   24.387601   18.500393
+0       normal     6117.643975 -12231.287950 -12219.513533  271.662861  265.775653
+3       cauchy     5978.071120 -11952.142240 -11940.367823  550.808571  544.921362
+
+Comparing models for HUL...
+  distribution  log_likelihood           AIC           BIC   delta_AIC   delta_BIC
+1            t     7789.232444 -15572.464888 -15554.803262    0.000000    0.000000
+2      laplace     7767.309002 -15530.618004 -15518.843587   41.846884   35.959675
+0       normal     7602.166715 -15200.333430 -15188.559013  372.131458  366.244250
+3       cauchy     7517.012481 -15030.024961 -15018.250544  542.439927  536.552718
+
+Comparing models for ICICIBank...
+  distribution  log_likelihood           AIC           BIC   delta_AIC   delta_BIC
+1            t     7033.799148 -14061.598296 -14043.936670    0.000000    0.000000
+2      laplace     7019.607102 -14035.214204 -14023.439787   26.384092   20.496884
+3       cauchy     6819.334991 -13634.669981 -13622.895564  426.928315  421.041107
+0       normal     6730.657617 -13457.315234 -13445.540817  604.283062  598.395854
+
+Comparing models for Infosys...
+  distribution  log_likelihood           AIC           BIC   delta_AIC   delta_BIC
+1            t     7372.151809 -14738.303618 -14720.641992    0.000000    0.000000
+2      laplace     7331.078451 -14658.156902 -14646.382485   80.146715   74.259507
+0       normal     7110.815684 -14217.631368 -14205.856951  520.672249  514.785040
+3       cauchy     7092.005380 -14180.010760 -14168.236343  558.292857  552.405649
+
+Comparing models for ITC...
+  distribution  log_likelihood           AIC           BIC   delta_AIC   delta_BIC
+1            t     7544.973173 -15083.946347 -15066.283595    0.000000    0.000000
+2      laplace     7511.913195 -15019.826389 -15008.051221   64.119957   58.232373
+3       cauchy     7295.493695 -14586.987389 -14575.212221  496.958957  491.071373
+0       normal     7265.848641 -14527.697283 -14515.922115  556.249064  550.361480
+
+Comparing models for L&T...
+  distribution  log_likelihood           AIC           BIC   delta_AIC   delta_BIC
+1            t     7350.730486 -14695.460972 -14677.799346    0.000000    0.000000
+2      laplace     7307.457362 -14610.914725 -14599.140307   84.546247   78.659039
+0       normal     7091.275740 -14178.551479 -14166.777062  516.909493  511.022284
+3       cauchy     7076.492180 -14148.984360 -14137.209943  546.476611  540.589403
+
+Comparing models for Nifty-50...
+  distribution  log_likelihood           AIC           BIC   delta_AIC   delta_BIC
+1            t     8766.167663 -17526.335327 -17508.672575    0.000000    0.000000
+2      laplace     8719.170008 -17434.340017 -17422.564849   91.995310   86.107726
+3       cauchy     8506.634771 -17009.269541 -16997.494373  517.065786  511.178201
+0       normal     8395.353384 -16786.706767 -16774.931599  739.628559  733.740975
+
+Comparing models for Reliance...
+  distribution  log_likelihood           AIC           BIC   delta_AIC   delta_BIC
+1            t     7300.099252 -14594.198504 -14576.535752    0.000000    0.000000
+2      laplace     7261.783031 -14519.566062 -14507.790894   74.632442   68.744858
+0       normal     7052.408361 -14100.816723 -14089.041555  493.381781  487.494197
+3       cauchy     7016.974779 -14029.949557 -14018.174389  564.248947  558.361363
+
+Comparing models for SBI...
+  distribution  log_likelihood           AIC           BIC   delta_AIC   delta_BIC
+1            t     6825.725796 -13645.451593 -13627.788841    0.000000    0.000000
+2      laplace     6807.740787 -13611.481575 -13599.706407   33.970018   28.082434
+3       cauchy     6577.832977 -13151.665954 -13139.890786  493.785639  487.898055
+0       normal     6558.761651 -13113.523302 -13101.748134  531.928291  526.040707
+
+Comparing models for TATAMotors...
+  distribution  log_likelihood           AIC           BIC   delta_AIC   delta_BIC
+1            t     6245.138726 -12484.277452 -12466.615826    0.000000    0.000000
+2      laplace     6218.070029 -12432.140057 -12420.365640   52.137395   46.250186
+3       cauchy     6013.495976 -12022.991952 -12011.217534  461.285500  455.398292
+0       normal     5965.998073 -11927.996147 -11916.221730  556.281305  550.394097
+
+Comparing models for TataSteel...
+  distribution  log_likelihood           AIC           BIC   delta_AIC   delta_BIC
+1            t     6447.928938 -12889.857875 -12872.195123    0.000000    1.360665
+2      laplace     6444.665478 -12885.330957 -12873.555789    4.526919    0.000000
+0       normal     6286.230525 -12568.461050 -12556.685882  321.396825  316.869907
+3       cauchy     6206.049945 -12408.099889 -12396.324721  481.757986  477.231067
+
+Comparing models for TCS...
+  distribution  log_likelihood           AIC           BIC   delta_AIC   delta_BIC
+1            t     7619.444012 -15232.888025 -15215.226399    0.000000    0.000000
+2      laplace     7611.227921 -15218.455842 -15206.681425   14.432182    8.544974
+0       normal     7459.796107 -14915.592213 -14903.817796  317.295811  311.408603
+3       cauchy     7365.238887 -14726.477773 -14714.703356  506.410252  500.523043
+
+✓ Model comparison completed for all stocks
+
+=== BEST FITTING MODELS BY STOCK ===
+     Stock Best_Model  Log_Likelihood           AIC           BIC  delta_AIC_to_2nd
+     BAJAJ          t     7450.431729 -14894.863457 -14877.201832         30.495589
+  HDFCBank          t     7898.575642 -15791.151285 -15773.488533         61.012797
+  Hindalco          t     6254.475406 -12502.950811 -12485.289186         24.387601
+       HUL          t     7789.232444 -15572.464888 -15554.803262         41.846884
+ ICICIBank          t     7033.799148 -14061.598296 -14043.936670         26.384092
+   Infosys          t     7372.151809 -14738.303618 -14720.641992         80.146715
+       ITC          t     7544.973173 -15083.946347 -15066.283595         64.119957
+       L&T          t     7350.730486 -14695.460972 -14677.799346         84.546247
+  Nifty-50          t     8766.167663 -17526.335327 -17508.672575         91.995310
+  Reliance          t     7300.099252 -14594.198504 -14576.535752         74.632442
+       SBI          t     6825.725796 -13645.451593 -13627.788841         33.970018
+TATAMotors          t     6245.138726 -12484.277452 -12466.615826         52.137395
+ TataSteel          t     6447.928938 -12889.857875 -12872.195123          4.526919
+       TCS          t     7619.444012 -15232.888025 -15215.226399         14.432182
+
+=== MODEL SELECTION FREQUENCY ===
+Best_Model
+t    14
+Name: count, dtype: int64
+
+=== LIKELIHOOD RATIO TEST: Normal vs t-distribution ===
+     Stock  LR_Statistic  P_Value  Reject_Normal               Conclusion
+     BAJAJ    505.552495      0.0           True t-distribution preferred
+  HDFCBank    636.283265      0.0           True t-distribution preferred
+  Hindalco    273.662861      0.0           True t-distribution preferred
+       HUL    374.131458      0.0           True t-distribution preferred
+ ICICIBank    606.283062      0.0           True t-distribution preferred
+   Infosys    522.672249      0.0           True t-distribution preferred
+       ITC    558.249064      0.0           True t-distribution preferred
+       L&T    518.909493      0.0           True t-distribution preferred
+  Nifty-50    741.628559      0.0           True t-distribution preferred
+  Reliance    495.381781      0.0           True t-distribution preferred
+       SBI    533.928291      0.0           True t-distribution preferred
+TATAMotors    558.281305      0.0           True t-distribution preferred
+ TataSteel    323.396825      0.0           True t-distribution preferred
+       TCS    319.295811      0.0           True t-distribution preferred
+
+Stocks rejecting normality: 14/14
+
+6. CREATING ADVANCED DIAGNOSTICS...
+\n✓ QQ-plots saved as 'qq_plots_normal.png'
+
+7. EXPORTING RESULTS...
+✓ Saved normality comparison to 'normality_comparison_results.csv'
+✓ Saved distance matrices to CSV files
+✓ Saved best models summary to 'best_models_summary.csv'
+✓ Saved likelihood ratio tests to 'likelihood_ratio_tests.csv'
+✓ Saved model_comparison_BAJAJ.csv
+✓ Saved model_comparison_HDFCBank.csv
+✓ Saved model_comparison_Hindalco.csv
+✓ Saved model_comparison_HUL.csv
+✓ Saved model_comparison_ICICIBank.csv
+✓ Saved model_comparison_Infosys.csv
+✓ Saved model_comparison_ITC.csv
+✓ Saved model_comparison_L&T.csv
+✓ Saved model_comparison_Nifty-50.csv
+✓ Saved model_comparison_Reliance.csv
+✓ Saved model_comparison_SBI.csv
+✓ Saved model_comparison_TATAMotors.csv
+✓ Saved model_comparison_TataSteel.csv
+✓ Saved model_comparison_TCS.csv
+
+=== All results exported successfully ===
+
+================================================================================
+COMPLETE STEP 2.2 SUMMARY: DENSITY DISTANCE METRICS
+================================================================================
+
+### PART 1: STATISTICAL DISTANCE MEASURES ###
+--------------------------------------------------------------------------------
+Stocks analyzed: 14
+Average Wasserstein distance from normality: 0.002738
+Average KS statistic: 0.072356
+Average Hellinger distance: 0.124656
+Stocks passing normality test (p > 0.05): False/14
+
+### PART 2: LIKELIHOOD METHODS ###
+--------------------------------------------------------------------------------
+Model Selection Summary:
+  - T: 14 stock(s)
+
+Likelihood Ratio Tests (Normal vs t-distribution):
+  - Rejecting normality: 14/14 stocks
+  - Mean LR statistic: 497.6898
+
+### KEY FINDINGS ###
+--------------------------------------------------------------------------------
+Most normal distribution: Hindalco (KS p-value: 0.000214)
+Least normal distribution: ICICIBank (KS p-value: 0.000000)
+
+================================================================================
+✓ STEP 2.2 COMPLETE: All distance metrics, likelihood methods, and diagnostics implemented
+================================================================================
+(modelEnv) PS E:\Modelling\Project\Notebook> 
+
+=================================================
+
+Yes, we're good! ✅ The script ran successfully!
+Here's what happened in short:
+
+Summary of Results:
+Data Loaded Successfully: All 14 stocks loaded (~2,664 data points each), and log returns computed for each.
+
+Key Finding - None of the stocks follow a normal distribution:
+
+All 14 stocks failed the normality test (KS p-value < 0.05)
+All stocks show deviation from normal distribution
+Best Fitting Distribution:
+
+Student's t-distribution is the best fit for all 14 stocks
+This means your stock returns have heavier tails than normal distribution (more extreme values/outliers)
+Statistical Tests:
+
+Validated distance metrics (Wasserstein, KS, Hellinger)
+Compared 4 distributions: Normal, Student-t, Laplace, Cauchy
+Likelihood ratio tests confirm t-distribution is statistically superior
+Outputs Generated:
+
+📊 Multiple visualization plots (QQ-plots, distance matrices, diagnostics)
+📁 14+ CSV files with detailed results
+All saved in the Notebook folder
+What This Means:
+Your stock returns have fat tails and more volatility/extreme events than a normal distribution would predict. This is typical for financial markets and important for risk modeling (GBM and Fokker-Planck equations should account for this).
+
+=============================================
+
+
+Yes, you are **more than good\! This is a perfect run.**
+
+The previous `KeyError` is gone, the data was loaded correctly, and the entire analysis pipeline ran from start to finish without a single error.
+
+Here is what all this output means, in plain English:
+
+### 1\. The Fix Worked
+
+```
+BAJAJ: 2663 returns computed
+...
+TCS: 2663 returns computed
+✓ Computed returns for 14 stocks
+```
+
+This confirms the new `compute_stock_returns` function is correctly finding the price columns (likely `'Adj Close'`) and calculating log returns for all 14 of your data files.
+
+### 2\. Your Measurement Tools are Validated
+
+```
+=== VALIDATION RESULTS ===
+                                      ks_pvalue
+Identical (N(0,1) vs N(0,1))           0.263472
+Shifted Mean (N(0,1) vs N(0.5,1))      0.000000
+```
+
+This is your "sanity check." It shows that when two distributions are the same, the K-S p-value is high (0.26), so it correctly *fails* to find a difference. When they *are* different, the p-value is 0.0, so it correctly *finds* the difference. This proves your tools are working.
+
+### 3\. Key Finding \#1: Your Stock Returns are NOT Normally Distributed
+
+```
+=== NORMALITY COMPARISON ===
+               ks_pval  is_normal
+BAJAJ         0.000000      False
+HDFCBank      0.000002      False
+Hindalco      0.000214      False
+...
+Stocks consistent with normality (KS p > 0.05): False
+```
+
+This is your first major conclusion. The **`ks_pval` is effectively zero for every single stock**. This is definitive statistical proof that your data **does not** follow a Normal distribution. This is the classic "fat-tails" (leptokurtosis) problem in finance, and you have just proven it for your dataset.
+
+### 4\. Key Finding \#2: The Student's-t Model is a *Much* Better Fit
+
+```
+Comparing models for BAJAJ...
+  distribution  log_likelihood           AIC
+1            t     7450.431729  -14894.863457  <-- Best (Lowest AIC)
+0       normal     7197.655481  -14391.310962
+
+...
+
+=== MODEL SELECTION FREQUENCY ===
+Best_Model
+t     14
+Name: count, dtype: int64
+```
+
+This is your second major conclusion. When comparing models, the one with the **lowest AIC/BIC score wins**.
+
+  * For **all 14 stocks**, the **Student's-t distribution ('t')** has a *much* lower (more negative) AIC score than the `normal` distribution.
+  * The `MODEL SELECTION FREQUENCY` summary confirms this: the **'t' model was the best fit 14 out of 14 times.**
+
+### 5\. Key Finding \#3: The Normal Model is Statistically Rejected
+
+```
+=== LIKELIHOOD RATIO TEST: Normal vs t-distribution ===
+      Stock  P_Value  Reject_Normal              Conclusion
+      BAJAJ      0.0           True t-distribution preferred
+...
+Stocks rejecting normality: 14/14
+```
+
+This test confirms Finding \#2. It asks: "Is the Student's-t model *significantly* better than the Normal model, or is it just a random chance?"
+
+  * With a `P_Value` of 0.0, the answer is a resounding **yes, it is significantly better.**
+  * The `Reject_Normal: True` for all 14 stocks means you can confidently **reject the Normal (GBM) model** in favor of the fat-tailed Student's-t model.
+
+-----
+
+### **Overall Conclusion: What to do next**
+
+You are in an excellent position. **You have successfully completed Step 2.2.**
+
+You have built a robust testing framework, validated it, and used it to prove two critical facts about your data:
+
+1.  The simple Normal (GBM) model is **not** a good fit.
+2.  A fat-tailed model (like Student's-t) is **quantifiably superior**.
+
+Your next step (Step 2.3 or 3.1) is to take the model you are *actually* trying to build (your SDE / Fokker-Planck model) and see if it can **beat the Student's-t distribution**. Your new model must have a *lower AIC/BIC score* than the 't' model to be considered an improvement.
+

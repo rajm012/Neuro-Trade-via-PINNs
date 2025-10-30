@@ -1,0 +1,503 @@
+PS E:\Modelling\Project> & E:/Modelling/Project/modelEnv/Scripts/Activate.ps1
+(modelEnv) PS E:\Modelling\Project> cd .\Notebook\
+(modelEnv) PS E:\Modelling\Project\Notebook> python .\Fokker5_Spectral_Complete.py
+
+======================================================================
+SPECTRAL FOKKER-PLANCK ANALYSIS FOR ALL STOCKS
+======================================================================
+
+[1/14] Processing: BAJAJ-Data
+
+============================================================
+Spectral FP Analysis: BAJAJ
+============================================================
+Parameters:
+  μ (drift) = 0.1527
+  σ (volatility) = 0.2574
+  μ_adjusted = 0.1196
+
+Domain: [8.1586, 10.2180] (log-space)
+Grid points: 512
+Time horizon: 1.0 years
+Time step: 0.001
+Method: exponential
+WARNING: Stability conditions may be violated!
+  CFL = 0.0297
+  Diffusion stability = 2.0480
+
+============================================================
+Results:
+============================================================
+Numerical Accuracy:
+  L² error: 7.370546e-04
+  L∞ error: 1.266311e-03
+
+Price Statistics:
+  Current price: 8679.50
+  Expected price (T=1.0): 10111.78
+  Expected return: 16.50%
+
+Plot saved to: Fokker5-Spectral-Results\BAJAJ_spectral_analysis.png
+
+[2/14] Processing: HDFCBank-Data
+
+============================================================
+Spectral FP Analysis: HDFCBank
+============================================================
+Parameters:
+  μ (drift) = 0.1577
+  σ (volatility) = 0.2232
+  μ_adjusted = 0.1328
+
+Domain: [6.1122, 7.8980] (log-space)
+Grid points: 512
+Time horizon: 1.0 years
+Time step: 0.001
+Method: exponential
+WARNING: Stability conditions may be violated!
+  CFL = 0.0381
+  Diffusion stability = 2.0480
+
+============================================================
+Results:
+============================================================
+Numerical Accuracy:
+  L² error: 1.029828e-03
+  L∞ error: 1.903790e-03
+
+Price Statistics:
+  Current price: 965.15
+  Expected price (T=1.0): 1130.10
+  Expected return: 17.09%
+
+Plot saved to: Fokker5-Spectral-Results\HDFCBank_spectral_analysis.png
+
+[3/14] Processing: Hindalco-Data
+
+============================================================
+Spectral FP Analysis: Hindalco
+============================================================
+Parameters:
+  μ (drift) = 0.2254
+  σ (volatility) = 0.3862
+  μ_adjusted = 0.1508
+
+Domain: [5.2659, 8.3552] (log-space)
+Grid points: 512
+Time horizon: 1.0 years
+Time step: 0.001
+Method: exponential
+WARNING: Stability conditions may be violated!
+  CFL = 0.0250
+  Diffusion stability = 2.0480
+
+============================================================
+Results:
+============================================================
+Numerical Accuracy:
+  L² error: 3.032856e-04
+  L∞ error: 4.116539e-04
+
+Price Statistics:
+  Current price: 780.35
+  Expected price (T=1.0): 977.64
+  Expected return: 25.28%
+
+Plot saved to: Fokker5-Spectral-Results\Hindalco_spectral_analysis.png
+
+[4/14] Processing: HUL-Data
+
+============================================================
+Spectral FP Analysis: HUL
+============================================================
+Parameters:
+  μ (drift) = 0.1390
+  σ (volatility) = 0.2211
+  μ_adjusted = 0.1145
+
+Domain: [7.0718, 8.8409] (log-space)
+Grid points: 512
+Time horizon: 1.0 years
+Time step: 0.001
+Method: exponential
+WARNING: Stability conditions may be violated!
+  CFL = 0.0331
+  Diffusion stability = 2.0480
+
+============================================================
+Results:
+============================================================
+Numerical Accuracy:
+  L² error: 1.053023e-03
+  L∞ error: 1.955929e-03
+
+Price Statistics:
+  Current price: 2544.90
+  Expected price (T=1.0): 2924.42
+  Expected return: 14.91%
+
+Plot saved to: Fokker5-Spectral-Results\HUL_spectral_analysis.png
+
+[5/14] Processing: ICICIBank-Data
+
+============================================================
+Spectral FP Analysis: ICICIBank
+============================================================
+Parameters:
+  μ (drift) = 0.1842
+  σ (volatility) = 0.3069
+  μ_adjusted = 0.1372
+
+Domain: [6.1287, 8.5837] (log-space)
+Grid points: 512
+Time horizon: 1.0 years
+Time step: 0.001
+Method: exponential
+WARNING: Stability conditions may be violated!
+  CFL = 0.0286
+  Diffusion stability = 2.0480
+
+============================================================
+Results:
+============================================================
+Numerical Accuracy:
+  L² error: 4.943125e-04
+  L∞ error: 7.720684e-04
+
+Price Statistics:
+  Current price: 1365.20
+  Expected price (T=1.0): 1641.44
+  Expected return: 20.23%
+
+Plot saved to: Fokker5-Spectral-Results\ICICIBank_spectral_analysis.png
+
+[6/14] Processing: Infosys-Data
+
+============================================================
+Spectral FP Analysis: Infosys
+============================================================
+Parameters:
+  μ (drift) = 0.1378
+  σ (volatility) = 0.2660
+  μ_adjusted = 0.1025
+
+Domain: [6.3154, 8.4435] (log-space)
+Grid points: 512
+Time horizon: 1.0 years
+Time step: 0.001
+Method: exponential
+WARNING: Stability conditions may be violated!
+  CFL = 0.0247
+  Diffusion stability = 2.0480
+
+============================================================
+Results:
+============================================================
+Numerical Accuracy:
+  L² error: 6.831582e-04
+  L∞ error: 1.153580e-03
+
+Price Statistics:
+  Current price: 1446.60
+  Expected price (T=1.0): 1660.46
+  Expected return: 14.78%
+
+Plot saved to: Fokker5-Spectral-Results\Infosys_spectral_analysis.png
+
+[7/14] Processing: ITC-Data
+
+============================================================
+Spectral FP Analysis: ITC
+============================================================
+Parameters:
+  μ (drift) = 0.0795
+  σ (volatility) = 0.2512
+  μ_adjusted = 0.0480
+
+Domain: [5.0455, 7.0548] (log-space)
+Grid points: 512
+Time horizon: 1.0 years
+Time step: 0.001
+Method: exponential
+WARNING: Stability conditions may be violated!
+  CFL = 0.0122
+  Diffusion stability = 2.0480
+
+============================================================
+Results:
+============================================================
+Numerical Accuracy:
+  L² error: 7.803856e-04
+  L∞ error: 1.358063e-03
+
+Price Statistics:
+  Current price: 404.30
+  Expected price (T=1.0): 437.78
+  Expected return: 8.28%
+
+Plot saved to: Fokker5-Spectral-Results\ITC_spectral_analysis.png
+
+[8/14] Processing: L&T-Data
+
+============================================================
+Spectral FP Analysis: L&T
+============================================================
+Parameters:
+  μ (drift) = 0.1603
+  σ (volatility) = 0.2680
+  μ_adjusted = 0.1244
+
+Domain: [7.2775, 9.4213] (log-space)
+Grid points: 512
+Time horizon: 1.0 years
+Time step: 0.001
+Method: exponential
+WARNING: Stability conditions may be violated!
+  CFL = 0.0297
+  Diffusion stability = 2.0480
+
+============================================================
+Results:
+============================================================
+Numerical Accuracy:
+  L² error: 6.716686e-04
+  L∞ error: 1.129755e-03
+
+Price Statistics:
+  Current price: 3733.10
+  Expected price (T=1.0): 4382.42
+  Expected return: 17.39%
+
+Plot saved to: Fokker5-Spectral-Results\L&T_spectral_analysis.png
+
+[9/14] Processing: Nifty-50-Data
+
+============================================================
+Spectral FP Analysis: Nifty-50
+============================================================
+Parameters:
+  μ (drift) = 0.1176
+  σ (volatility) = 0.1644
+  μ_adjusted = 0.1040
+
+Domain: [9.5688, 10.8841] (log-space)
+Grid points: 512
+Time horizon: 1.0 years
+Time step: 0.001
+Method: exponential
+WARNING: Stability conditions may be violated!
+  CFL = 0.0405
+  Diffusion stability = 2.0480
+
+============================================================
+Results:
+============================================================
+Numerical Accuracy:
+  L² error: 2.150710e-03
+  L∞ error: 4.629073e-03
+
+Price Statistics:
+  Current price: 24894.25
+  Expected price (T=1.0): 28001.05
+  Expected return: 12.48%
+
+Plot saved to: Fokker5-Spectral-Results\Nifty-50_spectral_analysis.png
+
+[10/14] Processing: Reliance-Data
+
+============================================================
+Spectral FP Analysis: Reliance
+============================================================
+Parameters:
+  μ (drift) = 0.2187
+  σ (volatility) = 0.2721
+  μ_adjusted = 0.1817
+
+Domain: [6.3109, 8.4879] (log-space)
+Grid points: 512
+Time horizon: 1.0 years
+Time step: 0.001
+Method: exponential
+WARNING: Stability conditions may be violated!
+  CFL = 0.0427
+  Diffusion stability = 2.0480
+
+============================================================
+Results:
+============================================================
+Numerical Accuracy:
+  L² error: 6.484471e-04
+  L∞ error: 1.081832e-03
+
+Price Statistics:
+  Current price: 1363.40
+  Expected price (T=1.0): 1696.75
+  Expected return: 24.45%
+
+Plot saved to: Fokker5-Spectral-Results\Reliance_spectral_analysis.png
+
+[11/14] Processing: SBI-Data
+
+============================================================
+Spectral FP Analysis: SBI
+============================================================
+Parameters:
+  μ (drift) = 0.1497
+  σ (volatility) = 0.3275
+  μ_adjusted = 0.0961
+
+Domain: [5.5514, 8.1715] (log-space)
+Grid points: 512
+Time horizon: 1.0 years
+Time step: 0.001
+Method: exponential
+WARNING: Stability conditions may be violated!
+  CFL = 0.0188
+  Diffusion stability = 2.0480
+
+============================================================
+Results:
+============================================================
+Numerical Accuracy:
+  L² error: 4.284495e-04
+  L∞ error: 6.445701e-04
+
+Price Statistics:
+  Current price: 867.30
+  Expected price (T=1.0): 1007.39
+  Expected return: 16.15%
+
+Plot saved to: Fokker5-Spectral-Results\SBI_spectral_analysis.png
+
+[12/14] Processing: TATAMotors-Data
+
+============================================================
+Spectral FP Analysis: TATAMotors
+============================================================
+Parameters:
+  μ (drift) = 0.1189
+  σ (volatility) = 0.4089
+  μ_adjusted = 0.0353
+
+Domain: [4.9736, 8.2446] (log-space)
+Grid points: 512
+Time horizon: 1.0 years
+Time step: 0.001
+Method: exponential
+WARNING: Stability conditions may be violated!
+  CFL = 0.0055
+  Diffusion stability = 2.0480
+
+============================================================
+Results:
+============================================================
+Numerical Accuracy:
+  L² error: 2.708400e-04
+  L∞ error: 3.535249e-04
+
+Price Statistics:
+  Current price: 716.10
+  Expected price (T=1.0): 806.51
+  Expected return: 12.63%
+
+Plot saved to: Fokker5-Spectral-Results\TATAMotors_spectral_analysis.png
+
+[13/14] Processing: TataSteel-Data
+
+============================================================
+Spectral FP Analysis: TataSteel
+============================================================
+Parameters:
+  μ (drift) = 0.2136
+  σ (volatility) = 0.3628
+  μ_adjusted = 0.1478
+
+Domain: [3.8510, 6.7536] (log-space)
+Grid points: 512
+Time horizon: 1.0 years
+Time step: 0.001
+Method: exponential
+WARNING: Stability conditions may be violated!
+  CFL = 0.0261
+  Diffusion stability = 2.0480
+
+============================================================
+Results:
+============================================================
+Numerical Accuracy:
+  L² error: 3.446014e-04
+  L∞ error: 4.870753e-04
+
+Price Statistics:
+  Current price: 173.21
+  Expected price (T=1.0): 214.46
+  Expected return: 23.82%
+
+Plot saved to: Fokker5-Spectral-Results\TataSteel_spectral_analysis.png
+
+[14/14] Processing: TCS-Data
+
+============================================================
+Spectral FP Analysis: TCS
+============================================================
+Parameters:
+  μ (drift) = 0.1070
+  σ (volatility) = 0.2333
+  μ_adjusted = 0.0798
+
+Domain: [7.1197, 8.9862] (log-space)
+Grid points: 512
+Time horizon: 1.0 years
+Time step: 0.001
+Method: exponential
+WARNING: Stability conditions may be violated!
+  CFL = 0.0219
+  Diffusion stability = 2.0480
+
+============================================================
+Results:
+============================================================
+Numerical Accuracy:
+  L² error: 9.275889e-04
+  L∞ error: 1.676689e-03
+
+Price Statistics:
+  Current price: 2901.90
+  Expected price (T=1.0): 3229.90
+  Expected return: 11.30%
+
+Plot saved to: Fokker5-Spectral-Results\TCS_spectral_analysis.png
+
+======================================================================
+SUMMARY STATISTICS
+======================================================================
+     Stock  Drift (μ)  Volatility (σ)  Current Price  Expected Price (1Y)  Expected Return (%)  L² Error  L∞ Error
+     BAJAJ   0.152699        0.257416        8679.50         10111.778121            16.501851  0.000737  0.001266
+  HDFCBank   0.157741        0.223227         965.15          1130.104269            17.091050  0.001030  0.001904
+  Hindalco   0.225377        0.386173         780.35           977.644688            25.282846  0.000303  0.000412
+       HUL   0.138965        0.221142        2544.90          2924.423173            14.913088  0.001053  0.001956
+ ICICIBank   0.184238        0.306874        1365.20          1641.438068            20.234256  0.000494  0.000772
+   Infosys   0.137839        0.266013        1446.60          1660.455323            14.783307  0.000683  0.001154
+       ITC   0.079526        0.251167         404.30           437.782449             8.281585  0.000780  0.001358
+       L&T   0.160324        0.267981        3733.10          4382.417455            17.393519  0.000672  0.001130
+  Nifty-50   0.117561        0.164419       24894.25         28001.049319            12.479988  0.002151  0.004629
+  Reliance   0.218698        0.272119        1363.40          1696.752897            24.450117  0.000648  0.001082
+       SBI   0.149705        0.327517         867.30          1007.393889            16.152875  0.000428  0.000645
+TATAMotors   0.118870        0.408870         716.10           806.507799            12.625024  0.000271  0.000354
+ TataSteel   0.213612        0.362822         173.21           214.464839            23.817816  0.000345  0.000487
+       TCS   0.107047        0.233318        2901.90          3229.904877            11.303108  0.000928  0.001677
+
+Summary saved to: Fokker5-Spectral-Results\summary_statistics.csv
+
+Comparison plot saved to: Fokker5-Spectral-Results\all_stocks_comparison.png
+
+======================================================================
+SPECTRAL FOKKER-PLANCK ANALYSIS COMPLETE
+======================================================================
+
+Total stocks processed: 14
+Average L² error: 7.516681e-04
+Average L∞ error: 1.344565e-03
+
+All results saved to: Fokker5-Spectral-Results/
+(modelEnv) PS E:\Modelling\Project\Notebook> 

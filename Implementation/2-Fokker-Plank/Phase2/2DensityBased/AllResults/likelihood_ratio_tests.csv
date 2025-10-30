@@ -1,0 +1,15 @@
+Stock,LR_Statistic,P_Value,Reject_Normal,Conclusion
+BAJAJ,505.5524948579805,0.0,True,t-distribution preferred
+HDFCBank,636.2832651188946,0.0,True,t-distribution preferred
+Hindalco,273.66286117426534,0.0,True,t-distribution preferred
+HUL,374.13145816095675,0.0,True,t-distribution preferred
+ICICIBank,606.2830622062684,0.0,True,t-distribution preferred
+Infosys,522.6722490806442,0.0,True,t-distribution preferred
+ITC,558.2490639596908,0.0,True,t-distribution preferred
+L&T,518.9094925284207,0.0,True,t-distribution preferred
+Nifty-50,741.6285592360582,0.0,True,t-distribution preferred
+Reliance,495.38178146012797,0.0,True,t-distribution preferred
+SBI,533.9282911131995,0.0,True,t-distribution preferred
+TATAMotors,558.2813051764497,0.0,True,t-distribution preferred
+TataSteel,323.3968252539289,0.0,True,t-distribution preferred
+TCS,319.29581113738277,0.0,True,t-distribution preferred

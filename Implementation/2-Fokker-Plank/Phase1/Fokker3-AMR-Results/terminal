@@ -1,0 +1,678 @@
+PS E:\Modelling\Project> & E:/Modelling/Project/modelEnv/Scripts/Activate.ps1
+(modelEnv) PS E:\Modelling\Project> cd .\Notebook\
+(modelEnv) PS E:\Modelling\Project\Notebook> python .\Fokker3AMR.py
+
+======================================================================
+AMR ANALYSIS: BAJAJ-Data
+======================================================================
+
+Estimated Parameters:
+  μ (drift): 0.1527
+  σ (volatility): 0.2574
+  μ_adjusted: 0.1196
+
+Domain Setup:
+  x_min: 8.1586, x_max: 10.2180
+  x0 (current log-price): 9.0687
+  S0 (current price): 8679.50
+
+Adaptive Mesh Solver:
+  Initial points: 100
+  Time steps: 1000
+  Adaptation frequency: every 20 steps
+  Step 100/1000: t=0.100, points=136, mass=1.000000, max(p)=16.5396
+  Step 200/1000: t=0.200, points=130, mass=1.000000, max(p)=20.5658
+  Step 300/1000: t=0.300, points=125, mass=1.000000, max(p)=23.1920
+  Step 400/1000: t=0.400, points=122, mass=1.000000, max(p)=30.4378
+  Step 500/1000: t=0.500, points=122, mass=1.000000, max(p)=36.9181
+  Step 600/1000: t=0.600, points=122, mass=1.000000, max(p)=22.3287
+  Step 700/1000: t=0.700, points=121, mass=1.000000, max(p)=31.3440
+  Step 800/1000: t=0.800, points=123, mass=1.000000, max(p)=31.7533
+  Step 900/1000: t=0.900, points=122, mass=1.000000, max(p)=27.6726
+  Step 1000/1000: t=1.000, points=124, mass=1.000000, max(p)=35.1658
+
+Final mesh statistics:
+  Final points: 124
+  Max points reached: 136
+  Refinement levels: [0 1 2]
+
+======================================================================
+RESULTS:
+======================================================================
+Accuracy:
+  L² error: 8.219555e+00
+  L∞ error: 3.504038e+01
+
+Mesh Evolution:
+  Initial points: 100
+  Final points: 124
+  Max points: 136
+
+Plot saved to: Fokker3-AMR-Results\BAJAJ_AMR_analysis.png
+
+======================================================================
+AMR ANALYSIS: HDFCBank-Data
+======================================================================
+
+Estimated Parameters:
+  μ (drift): 0.1577
+  σ (volatility): 0.2232
+  μ_adjusted: 0.1328
+
+Domain Setup:
+  x_min: 6.1122, x_max: 7.8980
+  x0 (current log-price): 6.8723
+  S0 (current price): 965.15
+
+Adaptive Mesh Solver:
+  Initial points: 100
+  Time steps: 1000
+  Adaptation frequency: every 20 steps
+  Step 100/1000: t=0.100, points=137, mass=1.000000, max(p)=19.2218
+  Step 200/1000: t=0.200, points=130, mass=1.000000, max(p)=32.7714
+  Step 300/1000: t=0.300, points=126, mass=1.000000, max(p)=25.2576
+  Step 400/1000: t=0.400, points=125, mass=1.000000, max(p)=25.4727
+  Step 500/1000: t=0.500, points=125, mass=1.000000, max(p)=31.1418
+  Step 600/1000: t=0.600, points=125, mass=1.000000, max(p)=30.0815
+  Step 700/1000: t=0.700, points=123, mass=1.000000, max(p)=28.7911
+  Step 800/1000: t=0.800, points=123, mass=1.000000, max(p)=25.9806
+  Step 900/1000: t=0.900, points=124, mass=1.000000, max(p)=25.9925
+  Step 1000/1000: t=1.000, points=126, mass=1.000000, max(p)=28.0218
+
+Final mesh statistics:
+  Final points: 126
+  Max points reached: 137
+  Refinement levels: [0 1 2]
+
+======================================================================
+RESULTS:
+======================================================================
+Accuracy:
+  L² error: 7.274876e+00
+  L∞ error: 2.794428e+01
+
+Mesh Evolution:
+  Initial points: 100
+  Final points: 126
+  Max points: 137
+
+Plot saved to: Fokker3-AMR-Results\HDFCBank_AMR_analysis.png
+
+======================================================================
+AMR ANALYSIS: Hindalco-Data
+======================================================================
+
+Estimated Parameters:
+  μ (drift): 0.2254
+  σ (volatility): 0.3862
+  μ_adjusted: 0.1508
+
+Domain Setup:
+  x_min: 5.2659, x_max: 8.3552
+  x0 (current log-price): 6.6597
+  S0 (current price): 780.35
+
+Adaptive Mesh Solver:
+  Initial points: 100
+  Time steps: 1000
+  Adaptation frequency: every 20 steps
+  Step 100/1000: t=0.100, points=135, mass=1.000000, max(p)=9.2020
+  Step 200/1000: t=0.200, points=128, mass=1.000000, max(p)=18.4011
+  Step 300/1000: t=0.300, points=125, mass=1.000000, max(p)=22.2959
+  Step 400/1000: t=0.400, points=123, mass=1.000000, max(p)=16.6853
+  Step 500/1000: t=0.500, points=121, mass=1.000000, max(p)=24.3635
+  Step 600/1000: t=0.600, points=124, mass=1.000000, max(p)=16.7961
+  Step 700/1000: t=0.700, points=125, mass=1.000000, max(p)=17.8884
+  Step 800/1000: t=0.800, points=124, mass=1.000000, max(p)=18.9678
+  Step 900/1000: t=0.900, points=124, mass=1.000000, max(p)=21.3197
+  Step 1000/1000: t=1.000, points=125, mass=1.000000, max(p)=16.2384
+
+Final mesh statistics:
+  Final points: 125
+  Max points reached: 135
+  Refinement levels: [0 1 2]
+
+======================================================================
+RESULTS:
+======================================================================
+Accuracy:
+  L² error: 5.507961e+00
+  L∞ error: 1.618369e+01
+
+Mesh Evolution:
+  Initial points: 100
+  Final points: 125
+  Max points: 135
+
+Plot saved to: Fokker3-AMR-Results\Hindalco_AMR_analysis.png
+
+======================================================================
+AMR ANALYSIS: HUL-Data
+======================================================================
+
+Estimated Parameters:
+  μ (drift): 0.1390
+  σ (volatility): 0.2211
+  μ_adjusted: 0.1145
+
+Domain Setup:
+  x_min: 7.0718, x_max: 8.8409
+  x0 (current log-price): 7.8418
+  S0 (current price): 2544.90
+
+Adaptive Mesh Solver:
+  Initial points: 100
+  Time steps: 1000
+  Adaptation frequency: every 20 steps
+  Step 100/1000: t=0.100, points=136, mass=1.000000, max(p)=19.3586
+  Step 200/1000: t=0.200, points=128, mass=1.000000, max(p)=26.1345
+  Step 300/1000: t=0.300, points=127, mass=1.000000, max(p)=33.8023
+  Step 400/1000: t=0.400, points=125, mass=1.000000, max(p)=33.2989
+  Step 500/1000: t=0.500, points=124, mass=1.000000, max(p)=27.0427
+  Step 600/1000: t=0.600, points=125, mass=1.000000, max(p)=32.8375
+  Step 700/1000: t=0.700, points=125, mass=1.000000, max(p)=41.0717
+  Step 800/1000: t=0.800, points=124, mass=1.000000, max(p)=26.4923
+  Step 900/1000: t=0.900, points=125, mass=1.000000, max(p)=33.1350
+  Step 1000/1000: t=1.000, points=125, mass=1.000000, max(p)=40.9944
+
+Final mesh statistics:
+  Final points: 125
+  Max points reached: 136
+  Refinement levels: [0 1 2]
+
+======================================================================
+RESULTS:
+======================================================================
+Accuracy:
+  L² error: 8.804328e+00
+  L∞ error: 4.085490e+01
+
+Mesh Evolution:
+  Initial points: 100
+  Final points: 125
+  Max points: 136
+
+Plot saved to: Fokker3-AMR-Results\HUL_AMR_analysis.png
+
+======================================================================
+AMR ANALYSIS: ICICIBank-Data
+======================================================================
+
+Estimated Parameters:
+  μ (drift): 0.1842
+  σ (volatility): 0.3069
+  μ_adjusted: 0.1372
+
+Domain Setup:
+  x_min: 6.1287, x_max: 8.5837
+  x0 (current log-price): 7.2191
+  S0 (current price): 1365.20
+
+Adaptive Mesh Solver:
+  Initial points: 100
+  Time steps: 1000
+  Adaptation frequency: every 20 steps
+  Step 100/1000: t=0.100, points=135, mass=1.000000, max(p)=12.2021
+  Step 200/1000: t=0.200, points=128, mass=1.000000, max(p)=17.3490
+  Step 300/1000: t=0.300, points=124, mass=1.000000, max(p)=19.9669
+  Step 400/1000: t=0.400, points=127, mass=1.000000, max(p)=25.5234
+  Step 500/1000: t=0.500, points=125, mass=1.000000, max(p)=23.8531
+  Step 600/1000: t=0.600, points=124, mass=1.000000, max(p)=19.4903
+  Step 700/1000: t=0.700, points=127, mass=1.000000, max(p)=25.4004
+  Step 800/1000: t=0.800, points=125, mass=1.000000, max(p)=22.6286
+  Step 900/1000: t=0.900, points=125, mass=1.000000, max(p)=18.2904
+  Step 1000/1000: t=1.000, points=127, mass=1.000000, max(p)=25.0606
+
+Final mesh statistics:
+  Final points: 127
+  Max points reached: 135
+  Refinement levels: [0 1 2]
+
+======================================================================
+RESULTS:
+======================================================================
+Accuracy:
+  L² error: 6.923996e+00
+  L∞ error: 2.502724e+01
+
+Mesh Evolution:
+  Initial points: 100
+  Final points: 127
+  Max points: 135
+
+Plot saved to: Fokker3-AMR-Results\ICICIBank_AMR_analysis.png
+
+======================================================================
+AMR ANALYSIS: Infosys-Data
+======================================================================
+
+Estimated Parameters:
+  μ (drift): 0.1378
+  σ (volatility): 0.2660
+  μ_adjusted: 0.1025
+
+Domain Setup:
+  x_min: 6.3154, x_max: 8.4435
+  x0 (current log-price): 7.2770
+  S0 (current price): 1446.60
+
+Adaptive Mesh Solver:
+  Initial points: 100
+  Time steps: 1000
+  Adaptation frequency: every 20 steps
+  Step 100/1000: t=0.100, points=135, mass=1.000000, max(p)=13.3076
+  Step 200/1000: t=0.200, points=128, mass=1.000000, max(p)=27.2484
+  Step 300/1000: t=0.300, points=127, mass=1.000000, max(p)=27.6141
+  Step 400/1000: t=0.400, points=125, mass=1.000000, max(p)=22.2824
+  Step 500/1000: t=0.500, points=125, mass=1.000000, max(p)=34.2094
+  Step 600/1000: t=0.600, points=122, mass=1.000000, max(p)=22.2768
+  Step 700/1000: t=0.700, points=125, mass=1.000000, max(p)=32.8095
+  Step 800/1000: t=0.800, points=123, mass=1.000000, max(p)=20.6256
+  Step 900/1000: t=0.900, points=125, mass=1.000000, max(p)=34.6353
+  Step 1000/1000: t=1.000, points=125, mass=1.000000, max(p)=22.7226
+
+Final mesh statistics:
+  Final points: 125
+  Max points reached: 135
+  Refinement levels: [0 1 2]
+
+======================================================================
+RESULTS:
+======================================================================
+Accuracy:
+  L² error: 6.490602e+00
+  L∞ error: 2.265412e+01
+
+Mesh Evolution:
+  Initial points: 100
+  Final points: 125
+  Max points: 135
+
+Plot saved to: Fokker3-AMR-Results\Infosys_AMR_analysis.png
+
+======================================================================
+AMR ANALYSIS: ITC-Data
+======================================================================
+
+Estimated Parameters:
+  μ (drift): 0.0795
+  σ (volatility): 0.2512
+  μ_adjusted: 0.0480
+
+Domain Setup:
+  x_min: 5.0455, x_max: 7.0548
+  x0 (current log-price): 6.0022
+  S0 (current price): 404.30
+
+Adaptive Mesh Solver:
+  Initial points: 100
+  Time steps: 1000
+  Adaptation frequency: every 20 steps
+  Step 100/1000: t=0.100, points=135, mass=1.000000, max(p)=15.4185
+  Step 200/1000: t=0.200, points=128, mass=1.000000, max(p)=24.7654
+  Step 300/1000: t=0.300, points=125, mass=1.000000, max(p)=22.8856
+  Step 400/1000: t=0.400, points=125, mass=1.000000, max(p)=21.1518
+  Step 500/1000: t=0.500, points=126, mass=1.000000, max(p)=23.5243
+  Step 600/1000: t=0.600, points=125, mass=1.000000, max(p)=24.4689
+  Step 700/1000: t=0.700, points=126, mass=1.000000, max(p)=21.3817
+  Step 800/1000: t=0.800, points=123, mass=1.000000, max(p)=21.7095
+  Step 900/1000: t=0.900, points=123, mass=1.000000, max(p)=21.9077
+  Step 1000/1000: t=1.000, points=123, mass=1.000000, max(p)=24.2855
+
+Final mesh statistics:
+  Final points: 123
+  Max points reached: 135
+  Refinement levels: [0 1 2]
+
+======================================================================
+RESULTS:
+======================================================================
+Accuracy:
+  L² error: 6.935567e+00
+  L∞ error: 2.416267e+01
+
+Mesh Evolution:
+  Initial points: 100
+  Final points: 123
+  Max points: 135
+
+Plot saved to: Fokker3-AMR-Results\ITC_AMR_analysis.png
+
+======================================================================
+AMR ANALYSIS: L&T-Data
+======================================================================
+
+Estimated Parameters:
+  μ (drift): 0.1603
+  σ (volatility): 0.2680
+  μ_adjusted: 0.1244
+
+Domain Setup:
+  x_min: 7.2775, x_max: 9.4213
+  x0 (current log-price): 8.2250
+  S0 (current price): 3733.10
+
+Adaptive Mesh Solver:
+  Initial points: 100
+  Time steps: 1000
+  Adaptation frequency: every 20 steps
+  Step 100/1000: t=0.100, points=136, mass=1.000000, max(p)=15.8459
+  Step 200/1000: t=0.200, points=129, mass=1.000000, max(p)=19.8649
+  Step 300/1000: t=0.300, points=125, mass=1.000000, max(p)=23.6603
+  Step 400/1000: t=0.400, points=125, mass=1.000000, max(p)=31.4217
+  Step 500/1000: t=0.500, points=122, mass=1.000000, max(p)=24.2532
+  Step 600/1000: t=0.600, points=122, mass=1.000000, max(p)=26.7491
+  Step 700/1000: t=0.700, points=122, mass=1.000000, max(p)=34.3974
+  Step 800/1000: t=0.800, points=124, mass=1.000000, max(p)=21.5468
+  Step 900/1000: t=0.900, points=125, mass=1.000000, max(p)=30.3165
+  Step 1000/1000: t=1.000, points=125, mass=1.000000, max(p)=30.5074
+
+Final mesh statistics:
+  Final points: 125
+  Max points reached: 136
+  Refinement levels: [0 1 2]
+
+======================================================================
+RESULTS:
+======================================================================
+Accuracy:
+  L² error: 7.548574e+00
+  L∞ error: 3.042858e+01
+
+Mesh Evolution:
+  Initial points: 100
+  Final points: 125
+  Max points: 136
+
+Plot saved to: Fokker3-AMR-Results\L&T_AMR_analysis.png
+
+======================================================================
+AMR ANALYSIS: Nifty-50-Data
+======================================================================
+
+Estimated Parameters:
+  μ (drift): 0.1176
+  σ (volatility): 0.1644
+  μ_adjusted: 0.1040
+
+Domain Setup:
+  x_min: 9.5688, x_max: 10.8841
+  x0 (current log-price): 10.1224
+  S0 (current price): 24894.25
+
+Adaptive Mesh Solver:
+  Initial points: 100
+  Time steps: 1000
+  Adaptation frequency: every 20 steps
+  Step 100/1000: t=0.100, points=136, mass=1.000000, max(p)=30.9303
+  Step 200/1000: t=0.200, points=130, mass=1.000000, max(p)=41.7569
+  Step 300/1000: t=0.300, points=126, mass=1.000000, max(p)=30.8691
+  Step 400/1000: t=0.400, points=125, mass=1.000000, max(p)=44.9612
+  Step 500/1000: t=0.500, points=125, mass=1.000000, max(p)=55.1441
+  Step 600/1000: t=0.600, points=125, mass=1.000000, max(p)=49.4663
+  Step 700/1000: t=0.700, points=125, mass=1.000000, max(p)=45.4509
+  Step 800/1000: t=0.800, points=125, mass=1.000000, max(p)=40.8296
+  Step 900/1000: t=0.900, points=126, mass=1.000000, max(p)=37.5808
+  Step 1000/1000: t=1.000, points=126, mass=1.000000, max(p)=36.5812
+
+Final mesh statistics:
+  Final points: 126
+  Max points reached: 136
+  Refinement levels: [0 1 2]
+
+======================================================================
+RESULTS:
+======================================================================
+Accuracy:
+  L² error: 8.345869e+00
+  L∞ error: 3.649550e+01
+
+Mesh Evolution:
+  Initial points: 100
+  Final points: 126
+  Max points: 136
+
+Plot saved to: Fokker3-AMR-Results\Nifty-50_AMR_analysis.png
+
+======================================================================
+AMR ANALYSIS: Reliance-Data
+======================================================================
+
+Estimated Parameters:
+  μ (drift): 0.2187
+  σ (volatility): 0.2721
+  μ_adjusted: 0.1817
+
+Domain Setup:
+  x_min: 6.3109, x_max: 8.4879
+  x0 (current log-price): 7.2177
+  S0 (current price): 1363.40
+
+Adaptive Mesh Solver:
+  Initial points: 100
+  Time steps: 1000
+  Adaptation frequency: every 20 steps
+  Step 100/1000: t=0.100, points=138, mass=1.000000, max(p)=16.2113
+  Step 200/1000: t=0.200, points=129, mass=1.000000, max(p)=22.9351
+  Step 300/1000: t=0.300, points=125, mass=1.000000, max(p)=28.9534
+  Step 400/1000: t=0.400, points=125, mass=1.000000, max(p)=26.5279
+  Step 500/1000: t=0.500, points=125, mass=1.000000, max(p)=21.2834
+  Step 600/1000: t=0.600, points=125, mass=1.000000, max(p)=33.1112
+  Step 700/1000: t=0.700, points=125, mass=1.000000, max(p)=30.9495
+  Step 800/1000: t=0.800, points=126, mass=1.000000, max(p)=22.0971
+  Step 900/1000: t=0.900, points=126, mass=1.000000, max(p)=18.8737
+  Step 1000/1000: t=1.000, points=128, mass=1.000000, max(p)=20.2171
+
+Final mesh statistics:
+  Final points: 128
+  Max points reached: 138
+  Refinement levels: [0 1 2]
+
+======================================================================
+RESULTS:
+======================================================================
+Accuracy:
+  L² error: 6.334026e+00
+  L∞ error: 2.018526e+01
+
+Mesh Evolution:
+  Initial points: 100
+  Final points: 128
+  Max points: 138
+
+Plot saved to: Fokker3-AMR-Results\Reliance_AMR_analysis.png
+
+======================================================================
+AMR ANALYSIS: SBI-Data
+======================================================================
+
+Estimated Parameters:
+  μ (drift): 0.1497
+  σ (volatility): 0.3275
+  μ_adjusted: 0.0961
+
+Domain Setup:
+  x_min: 5.5514, x_max: 8.1715
+  x0 (current log-price): 6.7654
+  S0 (current price): 867.30
+
+Adaptive Mesh Solver:
+  Initial points: 100
+  Time steps: 1000
+  Adaptation frequency: every 20 steps
+  Step 100/1000: t=0.100, points=135, mass=1.000000, max(p)=10.8309
+  Step 200/1000: t=0.200, points=130, mass=1.000000, max(p)=15.8008
+  Step 300/1000: t=0.300, points=126, mass=1.000000, max(p)=22.2788
+  Step 400/1000: t=0.400, points=125, mass=1.000000, max(p)=17.1248
+  Step 500/1000: t=0.500, points=124, mass=1.000000, max(p)=25.7992
+  Step 600/1000: t=0.600, points=125, mass=1.000000, max(p)=25.7381
+  Step 700/1000: t=0.700, points=124, mass=1.000000, max(p)=20.3353
+  Step 800/1000: t=0.800, points=125, mass=1.000000, max(p)=17.5055
+  Step 900/1000: t=0.900, points=125, mass=1.000000, max(p)=22.5578
+  Step 1000/1000: t=1.000, points=127, mass=1.000000, max(p)=25.8283
+
+Final mesh statistics:
+  Final points: 127
+  Max points reached: 135
+  Refinement levels: [0 1 2]
+
+======================================================================
+RESULTS:
+======================================================================
+Accuracy:
+  L² error: 7.100696e+00
+  L∞ error: 2.578060e+01
+
+Mesh Evolution:
+  Initial points: 100
+  Final points: 127
+  Max points: 135
+
+Plot saved to: Fokker3-AMR-Results\SBI_AMR_analysis.png
+
+======================================================================
+AMR ANALYSIS: TATAMotors-Data
+======================================================================
+
+Estimated Parameters:
+  μ (drift): 0.1189
+  σ (volatility): 0.4089
+  μ_adjusted: 0.0353
+
+Domain Setup:
+  x_min: 4.9736, x_max: 8.2446
+  x0 (current log-price): 6.5738
+  S0 (current price): 716.10
+
+Adaptive Mesh Solver:
+  Initial points: 100
+  Time steps: 1000
+  Adaptation frequency: every 20 steps
+  Step 100/1000: t=0.100, points=135, mass=1.000000, max(p)=11.5248
+  Step 200/1000: t=0.200, points=129, mass=1.000000, max(p)=14.7810
+  Step 300/1000: t=0.300, points=127, mass=1.000000, max(p)=13.9019
+  Step 400/1000: t=0.400, points=125, mass=1.000000, max(p)=14.7996
+  Step 500/1000: t=0.500, points=123, mass=1.000000, max(p)=16.9072
+  Step 600/1000: t=0.600, points=125, mass=1.000000, max(p)=22.2842
+  Step 700/1000: t=0.700, points=124, mass=1.000000, max(p)=13.2054
+  Step 800/1000: t=0.800, points=125, mass=1.000000, max(p)=16.1067
+  Step 900/1000: t=0.900, points=125, mass=1.000000, max(p)=21.6737
+  Step 1000/1000: t=1.000, points=125, mass=1.000000, max(p)=21.2097
+
+Final mesh statistics:
+  Final points: 125
+  Max points reached: 135
+  Refinement levels: [0 1 2]
+
+======================================================================
+RESULTS:
+======================================================================
+Accuracy:
+  L² error: 6.299981e+00
+  L∞ error: 2.113425e+01
+
+Mesh Evolution:
+  Initial points: 100
+  Final points: 125
+  Max points: 135
+
+Plot saved to: Fokker3-AMR-Results\TATAMotors_AMR_analysis.png
+
+======================================================================
+AMR ANALYSIS: TataSteel-Data
+======================================================================
+
+Estimated Parameters:
+  μ (drift): 0.2136
+  σ (volatility): 0.3628
+  μ_adjusted: 0.1478
+
+Domain Setup:
+  x_min: 3.8510, x_max: 6.7536
+  x0 (current log-price): 5.1545
+  S0 (current price): 173.21
+
+Adaptive Mesh Solver:
+  Initial points: 100
+  Time steps: 1000
+  Adaptation frequency: every 20 steps
+  Step 100/1000: t=0.100, points=135, mass=1.000000, max(p)=9.3389
+  Step 200/1000: t=0.200, points=130, mass=1.000000, max(p)=18.4356
+  Step 300/1000: t=0.300, points=130, mass=1.000000, max(p)=22.2074
+  Step 400/1000: t=0.400, points=125, mass=1.000000, max(p)=17.0395
+  Step 500/1000: t=0.500, points=124, mass=1.000000, max(p)=16.6383
+  Step 600/1000: t=0.600, points=123, mass=1.000000, max(p)=25.0095
+  Step 700/1000: t=0.700, points=122, mass=1.000000, max(p)=16.0258
+  Step 800/1000: t=0.800, points=124, mass=1.000000, max(p)=24.4685
+  Step 900/1000: t=0.900, points=125, mass=1.000000, max(p)=14.9715
+  Step 1000/1000: t=1.000, points=126, mass=1.000000, max(p)=23.1228
+
+Final mesh statistics:
+  Final points: 126
+  Max points reached: 135
+  Refinement levels: [0 1 2]
+
+======================================================================
+RESULTS:
+======================================================================
+Accuracy:
+  L² error: 6.778077e+00
+  L∞ error: 2.307506e+01
+
+Mesh Evolution:
+  Initial points: 100
+  Final points: 126
+  Max points: 135
+
+Plot saved to: Fokker3-AMR-Results\TataSteel_AMR_analysis.png
+
+======================================================================
+AMR ANALYSIS: TCS-Data
+======================================================================
+
+Estimated Parameters:
+  μ (drift): 0.1070
+  σ (volatility): 0.2333
+  μ_adjusted: 0.0798
+
+Domain Setup:
+  x_min: 7.1197, x_max: 8.9862
+  x0 (current log-price): 7.9731
+  S0 (current price): 2901.90
+
+Adaptive Mesh Solver:
+  Initial points: 100
+  Time steps: 1000
+  Adaptation frequency: every 20 steps
+  Step 100/1000: t=0.100, points=134, mass=1.000000, max(p)=13.5504
+  Step 200/1000: t=0.200, points=129, mass=1.000000, max(p)=32.0692
+  Step 300/1000: t=0.300, points=124, mass=1.000000, max(p)=24.6949
+  Step 400/1000: t=0.400, points=122, mass=1.000000, max(p)=38.1338
+  Step 500/1000: t=0.500, points=124, mass=1.000000, max(p)=29.7013
+  Step 600/1000: t=0.600, points=124, mass=1.000000, max(p)=26.6085
+  Step 700/1000: t=0.700, points=125, mass=1.000000, max(p)=37.0835
+  Step 800/1000: t=0.800, points=124, mass=1.000000, max(p)=25.2798
+  Step 900/1000: t=0.900, points=125, mass=1.000000, max(p)=36.3929
+  Step 1000/1000: t=1.000, points=124, mass=1.000000, max(p)=30.6045
+
+Final mesh statistics:
+  Final points: 124
+  Max points reached: 134
+  Refinement levels: [0 1 2]
+
+======================================================================
+RESULTS:
+======================================================================
+Accuracy:
+  L² error: 7.399510e+00
+  L∞ error: 3.048942e+01
+
+Mesh Evolution:
+  Initial points: 100
+  Final points: 124
+  Max points: 134
+
+Plot saved to: Fokker3-AMR-Results\TCS_AMR_analysis.png
+
+✅ AMR analysis complete!
+(modelEnv) PS E:\Modelling\Project\Notebook> 

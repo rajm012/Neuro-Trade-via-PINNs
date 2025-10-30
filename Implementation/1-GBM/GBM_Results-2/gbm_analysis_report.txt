@@ -1,0 +1,134 @@
+================================================================================
+GBM MODEL ANALYSIS REPORT
+================================================================================
+Generated on: 2025-10-19 15:15:51
+Number of assets analyzed: 14
+
+MODEL LIMITATIONS:
+----------------------------------------
+1. Constant volatility assumption (no volatility clustering)
+2. Normal distribution of returns (ignores fat tails)
+3. Independent increments (ignores autocorrelation)
+4. Constant drift parameter
+5. No jump components
+
+GOODNESS-OF-FIT SUMMARY:
+----------------------------------------
+BAJAJ:
+  KS test rejects normality: True
+  JB test rejects normality: True
+  Shapiro test rejects normality: True
+  Skewness: -0.3227
+  Kurtosis: 8.6292
+
+HDFCBank:
+  KS test rejects normality: True
+  JB test rejects normality: True
+  Shapiro test rejects normality: True
+  Skewness: -0.3372
+  Kurtosis: 10.6792
+
+Hindalco:
+  KS test rejects normality: True
+  JB test rejects normality: True
+  Shapiro test rejects normality: True
+  Skewness: -0.2013
+  Kurtosis: 3.8384
+
+HUL:
+  KS test rejects normality: True
+  JB test rejects normality: True
+  Shapiro test rejects normality: True
+  Skewness: 0.6406
+  Kurtosis: 6.5705
+
+ICICIBank:
+  KS test rejects normality: True
+  JB test rejects normality: True
+  Shapiro test rejects normality: True
+  Skewness: -0.1117
+  Kurtosis: 9.3213
+
+Infosys:
+  KS test rejects normality: True
+  JB test rejects normality: True
+  Shapiro test rejects normality: True
+  Skewness: -0.5421
+  Kurtosis: 9.9325
+
+ITC:
+  KS test rejects normality: True
+  JB test rejects normality: True
+  Shapiro test rejects normality: True
+  Skewness: -0.4537
+  Kurtosis: 8.2003
+
+L&T:
+  KS test rejects normality: True
+  JB test rejects normality: True
+  Shapiro test rejects normality: True
+  Skewness: -0.2167
+  Kurtosis: 10.0961
+
+Nifty-50:
+  KS test rejects normality: True
+  JB test rejects normality: True
+  Shapiro test rejects normality: True
+  Skewness: -1.3616
+  Kurtosis: 20.3110
+
+Reliance:
+  KS test rejects normality: True
+  JB test rejects normality: True
+  Shapiro test rejects normality: True
+  Skewness: 0.0882
+  Kurtosis: 8.4104
+
+SBI:
+  KS test rejects normality: True
+  JB test rejects normality: True
+  Shapiro test rejects normality: True
+  Skewness: 0.4490
+  Kurtosis: 12.3156
+
+TATAMotors:
+  KS test rejects normality: True
+  JB test rejects normality: True
+  Shapiro test rejects normality: True
+  Skewness: 0.1510
+  Kurtosis: 6.7598
+
+TataSteel:
+  KS test rejects normality: True
+  JB test rejects normality: True
+  Shapiro test rejects normality: True
+  Skewness: -0.2044
+  Kurtosis: 3.3321
+
+TCS:
+  KS test rejects normality: True
+  JB test rejects normality: True
+  Shapiro test rejects normality: True
+  Skewness: -0.0436
+  Kurtosis: 3.6363
+
+FORECAST PERFORMANCE SUMMARY:
+----------------------------------------
+Average RMSE across all assets: 41.61
+Average MAE across all assets: 28.93
+Average MAPE across all assets: 1.01%
+
+BAJAJ: RMSE=147.00, MAE=98.47, MAPE=1.17%
+HDFCBank: RMSE=10.16, MAE=7.24, MAPE=0.87%
+Hindalco: RMSE=11.47, MAE=8.03, MAPE=1.30%
+HUL: RMSE=29.10, MAE=20.75, MAPE=0.84%
+ICICIBank: RMSE=13.98, MAE=9.85, MAPE=0.82%
+Infosys: RMSE=24.43, MAE=17.52, MAPE=1.08%
+ITC: RMSE=5.70, MAE=3.87, MAPE=0.91%
+L&T: RMSE=55.46, MAE=38.13, MAPE=1.10%
+Nifty-50: RMSE=189.01, MAE=132.86, MAPE=0.58%
+Reliance: RMSE=17.92, MAE=12.83, MAPE=0.94%
+SBI: RMSE=12.08, MAE=7.91, MAPE=1.05%
+TATAMotors: RMSE=15.15, MAE=10.78, MAPE=1.34%
+TataSteel: RMSE=2.67, MAE=1.85, MAPE=1.26%
+TCS: RMSE=48.48, MAE=34.86, MAPE=0.92%

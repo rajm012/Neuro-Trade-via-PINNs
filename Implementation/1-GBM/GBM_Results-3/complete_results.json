@@ -1,0 +1,515 @@
+{
+  "parameters": {
+    "BAJAJ": {
+      "mu": 0.1526865703959968,
+      "sigma": 0.25736791843681106,
+      "S0": 2451.75,
+      "n_obs": 2664,
+      "mean_log_return": 0.0004744739987132869,
+      "std_log_return": 0.01621265494357518,
+      "mu_ci_lower": -0.002457671359987035,
+      "mu_ci_upper": 0.30783081215198066,
+      "sigma_ci_lower": 0.25045724464893343,
+      "sigma_ci_upper": 0.2642785922246887,
+      "se_mu": 0.07915667990827477,
+      "se_sigma": 0.0035259187629916276
+    },
+    "HDFCBank": {
+      "mu": 0.15773189525428188,
+      "sigma": 0.22318556336685402,
+      "S0": 240.19,
+      "n_obs": 2665,
+      "mean_log_return": 0.0005270872912959995,
+      "std_log_return": 0.014059368973536745,
+      "mu_ci_lower": 0.02321840121299565,
+      "mu_ci_upper": 0.2922453892955681,
+      "sigma_ci_lower": 0.21719385612161174,
+      "sigma_ci_upper": 0.2291772706120963,
+      "se_mu": 0.0686305947978185,
+      "se_sigma": 0.003057049666475557
+    },
+    "Hindalco": {
+      "mu": 0.2253494157293463,
+      "sigma": 0.3861008343302903,
+      "S0": 160.1,
+      "n_obs": 2664,
+      "mean_log_return": 0.000598462256325687,
+      "std_log_return": 0.024322066396011855,
+      "mu_ci_lower": -0.007396458532494127,
+      "mu_ci_upper": 0.45809528999118676,
+      "sigma_ci_lower": 0.3757335090960882,
+      "sigma_ci_upper": 0.3964681595644924,
+      "se_mu": 0.11875007709208445,
+      "se_sigma": 0.005289548846804438
+    },
+    "HUL": {
+      "mu": 0.1389561732354107,
+      "sigma": 0.22110096203731605,
+      "S0": 755.95,
+      "n_obs": 2664,
+      "mean_log_return": 0.0004544180774940372,
+      "std_log_return": 0.013928051433044554,
+      "mu_ci_lower": 0.00567405588705161,
+      "mu_ci_upper": 0.2722382905837698,
+      "sigma_ci_lower": 0.21516410466944272,
+      "sigma_ci_upper": 0.22703781940518938,
+      "se_mu": 0.0680023298385437,
+      "se_sigma": 0.00302906452093125
+    },
+    "ICICIBank": {
+      "mu": 0.18422015966379734,
+      "sigma": 0.30681665562065746,
+      "S0": 329.36,
+      "n_obs": 2664,
+      "mean_log_return": 0.0005442536888122015,
+      "std_log_return": 0.019327632592019226,
+      "mu_ci_lower": -0.0007323304658559959,
+      "mu_ci_upper": 0.36917264979345066,
+      "sigma_ci_lower": 0.29857821691951636,
+      "sigma_ci_upper": 0.31505509432179857,
+      "se_mu": 0.09436524935587337,
+      "se_sigma": 0.004203362289371054
+    },
+    "Infosys": {
+      "mu": 0.13782529099770396,
+      "sigma": 0.2659634340202718,
+      "S0": 499.35,
+      "n_obs": 2664,
+      "mean_log_return": 0.00040657546380863576,
+      "std_log_return": 0.016754121529866068,
+      "mu_ci_lower": -0.02250042308706654,
+      "mu_ci_upper": 0.2981510050824745,
+      "sigma_ci_lower": 0.25882195911080647,
+      "sigma_ci_upper": 0.2731049089297371,
+      "se_mu": 0.08180033681710444,
+      "se_sigma": 0.003643676601098991
+    },
+    "ITC": {
+      "mu": 0.07951465258308837,
+      "sigma": 0.2511196662311511,
+      "S0": 244.17,
+      "n_obs": 2665,
+      "mean_log_return": 0.00019041313174232542,
+      "std_log_return": 0.01581905205155168,
+      "mu_ci_lower": -0.07183466955792586,
+      "mu_ci_upper": 0.2308639747241026,
+      "sigma_ci_lower": 0.24437803159814928,
+      "sigma_ci_upper": 0.25786130086415293,
+      "se_mu": 0.07722046085276994,
+      "se_sigma": 0.0034396727114268406
+    },
+    "L&T": {
+      "mu": 0.16031088067170188,
+      "sigma": 0.26793044128626997,
+      "S0": 1023.1,
+      "n_obs": 2664,
+      "mean_log_return": 0.0004937203174118024,
+      "std_log_return": 0.01687803134064912,
+      "mu_ci_lower": -0.001200567255364604,
+      "mu_ci_upper": 0.32182232859876836,
+      "sigma_ci_lower": 0.26073614959359304,
+      "sigma_ci_upper": 0.2751247329789469,
+      "se_mu": 0.08240531417977483,
+      "se_sigma": 0.003670624434645023
+    },
+    "Nifty-50": {
+      "mu": 0.11755608561274011,
+      "sigma": 0.16438781525651985,
+      "S0": 8395.45,
+      "n_obs": 2665,
+      "mean_log_return": 0.0004128746377394217,
+      "std_log_return": 0.010355458993761456,
+      "mu_ci_lower": 0.01847987712329835,
+      "mu_ci_upper": 0.21663229410218188,
+      "sigma_ci_lower": 0.15997461016904277,
+      "sigma_ci_upper": 0.16880102034399694,
+      "se_mu": 0.05055001483238583,
+      "se_sigma": 0.0022516766237991514
+    },
+    "Reliance": {
+      "mu": 0.21868405955134357,
+      "sigma": 0.2720675819044087,
+      "S0": 199.1,
+      "n_obs": 2665,
+      "mean_log_return": 0.000720927281705109,
+      "std_log_return": 0.017138646702899104,
+      "mu_ci_lower": 0.05470947040118829,
+      "mu_ci_upper": 0.38265864870149885,
+      "sigma_ci_lower": 0.26476357318135035,
+      "sigma_ci_upper": 0.2793715906274671,
+      "se_mu": 0.08366204197810058,
+      "se_sigma": 0.003726603539999424
+    },
+    "SBI": {
+      "mu": 0.14968478721571798,
+      "sigma": 0.32745535029926615,
+      "S0": 315.25,
+      "n_obs": 2665,
+      "mean_log_return": 0.00038123525395202554,
+      "std_log_return": 0.020627748151652338,
+      "mu_ci_lower": -0.04767189951077311,
+      "mu_ci_upper": 0.3470414739422091,
+      "sigma_ci_lower": 0.31866438476689224,
+      "sigma_ci_upper": 0.33624631583164005,
+      "se_mu": 0.10069403738191898,
+      "se_sigma": 0.004485268913977959
+    },
+    "TATAMotors": {
+      "mu": 0.11883845128768834,
+      "sigma": 0.4087932900028848,
+      "S0": 506.37,
+      "n_obs": 2664,
+      "mean_log_return": 0.00014000981869840087,
+      "std_log_return": 0.02575155673760809,
+      "mu_ci_lower": -0.1275866874694676,
+      "mu_ci_upper": 0.3652635900448443,
+      "sigma_ci_lower": 0.39781664189910493,
+      "sigma_ci_upper": 0.41976993810666463,
+      "se_mu": 0.12572942191842607,
+      "se_sigma": 0.005600433574474957
+    },
+    "TataSteel": {
+      "mu": 0.21358763005402637,
+      "sigma": 0.36275419407209675,
+      "S0": 36.85,
+      "n_obs": 2665,
+      "mean_log_return": 0.0005864774896649927,
+      "std_log_return": 0.022851366299057832,
+      "mu_ci_lower": -0.005043599433531609,
+      "mu_ci_upper": 0.43221885954158434,
+      "sigma_ci_lower": 0.35301558508648256,
+      "sigma_ci_upper": 0.37249280305771093,
+      "se_mu": 0.1115485953885343,
+      "se_sigma": 0.004968769356187702
+    },
+    "TCS": {
+      "mu": 0.10703706102606328,
+      "sigma": 0.23327385724456717,
+      "S0": 1264.51,
+      "n_obs": 2664,
+      "mean_log_return": 0.00031678061424279336,
+      "std_log_return": 0.014694871753378757,
+      "mu_ci_lower": -0.03358301284918014,
+      "mu_ci_upper": 0.2476571349013067,
+      "sigma_ci_lower": 0.22701014131428143,
+      "sigma_ci_upper": 0.2395375731748529,
+      "se_mu": 0.07174625400488817,
+      "se_sigma": 0.0031958321579851103
+    }
+  },
+  "nifty_parameters": {
+    "mu": 0.1262019848096192,
+    "sigma": 0.1669872990022539,
+    "S0": 100,
+    "n_obs": 2664,
+    "mean_log_return": 0.0004454746261729568,
+    "std_log_return": 0.010519211077770192,
+    "mu_ci_lower": 0.02554018498647942,
+    "mu_ci_upper": 0.22686378463275897,
+    "sigma_ci_lower": 0.1625034660632752,
+    "sigma_ci_upper": 0.1714711319412326,
+    "se_mu": 0.05135900486802167,
+    "se_sigma": 0.0022877119040689534,
+    "returns": "[ 0.01156038 -0.00050053 -0.02865031 ...  0.00324344  0.00534097\n  0.00383607]"
+  },
+  "validation_summary": {
+    "BAJAJ": {
+      "ks_reject": "True",
+      "jb_reject": "True",
+      "shapiro_reject": "True",
+      "skewness": -0.32268597332995114,
+      "kurtosis": 8.629193407972464
+    },
+    "HDFCBank": {
+      "ks_reject": "True",
+      "jb_reject": "True",
+      "shapiro_reject": "True",
+      "skewness": -0.3371999203415074,
+      "kurtosis": 10.679243414909314
+    },
+    "Hindalco": {
+      "ks_reject": "True",
+      "jb_reject": "True",
+      "shapiro_reject": "True",
+      "skewness": -0.20133476983078968,
+      "kurtosis": 3.8384425039791825
+    },
+    "HUL": {
+      "ks_reject": "True",
+      "jb_reject": "True",
+      "shapiro_reject": "True",
+      "skewness": 0.6406495932081513,
+      "kurtosis": 6.570513146723359
+    },
+    "ICICIBank": {
+      "ks_reject": "True",
+      "jb_reject": "True",
+      "shapiro_reject": "True",
+      "skewness": -0.11170899302722796,
+      "kurtosis": 9.321260052236044
+    },
+    "Infosys": {
+      "ks_reject": "True",
+      "jb_reject": "True",
+      "shapiro_reject": "True",
+      "skewness": -0.5421285621891241,
+      "kurtosis": 9.932527727286221
+    },
+    "ITC": {
+      "ks_reject": "True",
+      "jb_reject": "True",
+      "shapiro_reject": "True",
+      "skewness": -0.4537233330820917,
+      "kurtosis": 8.20033691064288
+    },
+    "L&T": {
+      "ks_reject": "True",
+      "jb_reject": "True",
+      "shapiro_reject": "True",
+      "skewness": -0.21668531654003376,
+      "kurtosis": 10.096094894858625
+    },
+    "Nifty-50": {
+      "ks_reject": "True",
+      "jb_reject": "True",
+      "shapiro_reject": "True",
+      "skewness": -1.3616009856437754,
+      "kurtosis": 20.310972928249974
+    },
+    "Reliance": {
+      "ks_reject": "True",
+      "jb_reject": "True",
+      "shapiro_reject": "True",
+      "skewness": 0.08815752874353414,
+      "kurtosis": 8.410416725881175
+    },
+    "SBI": {
+      "ks_reject": "True",
+      "jb_reject": "True",
+      "shapiro_reject": "True",
+      "skewness": 0.4489795594802314,
+      "kurtosis": 12.315625474447781
+    },
+    "TATAMotors": {
+      "ks_reject": "True",
+      "jb_reject": "True",
+      "shapiro_reject": "True",
+      "skewness": 0.1509746652452717,
+      "kurtosis": 6.759812629736135
+    },
+    "TataSteel": {
+      "ks_reject": "True",
+      "jb_reject": "True",
+      "shapiro_reject": "True",
+      "skewness": -0.20443034140804023,
+      "kurtosis": 3.332087511135536
+    },
+    "TCS": {
+      "ks_reject": "True",
+      "jb_reject": "True",
+      "shapiro_reject": "True",
+      "skewness": -0.043609349015760385,
+      "kurtosis": 3.6362877655593806
+    }
+  },
+  "forecast_summary": {
+    "BAJAJ": {
+      "rmse": 147.32980863709628,
+      "mae": 98.60446797311282,
+      "mape": 1.1699940470055643
+    },
+    "HDFCBank": {
+      "rmse": 10.142187855135424,
+      "mae": 7.235744634437915,
+      "mape": 0.8655610312903526
+    },
+    "Hindalco": {
+      "rmse": 11.373258184466595,
+      "mae": 7.97064665575338,
+      "mape": 1.292864317268829
+    },
+    "HUL": {
+      "rmse": 29.034042242722045,
+      "mae": 20.692106730815205,
+      "mape": 0.8366321059558597
+    },
+    "ICICIBank": {
+      "rmse": 13.989167622752738,
+      "mae": 9.873850140636227,
+      "mape": 0.8258000175391479
+    },
+    "Infosys": {
+      "rmse": 24.3482142202756,
+      "mae": 17.48229982450934,
+      "mape": 1.0747815108741694
+    },
+    "ITC": {
+      "rmse": 5.702402864412834,
+      "mae": 3.8699146931903523,
+      "mape": 0.9066814710031074
+    },
+    "L&T": {
+      "rmse": 55.35622600540146,
+      "mae": 37.95865319194407,
+      "mape": 1.0986099403759524
+    },
+    "Nifty-50": {
+      "rmse": 188.43169180625358,
+      "mae": 132.576789515166,
+      "mape": 0.5742796974264336
+    },
+    "Reliance": {
+      "rmse": 17.942694198315422,
+      "mae": 12.838850129435935,
+      "mape": 0.9440737697123025
+    },
+    "SBI": {
+      "rmse": 12.080741132815016,
+      "mae": 7.922682360511655,
+      "mape": 1.0478945793105319
+    },
+    "TATAMotors": {
+      "rmse": 15.060538677214156,
+      "mae": 10.730448892039076,
+      "mape": 1.3354535279630393
+    },
+    "TataSteel": {
+      "rmse": 2.663429298908805,
+      "mae": 1.8503652692567274,
+      "mape": 1.2537910933964393
+    },
+    "TCS": {
+      "rmse": 48.54254106067701,
+      "mae": 34.893819009575196,
+      "mape": 0.9243939962369376
+    }
+  },
+  "limitations_summary": {
+    "BAJAJ": {
+      "vol_clustering_present": true,
+      "autocorrelation_present": false,
+      "excess_kurtosis": 8.629193407972464,
+      "is_normal": "False",
+      "acf_squared": "[0.03141976 0.07929335 0.08999427 0.0468242  0.03462487]",
+      "acf_returns": "[-0.01575791  0.0064267   0.00297154 -0.00904874 -0.00187945]",
+      "n_obs": 2664
+    },
+    "HDFCBank": {
+      "vol_clustering_present": true,
+      "autocorrelation_present": true,
+      "excess_kurtosis": 10.679243414909314,
+      "is_normal": "False",
+      "acf_squared": "[0.11406627 0.31702974 0.3100352  0.1544772  0.28630049]",
+      "acf_returns": "[ 0.01793594 -0.05272119 -0.01394742  0.04174083  0.02549777]",
+      "n_obs": 2665
+    },
+    "Hindalco": {
+      "vol_clustering_present": true,
+      "autocorrelation_present": true,
+      "excess_kurtosis": 3.8384425039791825,
+      "is_normal": "False",
+      "acf_squared": "[0.11462583 0.16062047 0.11584089 0.07056412 0.11855371]",
+      "acf_returns": "[-0.0400914   0.00690251  0.03166783  0.01929817  0.01250926]",
+      "n_obs": 2664
+    },
+    "HUL": {
+      "vol_clustering_present": true,
+      "autocorrelation_present": true,
+      "excess_kurtosis": 6.570513146723359,
+      "is_normal": "False",
+      "acf_squared": "[0.26760353 0.25872391 0.15332689 0.1816778  0.10005394]",
+      "acf_returns": "[-0.04699452 -0.03354685  0.01880154  0.0368987   0.00977596]",
+      "n_obs": 2664
+    },
+    "ICICIBank": {
+      "vol_clustering_present": true,
+      "autocorrelation_present": true,
+      "excess_kurtosis": 9.321260052236044,
+      "is_normal": "False",
+      "acf_squared": "[0.12385343 0.15422129 0.1077721  0.16378685 0.24238676]",
+      "acf_returns": "[-0.01144964 -0.01331006 -0.02235663 -0.00469661  0.04512299]",
+      "n_obs": 2664
+    },
+    "Infosys": {
+      "vol_clustering_present": true,
+      "autocorrelation_present": false,
+      "excess_kurtosis": 9.932527727286221,
+      "is_normal": "False",
+      "acf_squared": "[0.13453978 0.09588668 0.02771596 0.06290491 0.08072329]",
+      "acf_returns": "[-0.01765114 -0.00964556  0.01246451 -0.03066671  0.03196369]",
+      "n_obs": 2664
+    },
+    "ITC": {
+      "vol_clustering_present": true,
+      "autocorrelation_present": true,
+      "excess_kurtosis": 8.20033691064288,
+      "is_normal": "False",
+      "acf_squared": "[0.18665847 0.15738332 0.10016971 0.08128327 0.18672952]",
+      "acf_returns": "[-0.02808669 -0.00221727 -0.01722665 -0.03280829  0.05126049]",
+      "n_obs": 2665
+    },
+    "L&T": {
+      "vol_clustering_present": true,
+      "autocorrelation_present": false,
+      "excess_kurtosis": 10.096094894858625,
+      "is_normal": "False",
+      "acf_squared": "[0.10341512 0.17791842 0.15389767 0.03396052 0.15669558]",
+      "acf_returns": "[ 0.02344973 -0.0261868   0.00783393 -0.00396667  0.02105503]",
+      "n_obs": 2664
+    },
+    "Nifty-50": {
+      "vol_clustering_present": true,
+      "autocorrelation_present": true,
+      "excess_kurtosis": 20.310972928249974,
+      "is_normal": "False",
+      "acf_squared": "[0.19302775 0.32360475 0.21847733 0.1557466  0.28354021]",
+      "acf_returns": "[-0.02626171  0.017069    0.01900029  0.00186072  0.06722517]",
+      "n_obs": 2665
+    },
+    "Reliance": {
+      "vol_clustering_present": true,
+      "autocorrelation_present": false,
+      "excess_kurtosis": 8.410416725881175,
+      "is_normal": "False",
+      "acf_squared": "[0.21132123 0.30152621 0.16786474 0.16486461 0.10804735]",
+      "acf_returns": "[-0.01549058  0.03686861 -0.00466323 -0.03211526  0.0144372 ]",
+      "n_obs": 2665
+    },
+    "SBI": {
+      "vol_clustering_present": true,
+      "autocorrelation_present": true,
+      "excess_kurtosis": 12.315625474447781,
+      "is_normal": "False",
+      "acf_squared": "[0.12875317 0.05822833 0.05029066 0.05634843 0.05880628]",
+      "acf_returns": "[-0.00418329  0.01248853  0.01370449 -0.01619007  0.0502173 ]",
+      "n_obs": 2665
+    },
+    "TATAMotors": {
+      "vol_clustering_present": true,
+      "autocorrelation_present": false,
+      "excess_kurtosis": 6.759812629736135,
+      "is_normal": "False",
+      "acf_squared": "[0.15250352 0.057888   0.05697018 0.09029199 0.05562653]",
+      "acf_returns": "[ 0.01798315  0.0238356   0.02301603 -0.00062935  0.00978394]",
+      "n_obs": 2664
+    },
+    "TataSteel": {
+      "vol_clustering_present": true,
+      "autocorrelation_present": false,
+      "excess_kurtosis": 3.332087511135536,
+      "is_normal": "False",
+      "acf_squared": "[0.14860056 0.10565238 0.10039953 0.13666371 0.11089732]",
+      "acf_returns": "[-0.01582027 -0.01461849 -0.01471605  0.02300557 -0.00094482]",
+      "n_obs": 2665
+    },
+    "TCS": {
+      "vol_clustering_present": true,
+      "autocorrelation_present": false,
+      "excess_kurtosis": 3.6362877655593806,
+      "is_normal": "False",
+      "acf_squared": "[0.13088533 0.1845793  0.04406544 0.11373819 0.07342518]",
+      "acf_returns": "[-0.00832996 -0.01578857  0.01354318 -0.0236473   0.02961541]",
+      "n_obs": 2664
+    }
+  }
+}

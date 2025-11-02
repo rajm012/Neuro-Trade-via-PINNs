@@ -17,9 +17,9 @@ Modules:
 __version__ = "1.0.0"
 __author__ = "rajm012"
 
-from .adaptive_kde import AdaptiveKDE
-from .regime_detection import MarketRegimeDetector
-from .tail_risk import TailRiskEstimator
+from .AdaptiveKDE import AdaptiveKDE
+from .RegimeDetection import MarketRegimeDetector
+from .TailRisk import TailRiskEstimator
 
 __all__ = ['AdaptiveKDE', 'MarketRegimeDetector', 'TailRiskEstimator']
 

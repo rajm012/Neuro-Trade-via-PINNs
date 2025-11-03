@@ -1,0 +1,70 @@
+================================================================================
+VALIDATION REPORT: Enhanced Density Estimation
+================================================================================
+
+[#] ADAPTIVE KDE VALIDATION
+--------------------------------------------------------------------------------
+Log-Likelihood (in-sample): 3.4901
+Log-Likelihood (out-of-sample): 3.1467
+KS Test Statistic: 0.0516
+KS Test p-value: 0.0399
+Good Fit: False
+Adaptive vs Fixed Improvement: 0.6046
+
+Moment Matching:
+  Mean    - Data:   0.0003  KDE:  -0.0005
+  Std     - Data:   0.0158  KDE:   0.0155
+  Skew    - Data:  -0.2238  KDE:   0.5543
+  Kurtosis- Data:   7.3380  KDE:   3.8712
+
+[[]] REGIME DETECTION VALIDATION
+--------------------------------------------------------------------------------
+Number of Regimes: 57
+ANOVA F-statistic: 254.6481
+ANOVA p-value: 0.000000
+Regimes Significantly Different: True
+
+Volatility Range: 0.042192
+Volatility Ratio (max/min): 7.58x
+Mean Regime Duration: 47 periods
+Regime Duration Std: 31.0 periods
+
+[%] TAIL RISK VALIDATION
+--------------------------------------------------------------------------------
+Left Tail GPD Fit:
+  KS Statistic: 0.0655
+  KS p-value: 0.9183
+  Good Fit: True
+
+VaR 95% Backtest:
+  Violations: 9 (expected: 26.7)
+  Violation Rate: 0.0169 (expected: 0.0500)
+  Coverage OK: False
+  Kupiec Test p-value: 0.0001
+
+VaR 99% Backtest:
+  Violations: 4 (expected: 5.3)
+  Violation Rate: 0.0075 (expected: 0.0100)
+  Coverage OK: True
+  Kupiec Test p-value: 0.5447
+
+ES 95% Validation:
+  ES Value: -0.045917
+  ES < VaR: True
+  ES Bias: -0.001326
+
+ES 99% Validation:
+  ES Value: -0.063906
+  ES < VaR: True
+  ES Bias: 0.001304
+
+[@] CROSS-VALIDATION RESULTS
+--------------------------------------------------------------------------------
+Successful Folds: 5
+Mean Log-Likelihood: 2.3319 ± 0.5223
+Mean VaR 95% Rate: 0.0225 (expected: 0.0500)
+Mean VaR 99% Rate: 0.0090 (expected: 0.0100)
+Mean ES 95% Bias: -0.001753
+Mean ES 99% Bias: -0.007401
+
+================================================================================

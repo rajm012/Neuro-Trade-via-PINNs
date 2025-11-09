@@ -1,0 +1,33 @@
+======================================================================
+FOKKER-PLANCK INVERSE PROBLEM ANALYSIS REPORT
+Stock: TATAMotors
+======================================================================
+
+TRAINING SUMMARY
+----------------------------------------------------------------------
+Total Epochs: 17923
+Optimizer: adam
+Learning Rate: 0.001
+Final Total Loss: 4.948703e+01
+Best Total Loss: 4.327487e+00
+Final PDE Loss: 4.694706e+01
+Final Data Loss: 6.935718e-03
+
+NETWORK CONFIGURATION
+----------------------------------------------------------------------
+Solution Network: {'input_dim': 2, 'hidden_layers': [64, 64, 64], 'output_dim': 1, 'activation': 'tanh'}
+Drift Network: {'input_dim': 2, 'hidden_layers': [32, 32], 'output_dim': 1, 'activation': 'tanh'}
+Diffusion Network: {'input_dim': 2, 'hidden_layers': [32, 32], 'output_dim': 1, 'activation': 'tanh'}
+
+LOSS WEIGHTS
+----------------------------------------------------------------------
+w_pde: 1.0
+w_data: 100.0
+w_ic: 10.0
+w_bc: 10.0
+w_reg: 0.0001
+w_norm: 0.1
+
+======================================================================
+Report generated successfully
+======================================================================

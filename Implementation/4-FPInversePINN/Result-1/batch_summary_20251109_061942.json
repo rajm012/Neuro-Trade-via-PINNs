@@ -1,0 +1,124 @@
+{
+  "mode": "parallel",
+  "n_processes": 3,
+  "total_stocks": 14,
+  "stocks": [
+    "BAJAJ",
+    "HDFCBank",
+    "Hindalco",
+    "HUL",
+    "ICICIBank",
+    "Infosys",
+    "ITC",
+    "L&T",
+    "Nifty-50",
+    "Reliance",
+    "SBI",
+    "TATAMotors",
+    "TataSteel",
+    "TCS"
+  ],
+  "results": [
+    {
+      "stock": "BAJAJ",
+      "status": "success",
+      "results_dir": "e:\\Modelling\\Project\\Implementation\\4-FPInversePINN\\Results\\BAJAJ_20251108_191040",
+      "final_loss": 11.718279838562012,
+      "best_loss": 5.009023189544678
+    },
+    {
+      "stock": "HDFCBank",
+      "status": "success",
+      "results_dir": "e:\\Modelling\\Project\\Implementation\\4-FPInversePINN\\Results\\HDFCBank_20251108_213130",
+      "final_loss": 32.473655700683594,
+      "best_loss": 7.579366683959961
+    },
+    {
+      "stock": "Hindalco",
+      "status": "success",
+      "results_dir": "e:\\Modelling\\Project\\Implementation\\4-FPInversePINN\\Results\\Hindalco_20251108_191040",
+      "final_loss": 230.22067260742188,
+      "best_loss": 60.48800277709961
+    },
+    {
+      "stock": "HUL",
+      "status": "success",
+      "results_dir": "e:\\Modelling\\Project\\Implementation\\4-FPInversePINN\\Results\\HUL_20251108_213121",
+      "final_loss": 11717.1904296875,
+      "best_loss": 11567.67578125
+    },
+    {
+      "stock": "ICICIBank",
+      "status": "success",
+      "results_dir": "e:\\Modelling\\Project\\Implementation\\4-FPInversePINN\\Results\\ICICIBank_20251108_191040",
+      "final_loss": 216.36253356933594,
+      "best_loss": 4.481694221496582
+    },
+    {
+      "stock": "Infosys",
+      "status": "success",
+      "results_dir": "e:\\Modelling\\Project\\Implementation\\4-FPInversePINN\\Results\\Infosys_20251108_213121",
+      "final_loss": 15.353984832763672,
+      "best_loss": 7.014669895172119
+    },
+    {
+      "stock": "ITC",
+      "status": "success",
+      "results_dir": "e:\\Modelling\\Project\\Implementation\\4-FPInversePINN\\Results\\ITC_20251108_224933",
+      "final_loss": 472.8729248046875,
+      "best_loss": 387.9407653808594
+    },
+    {
+      "stock": "L&T",
+      "status": "success",
+      "results_dir": "e:\\Modelling\\Project\\Implementation\\4-FPInversePINN\\Results\\L&T_20251109_001213",
+      "final_loss": 83.52692413330078,
+      "best_loss": 7.954869747161865
+    },
+    {
+      "stock": "Nifty-50",
+      "status": "success",
+      "results_dir": "e:\\Modelling\\Project\\Implementation\\4-FPInversePINN\\Results\\Nifty-50_20251108_225324",
+      "final_loss": 632.0282592773438,
+      "best_loss": 454.15582275390625
+    },
+    {
+      "stock": "Reliance",
+      "status": "success",
+      "results_dir": "e:\\Modelling\\Project\\Implementation\\4-FPInversePINN\\Results\\Reliance_20251109_001657",
+      "final_loss": 237.5481414794922,
+      "best_loss": 12.882231712341309
+    },
+    {
+      "stock": "SBI",
+      "status": "success",
+      "results_dir": "e:\\Modelling\\Project\\Implementation\\4-FPInversePINN\\Results\\SBI_20251108_225729",
+      "final_loss": 20.963491439819336,
+      "best_loss": 4.666884422302246
+    },
+    {
+      "stock": "TATAMotors",
+      "status": "success",
+      "results_dir": "e:\\Modelling\\Project\\Implementation\\4-FPInversePINN\\Results\\TATAMotors_20251109_002319",
+      "final_loss": 49.48702621459961,
+      "best_loss": 4.327486991882324
+    },
+    {
+      "stock": "TataSteel",
+      "status": "success",
+      "results_dir": "e:\\Modelling\\Project\\Implementation\\4-FPInversePINN\\Results\\TataSteel_20251109_014317",
+      "final_loss": 5651.041015625,
+      "best_loss": 5600.748046875
+    },
+    {
+      "stock": "TCS",
+      "status": "success",
+      "results_dir": "e:\\Modelling\\Project\\Implementation\\4-FPInversePINN\\Results\\TCS_20251109_040215",
+      "final_loss": 535.4798583984375,
+      "best_loss": 511.8375244140625
+    }
+  ],
+  "total_time_seconds": 40144.650846,
+  "successful": 14,
+  "failed": 0
+}

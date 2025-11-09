@@ -1,0 +1,33 @@
+======================================================================
+FOKKER-PLANCK INVERSE PROBLEM ANALYSIS REPORT
+Stock: Nifty-50
+======================================================================
+
+TRAINING SUMMARY
+----------------------------------------------------------------------
+Total Epochs: 20000
+Optimizer: adam
+Learning Rate: 0.001
+Final Total Loss: 6.320283e+02
+Best Total Loss: 4.541558e+02
+Final PDE Loss: 1.915307e+02
+Final Data Loss: 4.289488e+00
+
+NETWORK CONFIGURATION
+----------------------------------------------------------------------
+Solution Network: {'input_dim': 2, 'hidden_layers': [64, 64, 64], 'output_dim': 1, 'activation': 'tanh'}
+Drift Network: {'input_dim': 2, 'hidden_layers': [32, 32], 'output_dim': 1, 'activation': 'tanh'}
+Diffusion Network: {'input_dim': 2, 'hidden_layers': [32, 32], 'output_dim': 1, 'activation': 'tanh'}
+
+LOSS WEIGHTS
+----------------------------------------------------------------------
+w_pde: 1.0
+w_data: 100.0
+w_ic: 10.0
+w_bc: 10.0
+w_reg: 0.0001
+w_norm: 0.1
+
+======================================================================
+Report generated successfully
+======================================================================

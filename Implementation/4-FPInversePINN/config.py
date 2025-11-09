@@ -37,7 +37,8 @@ STOCK_FILES = {
 # Solution network p(x,t)
 P_NET_CONFIG = {
     'input_dim': 2,
-    'hidden_layers': [64, 64, 64],
+    # 'hidden_layers': [64, 64, 64],
+    'hidden_layers': [128, 128, 128],
     'output_dim': 1,
     'activation': 'tanh'
 }
@@ -45,7 +46,8 @@ P_NET_CONFIG = {
 # Drift network a(x,t)
 DRIFT_NET_CONFIG = {
     'input_dim': 2,
-    'hidden_layers': [32, 32],
+    # 'hidden_layers': [32, 32],
+    'hidden_layers': [64, 64],
     'output_dim': 1,
     'activation': 'tanh'
 }
@@ -53,7 +55,8 @@ DRIFT_NET_CONFIG = {
 # Diffusion network b(x,t)
 DIFFUSION_NET_CONFIG = {
     'input_dim': 2,
-    'hidden_layers': [32, 32],
+    # 'hidden_layers': [32, 32],
+    'hidden_layers': [64, 64],
     'output_dim': 1,
     'activation': 'tanh'
 }
@@ -61,7 +64,7 @@ DIFFUSION_NET_CONFIG = {
 # ===========================
 # TRAINING PARAMETERS
 # ===========================
-LEARNING_RATE = 1e-3
+LEARNING_RATE = 1.5e-3
 NUM_EPOCHS = 20000
 PRINT_EVERY = 100
 SAVE_EVERY = 1000

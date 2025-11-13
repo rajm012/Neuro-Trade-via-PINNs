@@ -1,25 +1,3 @@
-"""
-Logger Module for FP Inverse PINN
-==================================
-Provides logging functionality to capture console output and save to files.
-
-Usage:
-    from logger import setup_logging, log, restore_stdout
-    
-    # Setup logging at the start of your main script
-    logger = setup_logging(stock_name="TCS", log_dir="Logs")
-    
-    # All print statements will be automatically logged
-    print("This will be logged to file and console!")
-    
-    # Or use direct logging
-    log("Training started...")
-    log(f"Epoch {epoch} | Loss: {loss}")
-    
-    # Restore when done
-    restore_stdout()
-"""
-
 import sys
 import os
 import threading
@@ -27,37 +5,14 @@ from datetime import datetime
 from pathlib import Path
 
 
-class Logger:
-    """
-    Logger class to capture and save console output to log files.
-    
-    Features:
-    - Dual output: prints to console AND saves to file
-    - Automatic timestamping
-    - Organized log directory structure
-    - Thread-safe file operations
-    - Automatic file creation
-    """
-    
+class Logger:    
     def __init__(self, stock_name=None, log_dir="Logs", 
-                 log_file=None, console_output=True):
-        """
-        Initialize logger.
-        
-        Parameters:
-        -----------
-        stock_name : str, optional
-            Name of the stock (creates stock-specific log file)
-        log_dir : str, default="Logs"
-            Directory to store log files
-        log_file : str, optional
-            Custom log file name (overrides stock_name)
-        console_output : bool, default=True
-            If True, also prints to console
-        """
+                 log_file=None, console_output=True, verbosity="normal"):
         self.console_output = console_output
         self.terminal = sys.stdout
         self._lock = threading.Lock()
+        self.verbosity = verbosity.lower()
+        self.suppress_debug = True  # Always suppress debug by default
         
         # Create log directory
         self.log_dir = Path(log_dir)
@@ -76,44 +31,48 @@ class Logger:
         self.log_path = self.log_dir / filename
         
         # Open log file
-        self.log_file = open(self.log_path, 'w', encoding='utf-8')
+        self.log_file = open(self.log_path, 'a', encoding='utf-8')
         
         # Write header
         self._write_header(stock_name)
     
     def _write_header(self, stock_name):
-        """Write log file header."""
+        """Write simplified log file header."""
         header = "="*70 + "\n"
-        header += f"FP Inverse PINN - Training Log\n"
+        header += "FP Inverse PINN - Training Log\n"
         if stock_name:
             header += f"Stock: {stock_name}\n"
         header += f"Started: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n"
+        header += f"Verbosity: {self.verbosity}\n"
         header += "="*70 + "\n\n"
         
         with self._lock:
             self.log_file.write(header)
             self.log_file.flush()
     
-    def log(self, message, end='\n'):
-        """
-        Log a message to file and optionally console.
-        
-        Parameters:
-        -----------
-        message : str
-            Message to log
-        end : str, default='\n'
-            String appended after the message
-        """
-        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        log_message = f"[{timestamp}] {message}{end}"
+    def should_log(self, level="normal"):
+        """Check if message should be logged based on verbosity."""
+        if level == "debug" and self.suppress_debug:
+            return False
+        if self.verbosity == "minimal":
+            return level in ["critical", "error", "info"]
+        elif self.verbosity == "normal":
+            return level in ["critical", "error", "warning", "info"]
+        else:  # detailed
+            return True
+    
+    def log(self, message, end='\n', level="normal"):
+        if not self.should_log(level):
+            return
+            
+        timestamp = datetime.now().strftime("%H:%M:%S")
         
         with self._lock:
-            # Write to file
-            self.log_file.write(log_message)
+            # Write to file (always with timestamp)
+            self.log_file.write(f"[{timestamp}] {message}{end}")
             self.log_file.flush()
             
-            # Write to console
+            # Write to console (minimal timestamp for cleaner output)
             if self.console_output:
                 self.terminal.write(f"{message}{end}")
                 self.terminal.flush()
@@ -121,22 +80,31 @@ class Logger:
     def write(self, message):
         """
         Write method for sys.stdout compatibility.
-        Allows using Logger as: sys.stdout = logger
+        Filters out excessive debug info.
         """
-        if message.strip():  # Only log non-empty messages
-            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            # Handle messages that might contain newlines
-            lines = message.rstrip().split('\n')
-            with self._lock:
-                for line in lines:
-                    if line.strip():  # Skip empty lines
-                        log_message = f"[{timestamp}] {line}\n"
-                        self.log_file.write(log_message)
-                self.log_file.flush()
+        if not message.strip():
+            return
+            
+        # Filter out very verbose messages
+        filters = [
+            "Tensor(",
+            "grad_fn=",
+            "device=",
+            "__main__",
+        ]
         
-        # Write to console
-        if self.console_output:
-            with self._lock:
+        if any(f in message for f in filters):
+            return
+        
+        timestamp = datetime.now().strftime("%H:%M:%S")
+        
+        with self._lock:
+            # Write to file with timestamp
+            self.log_file.write(f"[{timestamp}] {message}")
+            self.log_file.flush()
+            
+            # Write to console without timestamp for cleaner output
+            if self.console_output:
                 self.terminal.write(message)
                 self.terminal.flush()
     
@@ -162,7 +130,7 @@ class Logger:
     
     def __call__(self, message, end='\n'):
         """Allow logger to be called directly: logger('message')"""
-        self.log(message, end)
+        self.log(message, end, level="normal")
     
     def __enter__(self):
         """Context manager entry."""
@@ -184,26 +152,9 @@ class Logger:
 _global_logger = None
 
 
-def setup_logging(stock_name=None, log_dir="Logs", redirect_stdout=True):
-    """
-    Convenience function to set up global logging quickly.
-    
-    Parameters:
-    -----------
-    stock_name : str, optional
-        Name of the stock
-    log_dir : str, default="Logs"
-        Directory for log files
-    redirect_stdout : bool, default=True
-        If True, redirects all print statements to logger
-    
-    Returns:
-    --------
-    logger : Logger
-        Logger instance
-    """
+def setup_logging(stock_name=None, log_dir="Logs", redirect_stdout=True, verbosity="normal"):
     global _global_logger
-    _global_logger = Logger(stock_name=stock_name, log_dir=log_dir)
+    _global_logger = Logger(stock_name=stock_name, log_dir=log_dir, verbosity=verbosity)
     
     if redirect_stdout:
         sys.stdout = _global_logger
@@ -212,32 +163,15 @@ def setup_logging(stock_name=None, log_dir="Logs", redirect_stdout=True):
 
 
 def get_logger():
-    """
-    Get the global logger instance.
-    
-    Returns:
-    --------
-    Logger instance or None if not setup
-    """
     return _global_logger
 
 
 def log(message, end='\n'):
-    """
-    Log a message using the global logger.
-    
-    Parameters:
-    -----------
-    message : str
-        Message to log
-    end : str, default='\n'
-        String appended after the message
-    """
     global _global_logger
     if _global_logger is not None:
-        _global_logger.log(message, end)
+        _global_logger.log(message, end, level="normal")
     else:
-        print(f"[NO LOGGER] {message}", end=end)
+        print(f"{message}", end=end)
 
 
 def restore_stdout():
@@ -251,43 +185,47 @@ def restore_stdout():
 
 # Convenience functions for different log levels
 def debug(message):
-    log(f"[DEBUG] {message}")
+    """Log debug message (suppressed by default)."""
+    global _global_logger
+    if _global_logger is not None:
+        _global_logger.log(f"[DEBUG] {message}", level="debug")
+    # Don't print debug to console if no logger
 
 def info(message):
-    log(f"[INFO] {message}")
+    """Log info message (important events, always shown)."""
+    global _global_logger
+    if _global_logger is not None:
+        _global_logger.log(message, level="info")
+    else:
+        print(message)
 
 def warning(message):
-    log(f"[WARNING] {message}")
+    """Log warning message."""
+    global _global_logger
+    if _global_logger is not None:
+        _global_logger.log(f"[WARNING] {message}", level="warning")
+    else:
+        print(f"[WARNING] {message}")
 
 def error(message):
-    log(f"[ERROR] {message}")
+    """Log error message."""
+    global _global_logger
+    if _global_logger is not None:
+        _global_logger.log(f"[ERROR] {message}", level="error")
+    else:
+        print(f"[ERROR] {message}")
 
 def critical(message):
-    log(f"[CRITICAL] {message}")
+    """Log critical message."""
+    global _global_logger
+    if _global_logger is not None:
+        _global_logger.log(f"[CRITICAL] {message}", level="critical")
+    else:
+        print(f"[CRITICAL] {message}")
 
 
-class DualLogger:
-    """
-    Dual logger that writes to multiple destinations simultaneously.
-    
-    Usage:
-        logger1 = Logger(stock_name="TCS")
-        logger2 = Logger(stock_name="TCS", log_file="debug.log")
-        dual = DualLogger(logger1, logger2)
-        
-        sys.stdout = dual
-        print("This goes to both loggers!")
-    """
-    
+class DualLogger:    
     def __init__(self, *loggers):
-        """
-        Initialize with multiple loggers.
-        
-        Parameters:
-        -----------
-        *loggers : Logger objects
-            Variable number of Logger instances
-        """
         self.loggers = loggers
         self.terminal = sys.stdout
         self._lock = threading.Lock()
@@ -309,4 +247,5 @@ class DualLogger:
         with self._lock:
             for logger in self.loggers:
                 logger.close()
+
                 

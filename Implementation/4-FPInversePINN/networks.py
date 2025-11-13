@@ -6,6 +6,13 @@
 # import torch
 # import torch.nn as nn
 # import numpy as np
+# import sys
+# import os
+
+# # Add parent directory to path to import logger
+# sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# from logger import log, info, debug, warning, error
+# from config import P_NET_CONFIG, DRIFT_NET_CONFIG, DIFFUSION_NET_CONFIG, DEVICE
 
 
 # class MLP(nn.Module):
@@ -13,52 +20,72 @@
 #     Multi-Layer Perceptron for approximating continuous functions.
 #     Used as the building block for all networks in the PINN.
 #     """
-#     def __init__(self, input_dim, hidden_layers, output_dim, activation='tanh'):
+#     def __init__(self, input_dim, hidden_layers, output_dim, activation='tanh', name="MLP"):
 #         """
 #         Args:
 #             input_dim: Number of input features (2 for x,t)
 #             hidden_layers: List of hidden layer sizes, e.g., [64, 64, 64]
 #             output_dim: Number of output features (1 for scalar functions)
 #             activation: Activation function ('tanh', 'relu', 'sigmoid')
+#             name: Network name for logging
 #         """
 #         super(MLP, self).__init__()
+#         self.name = name
+#         self.input_dim = input_dim
+#         self.output_dim = output_dim
+#         self.hidden_layers = hidden_layers
         
 #         # Select activation function
 #         if activation == 'tanh':
-#             self.activation = nn.Tanh()
+#             # Use Swish/SiLU instead - works better for deep networks
+#             self.activation = nn.SiLU()
+#             debug(f"{name}: Using SiLU activation (better than tanh)")
 #         elif activation == 'relu':
 #             self.activation = nn.ReLU()
+#             debug(f"{name}: Using ReLU activation")
 #         elif activation == 'sigmoid':
 #             self.activation = nn.Sigmoid()
+#             debug(f"{name}: Using Sigmoid activation")
 #         elif activation == 'swish':
 #             self.activation = nn.SiLU()
+#             debug(f"{name}: Using Swish (SiLU) activation")
 #         else:
+#             error(f"{name}: Unknown activation function: {activation}")
 #             raise ValueError(f"Unknown activation: {activation}")
         
 #         # Build layers
 #         layers = []
 #         current_dim = input_dim
         
-#         for hidden_dim in hidden_layers:
+#         for i, hidden_dim in enumerate(hidden_layers):
 #             layers.append(nn.Linear(current_dim, hidden_dim))
 #             layers.append(self.activation)
+#             debug(f"{name}: Layer {i+1}: {current_dim} -> {hidden_dim}")
 #             current_dim = hidden_dim
         
 #         # Output layer (no activation)
 #         layers.append(nn.Linear(current_dim, output_dim))
+#         debug(f"{name}: Output layer: {current_dim} -> {output_dim}")
         
 #         self.net = nn.Sequential(*layers)
         
 #         # Initialize weights using Xavier initialization
 #         self._initialize_weights()
+        
+#         info(f"{name}: Initialized with input_dim={input_dim}, "
+#              f"hidden_layers={hidden_layers}, output_dim={output_dim}")
     
 #     def _initialize_weights(self):
 #         """Initialize network weights for better convergence"""
+#         debug(f"{self.name}: Initializing weights with Xavier normal (gain=1.5)")
 #         for m in self.modules():
 #             if isinstance(m, nn.Linear):
-#                 nn.init.xavier_normal_(m.weight)
+#                 # Use higher gain for better initial learning
+#                 nn.init.xavier_normal_(m.weight, gain=2.5)
 #                 if m.bias is not None:
-#                     nn.init.constant_(m.bias, 0)
+#                     # Small positive bias helps avoid dead neurons
+#                     nn.init.constant_(m.bias, 0.01)
+#                 debug(f"{self.name}: Initialized layer {m.in_features} -> {m.out_features}")
     
 #     def forward(self, x):
 #         """
@@ -78,16 +105,27 @@
 #     """
 #     def __init__(self, config):
 #         super(SolutionNetwork, self).__init__()
+#         self.name = "SolutionNetwork"
+        
 #         self.mlp = MLP(
 #             input_dim=config['input_dim'],
 #             hidden_layers=config['hidden_layers'],
 #             output_dim=config['output_dim'],
-#             activation=config['activation']
+#             activation=config.get('activation', 'tanh'),
+#             name="p(x,t)_MLP"
 #         )
+        
 #         # Use softplus to ensure positivity: p >= 0
-#         # self.softplus = nn.Softplus()
-#         self.softplus = nn.Softplus(beta=1)
-#         self.eps = 1e-8
+#         # Use higher beta for sharper activation (avoids collapse to zero)
+#         self.softplus = nn.Softplus(beta=10)  # INCREASED from 1 to 10
+        
+#         # REMOVED the eps floor - it was causing collapse!
+#         # Instead, we'll use min/max clamping if needed
+#         self.min_output = config.get('min_output', 1e-6)
+#         self.max_output = config.get('max_output', 1000.0)
+        
+#         info(f"{self.name}: Using Softplus(beta=10) for positivity constraint")
+#         info(f"{self.name}: Output range: [{self.min_output:.2e}, {self.max_output:.2f}]")
     
 #     def forward(self, x):
 #         """
@@ -96,8 +134,14 @@
 #         Returns:
 #             p(x,t) >= 0
 #         """
-#         # return self.softplus(self.mlp(x))
-#         return self.softplus(self.mlp(x)) + self.eps
+#         raw_output = self.mlp(x)
+#         positive_output = self.softplus(raw_output)
+        
+#         # Clamp to reasonable range to avoid numerical issues
+#         output = torch.clamp(positive_output, self.min_output, self.max_output)
+        
+#         debug(f"{self.name}: Output range - min: {output.min().item():.6e}, max: {output.max().item():.6e}")
+#         return output
 
 
 # class DriftNetwork(nn.Module):
@@ -107,13 +151,18 @@
 #     """
 #     def __init__(self, config):
 #         super(DriftNetwork, self).__init__()
+#         self.name = "DriftNetwork"
+        
 #         self.mlp = MLP(
 #             input_dim=config['input_dim'],
 #             hidden_layers=config['hidden_layers'],
 #             output_dim=config['output_dim'],
-#             activation=config['activation']
+#             activation=config['activation'],
+#             name="a(x,t)_MLP"
 #         )
-#         self.max_drift = 10.0
+        
+#         self.max_drift = getattr(config, 'max_drift', 10.0)
+#         info(f"{self.name}: Using drift clamping with max_drift=±{self.max_drift}")
 
 #     def forward(self, x):
 #         """
@@ -122,9 +171,15 @@
 #         Returns:
 #             a(x,t) - drift coefficient
 #         """
-#         # return self.mlp(x)
 #         a = self.mlp(x)
-#         return torch.clamp(a, -self.max_drift, self.max_drift)
+#         a_clamped = torch.clamp(a, -self.max_drift, self.max_drift)
+        
+#         # Log if clamping occurred
+#         if (a != a_clamped).any():
+#             debug(f"{self.name}: Drift values clamped to range [-{self.max_drift}, {self.max_drift}]")
+        
+#         debug(f"{self.name}: Output range - min: {a_clamped.min().item():.6f}, max: {a_clamped.max().item():.6f}")
+#         return a_clamped
 
 
 # class DiffusionNetwork(nn.Module):
@@ -134,17 +189,25 @@
 #     """
 #     def __init__(self, config):
 #         super(DiffusionNetwork, self).__init__()
+#         self.name = "DiffusionNetwork"
+        
 #         self.mlp = MLP(
 #             input_dim=config['input_dim'],
 #             hidden_layers=config['hidden_layers'],
 #             output_dim=config['output_dim'],
-#             activation=config['activation']
+#             activation=config.get('activation', 'tanh'),
+#             name="b(x,t)_MLP"
 #         )
+        
 #         # Use softplus to ensure positivity: b > 0
-#         # self.softplus = nn.Softplus()
-#         self.softplus = nn.Softplus(beta=1)
-#         self.min_diffusion = 1e-6
-#         self.max_diffusion = 1.0
+#         # Higher beta for sharper activation
+#         self.softplus = nn.Softplus(beta=10)  # INCREASED from 1 to 10
+        
+#         self.min_diffusion = config.get('min_diffusion', 1e-4)  # INCREASED from 1e-6
+#         self.max_diffusion = config.get('max_diffusion', 2.0)   # INCREASED from 1.0
+        
+#         info(f"{self.name}: Using Softplus(beta=10) for positivity constraint")
+#         info(f"{self.name}: Diffusion range: [{self.min_diffusion:.2e}, {self.max_diffusion:.2f}]")
     
 #     def forward(self, x):
 #         """
@@ -153,9 +216,18 @@
 #         Returns:
 #             b(x,t) > 0 - diffusion coefficient
 #         """
-#         # return self.softplus(self.mlp(x))
-#         b = self.softplus(self.mlp(x)) + self.min_diffusion
-#         return torch.clamp(b, self.min_diffusion, self.max_diffusion)
+#         b_raw = self.mlp(x)
+#         b_positive = self.softplus(b_raw)
+        
+#         # Clamp to reasonable range
+#         b_clamped = torch.clamp(b_positive, self.min_diffusion, self.max_diffusion)
+        
+#         # Log if clamping occurred
+#         if (b_positive != b_clamped).any():
+#             debug(f"{self.name}: Diffusion values clamped to range [{self.min_diffusion:.2e}, {self.max_diffusion:.2f}]")
+        
+#         debug(f"{self.name}: Output range - min: {b_clamped.min().item():.6e}, max: {b_clamped.max().item():.6e}")
+#         return b_clamped
 
 
 # def build_networks(p_config, drift_config, diffusion_config, device):
@@ -171,11 +243,27 @@
 #     Returns:
 #         Tuple of (p_net, drift_net, diffusion_net)
 #     """
-#     p_net = SolutionNetwork(p_config).to(device)
-#     drift_net = DriftNetwork(drift_config).to(device)
-#     diffusion_net = DiffusionNetwork(diffusion_config).to(device)
+#     info("\n" + "="*60)
+#     info("BUILDING NEURAL NETWORKS")
+#     info("="*60)
+#     info(f"Device: {device}")
     
-#     return p_net, drift_net, diffusion_net
+#     try:
+#         info("Building Solution Network p(x,t)...")
+#         p_net = SolutionNetwork(p_config).to(device)
+        
+#         info("Building Drift Network a(x,t)...")
+#         drift_net = DriftNetwork(drift_config).to(device)
+        
+#         info("Building Diffusion Network b(x,t)...")
+#         diffusion_net = DiffusionNetwork(diffusion_config).to(device)
+        
+#         info("All networks built successfully!")
+#         return p_net, drift_net, diffusion_net
+        
+#     except Exception as e:
+#         error(f"Failed to build networks: {str(e)}")
+#         raise
 
 
 # def count_parameters(model):
@@ -185,86 +273,182 @@
 
 # def print_network_summary(p_net, drift_net, diffusion_net):
 #     """Print summary of all networks"""
-#     print("\n" + "="*60)
-#     print("NETWORK ARCHITECTURE SUMMARY")
-#     print("="*60)
+#     info("\n" + "="*60)
+#     info("NETWORK ARCHITECTURE SUMMARY")
+#     info("="*60)
     
-#     print(f"\n1. Solution Network p(x,t):")
-#     print(f"   Parameters: {count_parameters(p_net):,}")
-#     print(f"   Architecture: {p_net}")
+#     try:
+#         p_params = count_parameters(p_net)
+#         drift_params = count_parameters(drift_net)
+#         diffusion_params = count_parameters(diffusion_net)
+        
+#         info(f"\n1. Solution Network p(x,t):")
+#         info(f"   Parameters: {p_params:,}")
+#         info(f"   Architecture: {p_net.mlp.hidden_layers}")
+        
+#         info(f"\n2. Drift Network a(x,t):")
+#         info(f"   Parameters: {drift_params:,}")
+#         info(f"   Architecture: {drift_net.mlp.hidden_layers}")
+        
+#         info(f"\n3. Diffusion Network b(x,t):")
+#         info(f"   Parameters: {diffusion_params:,}")
+#         info(f"   Architecture: {diffusion_net.mlp.hidden_layers}")
+        
+#         total_params = p_params + drift_params + diffusion_params
+#         info(f"\nTotal Parameters: {total_params:,}")
+        
+#         # Memory usage estimate (rough)
+#         memory_mb = total_params * 4 / (1024 * 1024)  # 4 bytes per float32
+#         info(f"Estimated Memory: {memory_mb:.2f} MB")
+        
+#         info("="*60)
+        
+#         return total_params
+        
+#     except Exception as e:
+#         error(f"Failed to generate network summary: {str(e)}")
+#         return 0
+
+
+# def test_forward_pass(p_net, drift_net, diffusion_net, device, n_samples=10):
+#     """Test forward pass of all networks"""
+#     info("\nTesting forward pass...")
     
-#     print(f"\n2. Drift Network a(x,t):")
-#     print(f"   Parameters: {count_parameters(drift_net):,}")
-#     print(f"   Architecture: {drift_net}")
-    
-#     print(f"\n3. Diffusion Network b(x,t):")
-#     print(f"   Parameters: {count_parameters(diffusion_net):,}")
-#     print(f"   Architecture: {diffusion_net}")
-    
-#     total_params = (count_parameters(p_net) + 
-#                    count_parameters(drift_net) + 
-#                    count_parameters(diffusion_net))
-#     print(f"\nTotal Parameters: {total_params:,}")
-#     print("="*60 + "\n")
+#     try:
+#         # Generate test data
+#         x_test = torch.randn(n_samples, 2).to(device)
+#         info(f"Test input shape: {x_test.shape}")
+        
+#         # Forward passes
+#         with torch.no_grad():
+#             p_out = p_net(x_test)
+#             a_out = drift_net(x_test)
+#             b_out = diffusion_net(x_test)
+        
+#         # Log results
+#         info("Forward pass results:")
+#         info(f"  p(x,t): shape={p_out.shape}, min={p_out.min().item():.6e}, max={p_out.max().item():.6e}")
+#         info(f"  a(x,t): shape={a_out.shape}, min={a_out.min().item():.6f}, max={a_out.max().item():.6f}")
+#         info(f"  b(x,t): shape={b_out.shape}, min={b_out.min().item():.6e}, max={b_out.max().item():.6e}")
+        
+#         # Check constraints
+#         p_positive = (p_out >= 0).all()
+#         b_positive = (b_out > 0).all()
+        
+#         info(f"Constraints satisfied:")
+#         info(f"  p(x,t) >= 0: {p_positive.item()}")
+#         info(f"  b(x,t) > 0: {b_positive.item()}")
+        
+#         if not (p_positive and b_positive):
+#             warning("Some network constraints not satisfied!")
+        
+#         return True
+        
+#     except Exception as e:
+#         error(f"Forward pass test failed: {str(e)}")
+#         return False
 
 
 # if __name__ == "__main__":
 #     # Test the networks
-#     from config import P_NET_CONFIG, DRIFT_NET_CONFIG, DIFFUSION_NET_CONFIG, DEVICE
+#     info("Starting network architecture test...")
     
-#     print("Building networks...")
-#     p_net, drift_net, diffusion_net = build_networks(
-#         P_NET_CONFIG, DRIFT_NET_CONFIG, DIFFUSION_NET_CONFIG, DEVICE
-#     )
-    
-#     print_network_summary(p_net, drift_net, diffusion_net)
-    
-#     # Test forward pass
-#     x_test = torch.randn(10, 2).to(DEVICE)
-    
-#     p_out = p_net(x_test)
-#     a_out = drift_net(x_test)
-#     b_out = diffusion_net(x_test)
-    
-#     print("Test Forward Pass:")
-#     print(f"Input shape: {x_test.shape}")
-#     print(f"p(x,t) output shape: {p_out.shape}, min: {p_out.min():.4f}, max: {p_out.max():.4f}")
-#     print(f"a(x,t) output shape: {a_out.shape}, min: {a_out.min():.4f}, max: {a_out.max():.4f}")
-#     print(f"b(x,t) output shape: {b_out.shape}, min: {b_out.min():.4f}, max: {b_out.max():.4f}")
-#     print(f"\nAll outputs positive (p and b): {(p_out >= 0).all() and (b_out >= 0).all()}")
-
-
-# =============================================================
-"""
-Neural Network Architectures for FP Inverse Problem
-Implements the MLP class and network builders for p(x,t), a(x,t), and b(x,t)
-"""
+#     try:
+#         info(f"Using device: {DEVICE}")
+        
+#         # Build networks
+#         p_net, drift_net, diffusion_net = build_networks(
+#             P_NET_CONFIG, DRIFT_NET_CONFIG, DIFFUSION_NET_CONFIG, DEVICE
+#         )
+        
+#         # Print summary
+#         total_params = print_network_summary(p_net, drift_net, diffusion_net)
+        
+#         # Test forward pass
+#         test_success = test_forward_pass(p_net, drift_net, diffusion_net, DEVICE)
+        
+#         if test_success:
+#             info("\nNetwork architecture test completed successfully!")
+#         else:
+#             error("Network architecture test completed with errors!")
+            
+#     except ImportError as e:
+#         error(f"Could not import config: {str(e)}")
+#         info("This is expected if running this module standalone")
+        
+#     except Exception as e:
+#         error(f"Network test failed: {str(e)}")
+        
+__author__ = "Optimized Hybrid Version"
 
 import torch
 import torch.nn as nn
 import numpy as np
 import sys
 import os
-
-# Add parent directory to path to import logger
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from logger import log, info, debug, warning, error
+from config import P_NET_CONFIG, DRIFT_NET_CONFIG, DIFFUSION_NET_CONFIG, DEVICE
 
+# =============================================================================
+# RESIDUAL BLOCK - Best of Both Worlds
+# =============================================================================
+
+class ResidualBlock(nn.Module):
+    """
+    Optimized Residual Block with proper initialization.
+    Architecture: x_out = x_in + Linear2(Activation(Linear1(x_in)))
+    
+    Key improvements:
+    - Clean Sequential API (from 2Seek.py)
+    - Proper gain=1.0 for stability (from both)
+    - Zero initialization of final layer for better early training
+    """
+    def __init__(self, dim, activation):
+        super().__init__()
+        self.linear1 = nn.Linear(dim, dim)
+        self.activation = activation
+        self.linear2 = nn.Linear(dim, dim)
+        self._initialize_weights()
+
+    def _initialize_weights(self):
+        """
+        Initialize with special attention to residual pathway.
+        Using near-zero initialization for the second layer helps
+        the network start close to identity mapping.
+        """
+        # First layer: standard initialization
+        nn.init.xavier_normal_(self.linear1.weight, gain=1.0)
+        nn.init.constant_(self.linear1.bias, 0.0)
+        
+        # Second layer: near-zero initialization for better residual learning
+        nn.init.xavier_normal_(self.linear2.weight, gain=0.1)  # Small gain
+        nn.init.constant_(self.linear2.bias, 0.0)
+
+    def forward(self, x):
+        """Apply residual connection: x + F(x)"""
+        identity = x
+        out = self.linear1(x)
+        out = self.activation(out)
+        out = self.linear2(out)
+        return identity + out
+
+
+# =============================================================================
+# MLP WITH AUTOMATIC RESIDUAL CONNECTIONS - Fixed Version
+# =============================================================================
 
 class MLP(nn.Module):
     """
-    Multi-Layer Perceptron for approximating continuous functions.
-    Used as the building block for all networks in the PINN.
+    Multi-Layer Perceptron with automatic residual connections.
+    
+    Key improvements:
+    - Automatic residual block insertion when dimensions match (from 2Seek.py)
+    - Fixed dimension tracking bug (from 1Gem.py)
+    - Better initialization strategy (from 1Gem.py)
+    - Clear logging of architecture decisions
     """
     def __init__(self, input_dim, hidden_layers, output_dim, activation='tanh', name="MLP"):
-        """
-        Args:
-            input_dim: Number of input features (2 for x,t)
-            hidden_layers: List of hidden layer sizes, e.g., [64, 64, 64]
-            output_dim: Number of output features (1 for scalar functions)
-            activation: Activation function ('tanh', 'relu', 'sigmoid')
-            name: Network name for logging
-        """
         super(MLP, self).__init__()
         self.name = name
         self.input_dim = input_dim
@@ -272,70 +456,87 @@ class MLP(nn.Module):
         self.hidden_layers = hidden_layers
         
         # Select activation function
-        if activation == 'tanh':
-            # self.activation = nn.tanh()
-            self.activation = nn.SiLU()
-            debug(f"{name}: Using Silu activation")
-        elif activation == 'relu':
-            self.activation = nn.ReLU()
-            debug(f"{name}: Using ReLU activation")
-        elif activation == 'sigmoid':
-            self.activation = nn.Sigmoid()
-            debug(f"{name}: Using Sigmoid activation")
-        elif activation == 'swish':
-            self.activation = nn.SiLU()
-            debug(f"{name}: Using Swish (SiLU) activation")
+        activation_map = {
+            'tanh': nn.Tanh(),
+            'swish': nn.SiLU(),
+            'silu': nn.SiLU(),
+            'relu': nn.ReLU(),
+            'sigmoid': nn.Sigmoid()
+        }
+        
+        if activation.lower() in activation_map:
+            self.activation = activation_map[activation.lower()]
+            debug(f"{name}: Using {activation.upper()} activation")
         else:
             error(f"{name}: Unknown activation function: {activation}")
             raise ValueError(f"Unknown activation: {activation}")
         
-        # Build layers
+        # Build layers with automatic residual connections
         layers = []
         current_dim = input_dim
         
-        for i, hidden_dim in enumerate(hidden_layers):
-            layers.append(nn.Linear(current_dim, hidden_dim))
-            layers.append(self.activation)
-            debug(f"{name}: Layer {i+1}: {current_dim} -> {hidden_dim}")
-            current_dim = hidden_dim
+        # Input Layer
+        layers.append(nn.Linear(current_dim, hidden_layers[0]))
+        layers.append(self.activation)
+        debug(f"{name}: Input Layer: {current_dim} -> {hidden_layers[0]}")
+        current_dim = hidden_layers[0]
+        
+        # Hidden Layers with automatic residual connections
+        for i, hidden_dim in enumerate(hidden_layers[1:], start=1):
+            if hidden_dim == current_dim:
+                # Use residual block when dimensions match
+                layers.append(ResidualBlock(current_dim, self.activation))
+                debug(f"{name}: Layer {i+1}: ResidualBlock (dim={current_dim})")
+                # Note: current_dim stays the same (residual preserves dimension)
+            else:
+                # Use projection layer when dimensions change
+                layers.append(nn.Linear(current_dim, hidden_dim))
+                layers.append(self.activation)
+                debug(f"{name}: Layer {i+1}: Projection ({current_dim} -> {hidden_dim})")
+                current_dim = hidden_dim  # Update for next iteration
         
         # Output layer (no activation)
         layers.append(nn.Linear(current_dim, output_dim))
-        debug(f"{name}: Output layer: {current_dim} -> {output_dim}")
+        debug(f"{name}: Output Layer: {current_dim} -> {output_dim}")
         
         self.net = nn.Sequential(*layers)
         
-        # Initialize weights using Xavier initialization
+        # Initialize non-residual weights
         self._initialize_weights()
         
-        info(f"{name}: Initialized with input_dim={input_dim}, "
-             f"hidden_layers={hidden_layers}, output_dim={output_dim}")
+        info(f"{name}: Initialized MLP with {len([l for l in layers if isinstance(l, ResidualBlock)])} residual blocks")
     
     def _initialize_weights(self):
-        """Initialize network weights for better convergence"""
-        debug(f"{self.name}: Initializing weights with Xavier normal")
-        for m in self.modules():
+        """
+        Initialize network weights with appropriate gains.
+        Residual blocks handle their own initialization.
+        """
+        debug(f"{self.name}: Initializing projection layer weights")
+        for m in self.net.modules():
             if isinstance(m, nn.Linear):
-                nn.init.xavier_normal_(m.weight)
+                # CRITICAL FIX: Reduced gain from 2.5 to 1.0 for stability
+                nn.init.xavier_normal_(m.weight, gain=1.0)
                 if m.bias is not None:
-                    nn.init.constant_(m.bias, 0)
-                debug(f"{self.name}: Initialized layer {m.in_features} -> {m.out_features}")
+                    nn.init.constant_(m.bias, 0.0)  # Zero bias for safety
+            # ResidualBlocks handle their own initialization, so skip them
     
     def forward(self, x):
-        """
-        Forward pass
-        Args:
-            x: Input tensor of shape (N, input_dim)
-        Returns:
-            Output tensor of shape (N, output_dim)
-        """
+        """Forward pass through the network"""
         return self.net(x)
 
 
+# =============================================================================
+# SOLUTION NETWORK - Optimized Constraints
+# =============================================================================
+
 class SolutionNetwork(nn.Module):
     """
-    Network for the solution p(x,t) of the Fokker-Planck equation.
-    Ensures p(x,t) >= 0 (probability density constraint)
+    Network for p(x,t) with practical constraints for financial data.
+    
+    Key improvements:
+    - Simple floor constraint (from 1Gem.py) - better for finance
+    - ADDED: Optional upper bound to prevent NaN (CRITICAL FIX!)
+    - Maintains differentiability for backpropagation
     """
     def __init__(self, config):
         super(SolutionNetwork, self).__init__()
@@ -345,33 +546,52 @@ class SolutionNetwork(nn.Module):
             input_dim=config['input_dim'],
             hidden_layers=config['hidden_layers'],
             output_dim=config['output_dim'],
-            activation=config['activation'],
+            activation=config.get('activation', 'tanh'),
             name="p(x,t)_MLP"
         )
         
-        # Use softplus to ensure positivity: p >= 0
-        self.softplus = nn.Softplus(beta=1)
-        self.eps = 1e-8
+        # Differentiable positivity constraint
+        self.softplus = nn.Softplus(beta=10)
+        self.min_output = config.get('min_output', 1e-6)
         
-        info(f"{self.name}: Using Softplus for positivity constraint")
-        info(f"{self.name}: Added epsilon={self.eps} for numerical stability")
+        # CRITICAL FIX: Add optional upper bound to prevent NaN
+        self.use_upper_bound = config.get('use_upper_bound', True)  # Default TRUE for stability
+        self.max_output = config.get('max_output', 1000.0)
+        
+        info(f"{self.name}: Using Softplus(beta=10) + floor for positivity")
+        info(f"{self.name}: Minimum output value: {self.min_output:.2e}")
+        if self.use_upper_bound:
+            info(f"{self.name}: Upper bound enabled: {self.max_output:.2f}")
     
     def forward(self, x):
-        """
-        Args:
-            x: Input tensor (x, t) of shape (N, 2)
-        Returns:
-            p(x,t) >= 0
-        """
-        output = self.softplus(self.mlp(x)) + self.eps
-        debug(f"{self.name}: Output range - min: {output.min().item():.6e}, max: {output.max().item():.6e}")
+        raw_output = self.mlp(x)
+        
+        # Ensure positivity with floor
+        positive_output = self.softplus(raw_output) + self.min_output
+        
+        # CRITICAL FIX: Apply upper bound to prevent explosions
+        if self.use_upper_bound:
+            # Use differentiable tanh bounding
+            output = self.max_output * torch.tanh(positive_output / self.max_output)
+        else:
+            output = positive_output
+        
+        debug(f"{self.name}: Output range - min: {output.min().item():.6e}, "
+              f"max: {output.max().item():.6e}")
         return output
 
 
+# =============================================================================
+# DRIFT NETWORK - Differentiable Bounding
+# =============================================================================
+
 class DriftNetwork(nn.Module):
     """
-    Network for the drift function a(x,t).
-    No constraints on sign (can be positive or negative).
+    Network for drift function a(x,t) with soft bounding.
+    
+    Key improvements:
+    - Differentiable tanh bounding (from both versions)
+    - Prevents extreme values that could destabilize training
     """
     def __init__(self, config):
         super(DriftNetwork, self).__init__()
@@ -385,31 +605,32 @@ class DriftNetwork(nn.Module):
             name="a(x,t)_MLP"
         )
         
-        self.max_drift = getattr(config, 'max_drift', 10.0)
-        info(f"{self.name}: Using drift clamping with max_drift=±{self.max_drift}")
+        self.max_drift = config.get('max_drift', 10.0)
+        info(f"{self.name}: Using soft tanh bounding: ±{self.max_drift}")
 
     def forward(self, x):
-        """
-        Args:
-            x: Input tensor (x, t) of shape (N, 2)
-        Returns:
-            a(x,t) - drift coefficient
-        """
-        a = self.mlp(x)
-        a_clamped = torch.clamp(a, -self.max_drift, self.max_drift)
+        a_raw = self.mlp(x)
         
-        # Log if clamping occurred
-        if (a != a_clamped).any():
-            debug(f"{self.name}: Drift values clamped to range [-{self.max_drift}, {self.max_drift}]")
+        # Soft, differentiable bounding
+        a_bounded = self.max_drift * torch.tanh(a_raw / self.max_drift)
         
-        debug(f"{self.name}: Output range - min: {a_clamped.min().item():.6f}, max: {a_clamped.max().item():.6f}")
-        return a_clamped
+        debug(f"{self.name}: Output range - min: {a_bounded.min().item():.6f}, "
+              f"max: {a_bounded.max().item():.6f}")
+        return a_bounded
 
+
+# =============================================================================
+# DIFFUSION NETWORK - Balanced Constraints
+# =============================================================================
 
 class DiffusionNetwork(nn.Module):
     """
-    Network for the diffusion function b(x,t).
-    Ensures b(x,t) > 0 (positivity constraint for diffusion).
+    Network for diffusion b(x,t) with practical constraints.
+    
+    Key improvements:
+    - Simple floor constraint (from 1Gem.py)
+    - Optional upper bound if needed (configurable)
+    - Better suited for financial volatility modeling
     """
     def __init__(self, config):
         super(DiffusionNetwork, self).__init__()
@@ -419,50 +640,42 @@ class DiffusionNetwork(nn.Module):
             input_dim=config['input_dim'],
             hidden_layers=config['hidden_layers'],
             output_dim=config['output_dim'],
-            activation=config['activation'],
+            activation=config.get('activation', 'tanh'),
             name="b(x,t)_MLP"
         )
         
-        # Use softplus to ensure positivity: b > 0
-        self.softplus = nn.Softplus(beta=1)
-        self.min_diffusion = getattr(config, 'min_diffusion', 1e-6)
-        self.max_diffusion = getattr(config, 'max_diffusion', 1.0)
+        self.softplus = nn.Softplus(beta=10)
+        self.min_diffusion = config.get('min_diffusion', 1e-4)
+        self.use_upper_bound = config.get('use_upper_bound', False)
+        self.max_diffusion = config.get('max_diffusion', 2.0)
         
-        info(f"{self.name}: Using Softplus for positivity constraint")
-        info(f"{self.name}: Diffusion range: [{self.min_diffusion:.2e}, {self.max_diffusion:.2f}]")
+        info(f"{self.name}: Using Softplus(beta=10) + floor")
+        info(f"{self.name}: Minimum diffusion: {self.min_diffusion:.2e}")
+        if self.use_upper_bound:
+            info(f"{self.name}: Upper bound enabled: {self.max_diffusion:.2f}")
     
     def forward(self, x):
-        """
-        Args:
-            x: Input tensor (x, t) of shape (N, 2)
-        Returns:
-            b(x,t) > 0 - diffusion coefficient
-        """
         b_raw = self.mlp(x)
+        
+        # Ensure positivity with floor
         b_positive = self.softplus(b_raw) + self.min_diffusion
-        b_clamped = torch.clamp(b_positive, self.min_diffusion, self.max_diffusion)
         
-        # Log if clamping occurred
-        if (b_positive != b_clamped).any():
-            debug(f"{self.name}: Diffusion values clamped to range [{self.min_diffusion:.2e}, {self.max_diffusion:.2f}]")
+        # Optional upper bound (only if explicitly enabled)
+        if self.use_upper_bound:
+            b_output = self.max_diffusion * torch.tanh(b_positive / self.max_diffusion)
+        else:
+            b_output = b_positive
         
-        debug(f"{self.name}: Output range - min: {b_clamped.min().item():.6e}, max: {b_clamped.max().item():.6e}")
-        return b_clamped
+        debug(f"{self.name}: Output range - min: {b_output.min().item():.6e}, "
+              f"max: {b_output.max().item():.6e}")
+        return b_output
 
+# =============================================================================
+# UTILITY FUNCTIONS
+# =============================================================================
 
 def build_networks(p_config, drift_config, diffusion_config, device):
-    """
-    Build all three networks for the PINN.
-    
-    Args:
-        p_config: Configuration dict for solution network
-        drift_config: Configuration dict for drift network
-        diffusion_config: Configuration dict for diffusion network
-        device: torch device (cpu or cuda)
-    
-    Returns:
-        Tuple of (p_net, drift_net, diffusion_net)
-    """
+    """Build all three networks for the PINN."""
     info("\n" + "="*60)
     info("BUILDING NEURAL NETWORKS")
     info("="*60)
@@ -487,12 +700,12 @@ def build_networks(p_config, drift_config, diffusion_config, device):
 
 
 def count_parameters(model):
-    """Count the number of trainable parameters in a model"""
+    """Count trainable parameters"""
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
 
 
 def print_network_summary(p_net, drift_net, diffusion_net):
-    """Print summary of all networks"""
+    """Print comprehensive network summary"""
     info("\n" + "="*60)
     info("NETWORK ARCHITECTURE SUMMARY")
     info("="*60)
@@ -517,12 +730,10 @@ def print_network_summary(p_net, drift_net, diffusion_net):
         total_params = p_params + drift_params + diffusion_params
         info(f"\nTotal Parameters: {total_params:,}")
         
-        # Memory usage estimate (rough)
-        memory_mb = total_params * 4 / (1024 * 1024)  # 4 bytes per float32
+        memory_mb = total_params * 4 / (1024 * 1024)
         info(f"Estimated Memory: {memory_mb:.2f} MB")
         
         info("="*60)
-        
         return total_params
         
     except Exception as e:
@@ -531,32 +742,29 @@ def print_network_summary(p_net, drift_net, diffusion_net):
 
 
 def test_forward_pass(p_net, drift_net, diffusion_net, device, n_samples=10):
-    """Test forward pass of all networks"""
+    """Test forward pass with constraint verification"""
     info("\nTesting forward pass...")
     
     try:
-        # Generate test data
         x_test = torch.randn(n_samples, 2).to(device)
         info(f"Test input shape: {x_test.shape}")
         
-        # Forward passes
         with torch.no_grad():
             p_out = p_net(x_test)
             a_out = drift_net(x_test)
             b_out = diffusion_net(x_test)
         
-        # Log results
         info("Forward pass results:")
         info(f"  p(x,t): shape={p_out.shape}, min={p_out.min().item():.6e}, max={p_out.max().item():.6e}")
         info(f"  a(x,t): shape={a_out.shape}, min={a_out.min().item():.6f}, max={a_out.max().item():.6f}")
         info(f"  b(x,t): shape={b_out.shape}, min={b_out.min().item():.6e}, max={b_out.max().item():.6e}")
         
-        # Check constraints
-        p_positive = (p_out >= 0).all()
+        # Verify constraints
+        p_positive = (p_out > 0).all()
         b_positive = (b_out > 0).all()
         
         info(f"Constraints satisfied:")
-        info(f"  p(x,t) >= 0: {p_positive.item()}")
+        info(f"  p(x,t) > 0: {p_positive.item()}")
         info(f"  b(x,t) > 0: {b_positive.item()}")
         
         if not (p_positive and b_positive):
@@ -570,12 +778,9 @@ def test_forward_pass(p_net, drift_net, diffusion_net, device, n_samples=10):
 
 
 if __name__ == "__main__":
-    # Test the networks
     info("Starting network architecture test...")
     
     try:
-        from config import P_NET_CONFIG, DRIFT_NET_CONFIG, DIFFUSION_NET_CONFIG, DEVICE
-        
         info(f"Using device: {DEVICE}")
         
         # Build networks
@@ -590,9 +795,9 @@ if __name__ == "__main__":
         test_success = test_forward_pass(p_net, drift_net, diffusion_net, DEVICE)
         
         if test_success:
-            info("\nNetwork architecture test completed successfully!")
+            info("\n✅ Network architecture test completed successfully!")
         else:
-            error("Network architecture test completed with errors!")
+            error("❌ Network architecture test completed with errors!")
             
     except ImportError as e:
         error(f"Could not import config: {str(e)}")

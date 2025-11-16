@@ -108,17 +108,7 @@ def setup_custom_config(args):
         customizations['optimizer'] = f"{original_optimizer} -> {args.optimizer}"
         info(f"Using custom optimizer: {args.optimizer} (was {original_optimizer})")
     
-    if args.layers is not None:
-        original_layers = config.LAYERS
-        config.LAYERS = args.layers
-        customizations['layers'] = f"{original_layers} -> {args.layers}"
-        info(f"Using custom network layers: {args.layers} (was {original_layers})")
-    
-    if args.neurons is not None:
-        original_neurons = config.NEURONS
-        config.NEURONS = args.neurons
-        customizations['neurons'] = f"{original_neurons} -> {args.neurons}"
-        info(f"Using custom neurons per layer: {args.neurons} (was {original_neurons})")
+    # Note: layers and neurons customization removed - use config.py instead
     
     return customizations
 

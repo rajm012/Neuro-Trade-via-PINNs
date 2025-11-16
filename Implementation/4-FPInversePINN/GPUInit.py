@@ -94,18 +94,31 @@ class ResidualGuidedResampler:
             # CRITICAL FIX: Don't use no_grad() - we need gradients for compute_fp_residual!
             x_c = data_dict['x_colloc']
             t_c = data_dict['t_colloc']
+            z_c = data_dict.get('z_colloc', None)  # Get features if they exist
             
             # Ensure gradient tracking is enabled
             x_c.requires_grad_(True)
             t_c.requires_grad_(True)
+            if z_c is not None:
+                z_c.requires_grad_(True)
             
             # Compute PDE residuals (needs gradients)
             from pinn import compute_fp_residual
-            residual = compute_fp_residual(p_net, drift_net, diffusion_net, x_c, t_c)
+            residual = compute_fp_residual(p_net, drift_net, diffusion_net, x_c, t_c, z_c)
+            
+            # SAFETY CHECK: Detect and handle NaN/Inf in residuals
+            if torch.isnan(residual).any() or torch.isinf(residual).any():
+                warning(f"NaN/Inf detected in residuals during resampling - skipping this resample")
+                return False
             
             # Now convert to numpy for topk (no gradients needed here)
             with torch.no_grad():
                 pde_losses = (residual ** 2).detach()
+                
+                # SAFETY CHECK: Cap extreme residual values to prevent instability
+                # Use 99th percentile as max to filter outliers
+                max_safe_residual = torch.quantile(pde_losses, 0.99) * 10.0  # Allow 10x above 99th percentile
+                pde_losses = torch.clamp(pde_losses, max=max_safe_residual)
             
             # Find points with highest residual
             num_to_resample = int(len(x_c) * self.resample_ratio)
@@ -121,14 +134,25 @@ class ResidualGuidedResampler:
             new_x_c.requires_grad_(True)
             new_t_c.requires_grad_(True)
             
+            # If features exist, we need to regenerate them for new time points
+            if z_c is not None:
+                # Recompute features for new time points (simplified - use mean features)
+                # TODO: Proper feature recomputation would require access to data_preparation
+                new_z_c = z_c[hard_indices].clone()  # For now, just copy features from replaced points
+                new_z_c.requires_grad_(True)
+            
             # Replace hard points (use .data to avoid in-place operation issues)
             with torch.no_grad():
                 data_dict['x_colloc'].data[hard_indices] = new_x_c.data
                 data_dict['t_colloc'].data[hard_indices] = new_t_c.data
+                if z_c is not None:
+                    data_dict['z_colloc'].data[hard_indices] = new_z_c.data
             
             # Re-enable gradients on entire tensor after replacement
             data_dict['x_colloc'].requires_grad_(True)
             data_dict['t_colloc'].requires_grad_(True)
+            if z_c is not None:
+                data_dict['z_colloc'].requires_grad_(True)
             
             self.resample_count += 1
             

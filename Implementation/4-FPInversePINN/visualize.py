@@ -240,10 +240,19 @@ class Analyzer:
                     t_tensor = torch.ones_like(x_tensor) * t
                     xt = torch.cat([x_tensor, t_tensor], dim=1)
                     
+                    # If using multi-timeframe features, need to add dummy features
+                    # Since we don't have time-series data here, use zeros or mean features
+                    if hasattr(self.config, 'USE_MULTI_TIMEFRAME_FEATURES') and self.config.USE_MULTI_TIMEFRAME_FEATURES:
+                        n_features = self.config.N_FEATURES
+                        z_tensor = torch.zeros(len(x_vals), n_features, dtype=torch.float32)
+                        xtz = torch.cat([x_tensor, t_tensor, z_tensor], dim=1)
+                    else:
+                        xtz = xt
+                    
                     # Evaluate networks
                     p_vals = self.p_net(xt).numpy().flatten()
-                    a_vals = self.drift_net(xt).numpy().flatten()
-                    b_vals = self.diffusion_net(xt).numpy().flatten()
+                    a_vals = self.drift_net(xtz).numpy().flatten()
+                    b_vals = self.diffusion_net(xtz).numpy().flatten()
                     
                     debug(f"t={t:.2f} - p range: [{p_vals.min():.6e}, {p_vals.max():.6e}], "
                           f"a range: [{a_vals.min():.6f}, {a_vals.max():.6f}], "

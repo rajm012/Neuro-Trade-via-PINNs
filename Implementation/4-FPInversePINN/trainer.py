@@ -80,10 +80,13 @@ class Trainer:
             'total_loss': [],
             'pde_loss': [],
             'data_loss': [],
+            'cdf_loss': [],  # NEW
             'ic_loss': [],
             'bc_loss': [],
             'reg_loss': [],
             'norm_loss': [],
+            'mean_rev_loss': [],  # NEW
+            'vol_grad_loss': [],  # NEW
             'time': [],
             'lr': [],
             'phase': [],  # NEW: Track training phase
@@ -357,6 +360,15 @@ class Trainer:
                 else:
                     total_loss, loss_components = self.train_step_lbfgs()
                 
+                # SAFETY CHECK: Detect NaN/Inf in losses
+                if torch.isnan(total_loss) or torch.isinf(total_loss):
+                    error(f"NaN/Inf detected in loss at epoch {epoch}!")
+                    error(f"Loss components: {loss_components}")
+                    error("Training stopped to prevent further instability")
+                    # Save current state before stopping
+                    self.save_checkpoint(epoch, emergency=True)
+                    break
+                
                 epoch_time = time.time() - epoch_start
                 current_lr = self.optimizer.param_groups[0]['lr']
                 
@@ -368,10 +380,13 @@ class Trainer:
                 self.history['total_loss'].append(loss_components['total'])
                 self.history['pde_loss'].append(loss_components['pde'])
                 self.history['data_loss'].append(loss_components['data'])
+                self.history['cdf_loss'].append(loss_components['cdf'])  # NEW
                 self.history['ic_loss'].append(loss_components['ic'])
                 self.history['bc_loss'].append(loss_components['bc'])
                 self.history['reg_loss'].append(loss_components['reg'])
                 self.history['norm_loss'].append(loss_components['norm'])
+                self.history['mean_rev_loss'].append(loss_components['mean_rev'])  # NEW
+                self.history['vol_grad_loss'].append(loss_components['vol_grad'])  # NEW
                 self.history['time'].append(epoch_time)
                 self.history['lr'].append(current_lr)
                 self.history['phase'].append(current_phase)
@@ -392,9 +407,10 @@ class Trainer:
                 if epoch % self.config.PRINT_EVERY == 0 or epoch < 10:
                     elapsed = time.time() - start_time
                     gpu_info = f"GPU: {gpu_mem['percentage']:.0f}%" if torch.cuda.is_available() else ""
-                    info(f"Epoch {epoch:5d} | Loss: {loss_components['total']:.6e} | "
-                         f"PDE: {loss_components['pde']:.4e} | Data: {loss_components['data']:.4e} | "
-                         f"Phase: {current_phase} | {gpu_info} | Time: {elapsed:.0f}s")
+                    info(f"Epoch {epoch:5d} | Loss: {loss_components['total']:.6e} | Phase: {current_phase} | {gpu_info} | Time: {elapsed:.0f}s")
+                    info(f"    Data -> CDF: {loss_components['cdf']:.4e} | PDF: {loss_components['data']:.4e} | IC: {loss_components['ic']:.4e}")
+                    info(f"    Physics -> PDE: {loss_components['pde']:.4e} | BC: {loss_components['bc']:.4e} | Norm: {loss_components['norm']:.4e}")
+                    info(f"    Finance -> MeanRev: {loss_components['mean_rev']:.4e} | VolGrad: {loss_components['vol_grad']:.4e}")
                 
                 # GPU memory management
                 if self.gpu_memory_manager.should_clear_cache(threshold=0.85):

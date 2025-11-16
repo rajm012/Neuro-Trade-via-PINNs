@@ -14,7 +14,7 @@ import config
 from logger import log, info, debug, warning, error
 
 
-def compute_fp_residual(p_net, drift_net, diffusion_net, x, t):
+def compute_fp_residual(p_net, drift_net, diffusion_net, x, t, z=None):
     """
     Compute the Fokker-Planck equation residual using automatic differentiation.
     
@@ -23,10 +23,11 @@ def compute_fp_residual(p_net, drift_net, diffusion_net, x, t):
     
     Args:
         p_net: Solution network p(x,t)
-        drift_net: Drift network a(x,t)
-        diffusion_net: Diffusion network b(x,t)
+        drift_net: Drift network a(x,t,z)
+        diffusion_net: Diffusion network b(x,t,z)
         x: Spatial coordinates (N, 1) with requires_grad=True
         t: Temporal coordinates (N, 1) with requires_grad=True
+        z: Optional features (N, n_features) with requires_grad=True
     
     Returns:
         residual: The PDE residual (should be ~0 when equation is satisfied)
@@ -39,12 +40,20 @@ def compute_fp_residual(p_net, drift_net, diffusion_net, x, t):
         t.requires_grad_(True)
         
         # Concatenate inputs for networks
-        xt = torch.cat([x, t], dim=1)
+        xt = torch.cat([x, t], dim=1)  # Input for p_net
+        
+        if z is not None:
+            # Create augmented input for drift/diffusion
+            if not z.requires_grad:
+                z.requires_grad_(True)
+            xtz = torch.cat([x, t, z], dim=1)
+        else:
+            xtz = xt  # Fallback if no features
         
         # Get network outputs
         p = p_net(xt)
-        a = drift_net(xt)    # drift a(x,t)
-        b = diffusion_net(xt) # diffusion b(x,t) > 0
+        a = drift_net(xtz)    # drift a(x,t,z)
+        b = diffusion_net(xtz) # diffusion b(x,t,z) > 0
         
         debug(f"Network outputs - p: {p.shape}, a: {a.shape}, b: {b.shape}")
         
@@ -109,7 +118,7 @@ def compute_fp_residual(p_net, drift_net, diffusion_net, x, t):
         raise
 
 
-def compute_pde_loss(p_net, drift_net, diffusion_net, x_colloc, t_colloc):
+def compute_pde_loss(p_net, drift_net, diffusion_net, x_colloc, t_colloc, z_colloc=None):
     """
     Compute PDE residual loss at collocation points.
     
@@ -119,7 +128,7 @@ def compute_pde_loss(p_net, drift_net, diffusion_net, x_colloc, t_colloc):
     debug("Computing PDE loss...")
     
     try:
-        residual = compute_fp_residual(p_net, drift_net, diffusion_net, x_colloc, t_colloc)
+        residual = compute_fp_residual(p_net, drift_net, diffusion_net, x_colloc, t_colloc, z_colloc)
         loss = torch.mean(residual ** 2)
         
         debug(f"PDE loss: {loss.item():.6e}")
@@ -160,6 +169,126 @@ def compute_data_loss(p_net, x_data, t_data, p_data):
         
     except Exception as e:
         error(f"Error computing data loss: {str(e)}")
+        raise
+
+
+def compute_cdf_loss(p_net, x_data, t_data, p_data):
+    """
+    Compute data matching loss on the Cumulative Distribution Function (CDF).
+    More robust than PDF matching for capturing distribution shape.
+    
+    Args:
+        p_net: Solution network
+        x_data, t_data: Locations where empirical density is known
+        p_data: Empirical density values
+    
+    Returns:
+        Mean squared error between predicted and empirical CDF
+    """
+    debug("Computing CDF loss...")
+    
+    try:
+        xt_data = torch.cat([x_data, t_data], dim=1)
+        p_predicted = p_net(xt_data)
+        p_predicted = torch.clamp(p_predicted, min=1e-8)
+        
+        # Compute dx for integration
+        dx = x_data[1] - x_data[0]
+        
+        # Normalize densities
+        p_pred_norm = p_predicted / (torch.sum(p_predicted) * dx)
+        p_data_norm = p_data / (torch.sum(p_data) * dx)
+        
+        # Compute CDFs via cumulative sum
+        cdf_predicted = torch.cumsum(p_pred_norm * dx, dim=0)
+        cdf_target = torch.cumsum(p_data_norm * dx, dim=0)
+        
+        # MSE on CDF
+        loss = torch.mean((cdf_predicted - cdf_target) ** 2)
+        
+        debug(f"CDF loss: {loss.item():.6e}")
+        debug(f"CDF predicted range: [{cdf_predicted.min().item():.6f}, {cdf_predicted.max().item():.6f}]")
+        debug(f"CDF target range: [{cdf_target.min().item():.6f}, {cdf_target.max().item():.6f}]")
+        
+        return loss
+        
+    except Exception as e:
+        error(f"Error computing CDF loss: {str(e)}")
+        raise
+
+
+def compute_mean_reversion_loss(drift_net, x_colloc, t_colloc, z_colloc):
+    """
+    Financial-Informed Loss: Enforce mean reversion in drift.
+    Penalizes drift that pushes away from zero (a(x) * x > 0).
+    
+    Args:
+        drift_net: Drift network
+        x_colloc, t_colloc, z_colloc: Collocation points with features
+    
+    Returns:
+        Mean reversion penalty loss
+    """
+    debug("Computing mean reversion loss...")
+    
+    try:
+        xtz = torch.cat([x_colloc, t_colloc, z_colloc], dim=1)
+        drift_values = drift_net(xtz)
+        
+        # Penalize if drift pushes away from zero
+        product = drift_values * x_colloc
+        penalty = torch.relu(product)  # Only penalize positive products
+        
+        loss = torch.mean(penalty ** 2)
+        
+        debug(f"Mean reversion loss: {loss.item():.6e}")
+        return loss
+        
+    except Exception as e:
+        error(f"Error computing mean reversion loss: {str(e)}")
+        raise
+
+
+def compute_vol_cluster_grad_loss(diffusion_net, x_colloc, t_colloc, z_colloc):
+    """
+    Financial-Informed Loss: Enforce volatility clustering.
+    Penalizes negative gradient of diffusion w.r.t. volatility features.
+    (When market vol increases, model vol should increase)
+    
+    Args:
+        diffusion_net: Diffusion network
+        x_colloc, t_colloc, z_colloc: Collocation points with features
+    
+    Returns:
+        Volatility clustering gradient penalty loss
+    """
+    debug("Computing vol cluster gradient loss...")
+    
+    try:
+        z_colloc.requires_grad_(True)
+        xtz = torch.cat([x_colloc, t_colloc, z_colloc], dim=1)
+        
+        diffusion_values = diffusion_net(xtz)
+        
+        # Compute gradient of b with respect to features z
+        db_dz = torch.autograd.grad(
+            outputs=diffusion_values,
+            inputs=z_colloc,
+            grad_outputs=torch.ones_like(diffusion_values),
+            create_graph=True,
+            retain_graph=True
+        )[0]
+        
+        # Penalize negative gradients
+        penalty = torch.relu(-db_dz)
+        
+        loss = torch.mean(penalty ** 2)
+        
+        debug(f"Vol cluster grad loss: {loss.item():.6e}")
+        return loss
+        
+    except Exception as e:
+        error(f"Error computing vol cluster grad loss: {str(e)}")
         raise
 
 
@@ -324,7 +453,7 @@ def compute_regularization_loss(drift_net, diffusion_net):
 
 def compute_total_loss(p_net, drift_net, diffusion_net, data_dict, loss_weights):
     """
-    Compute the unified loss function combining all components.
+    Compute the unified loss function combining all components (HYBRID MODEL).
     
     Args:
         p_net, drift_net, diffusion_net: Networks
@@ -339,22 +468,34 @@ def compute_total_loss(p_net, drift_net, diffusion_net, data_dict, loss_weights)
     
     try:
         # Extract weights
-        w_pde = loss_weights['w_pde']
-        w_data = loss_weights['w_data']
-        w_ic = loss_weights['w_ic']
-        w_bc = loss_weights['w_bc']
-        w_reg = loss_weights['w_reg']
+        w_pde = loss_weights.get('w_pde', 0.0)
+        w_data = loss_weights.get('w_data', 0.0)
+        w_cdf = loss_weights.get('w_cdf', 0.0)
+        w_ic = loss_weights.get('w_ic', 0.0)
+        w_bc = loss_weights.get('w_bc', 0.0)
+        w_reg = loss_weights.get('w_reg', 0.0)
         w_norm = loss_weights.get('w_norm', 0.1)
+        w_mean_rev = loss_weights.get('w_mean_rev', 0.0)
+        w_vol_grad = loss_weights.get('w_vol_grad', 0.0)
         
-        debug(f"Loss weights - PDE: {w_pde}, Data: {w_data}, IC: {w_ic}, BC: {w_bc}, Reg: {w_reg}, Norm: {w_norm}")
+        debug(f"Loss weights - PDE: {w_pde}, Data: {w_data}, CDF: {w_cdf}, IC: {w_ic}, BC: {w_bc}, Reg: {w_reg}, Norm: {w_norm}, MeanRev: {w_mean_rev}, VolGrad: {w_vol_grad}")
+        
+        # Get feature data (z) if available
+        z_colloc = data_dict.get('z_colloc', None)
+        has_features = z_colloc is not None
         
         # Compute individual losses
         loss_pde = compute_pde_loss(
             p_net, drift_net, diffusion_net,
-            data_dict['x_colloc'], data_dict['t_colloc']
+            data_dict['x_colloc'], data_dict['t_colloc'], z_colloc
         )
         
         loss_data = compute_data_loss(
+            p_net,
+            data_dict['x_data'], data_dict['t_data'], data_dict['p_data']
+        )
+        
+        loss_cdf = compute_cdf_loss(
             p_net,
             data_dict['x_data'], data_dict['t_data'], data_dict['p_data']
         )
@@ -373,14 +514,29 @@ def compute_total_loss(p_net, drift_net, diffusion_net, data_dict, loss_weights)
         loss_reg = compute_regularization_loss(drift_net, diffusion_net)
         loss_norm = compute_normalization_loss(p_net, data_dict['x_norm'], data_dict['t_norm'])
         
+        # Compute financial losses only if features are available
+        if has_features:
+            loss_mean_rev = compute_mean_reversion_loss(
+                drift_net, data_dict['x_colloc'], data_dict['t_colloc'], z_colloc
+            )
+            loss_vol_grad = compute_vol_cluster_grad_loss(
+                diffusion_net, data_dict['x_colloc'], data_dict['t_colloc'], z_colloc
+            )
+        else:
+            loss_mean_rev = torch.tensor(0.0, device=config.DEVICE)
+            loss_vol_grad = torch.tensor(0.0, device=config.DEVICE)
+        
         # Compute weighted total loss
         total_loss = (
             w_pde * loss_pde +
             w_data * loss_data +
+            w_cdf * loss_cdf +
             w_ic * loss_ic +
             w_bc * loss_bc +
             w_reg * loss_reg +
-            w_norm * loss_norm
+            w_norm * loss_norm +
+            w_mean_rev * loss_mean_rev +
+            w_vol_grad * loss_vol_grad
         )
         
         # Store components for logging
@@ -388,10 +544,13 @@ def compute_total_loss(p_net, drift_net, diffusion_net, data_dict, loss_weights)
             'total': total_loss.item(),
             'pde': loss_pde.item(),
             'data': loss_data.item(),
+            'cdf': loss_cdf.item(),
             'ic': loss_ic.item(),
             'bc': loss_bc.item(),
             'reg': loss_reg.item(),
-            'norm': loss_norm.item()
+            'norm': loss_norm.item(),
+            'mean_rev': loss_mean_rev.item(),
+            'vol_grad': loss_vol_grad.item()
         }
         
         # Log detailed loss breakdown

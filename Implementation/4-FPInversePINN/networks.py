@@ -989,8 +989,16 @@ class MLP(nn.Module):
 
         # --- NEW: Add Fourier Features ---
         if use_fourier:
-            # Use first hidden layer size to determine mapping size
-            mapping_size = hidden_layers[0] // 2
+            # CRITICAL FIX: Reduce mapping_size to prevent high-frequency spikes
+            # Was: mapping_size = hidden_layers[0] // 2 (causing overly complex representations)
+            # Now: Use smaller fixed size or scale down further
+            if 'p(x,t)' in name:
+                # Solution network: Use smaller Fourier features to limit expressivity
+                mapping_size = 64  # Reduced from 128 for stability
+            else:
+                # Drift/Diffusion: Can use more features
+                mapping_size = hidden_layers[0] // 2
+            
             self.fourier_mapping = FourierFeatureMapping(
                 input_dim, 
                 mapping_size=mapping_size,
@@ -998,7 +1006,7 @@ class MLP(nn.Module):
             )
             current_dim = self.fourier_mapping.output_dim
             layers.append(self.fourier_mapping)
-            info(f"{name}: Using Fourier Features (output dim={current_dim})")
+            info(f"{name}: Using Fourier Features (mapping_size={mapping_size}, output dim={current_dim})")
         # --- END NEW ---
         
         # Input Layer
@@ -1076,8 +1084,9 @@ class SolutionNetwork(nn.Module):
             fourier_scale=config.get('fourier_scale', 10.0)
         )
         
-        # Differentiable positivity constraint
-        self.softplus = nn.Softplus(beta=10)
+        # CRITICAL FIX: Reduce softplus beta to prevent sharp spikes
+        # Was beta=10 (very sharp), now beta=5 (softer, more stable)
+        self.softplus = nn.Softplus(beta=5)
         self.min_output = config.get('min_output', 1e-6)
         
         # CRITICAL FIX: Add optional upper bound to prevent NaN

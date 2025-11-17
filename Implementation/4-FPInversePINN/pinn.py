@@ -451,6 +451,82 @@ def compute_regularization_loss(drift_net, diffusion_net):
         raise
 
 
+def compute_pdf_pointwise_penalty(p_net, x_norm, t_norm, threshold=50.0):
+    """
+    Penalize PDF values that exceed a physically reasonable threshold.
+    This prevents the network from creating tall, narrow spikes.
+    
+    Args:
+        p_net: Solution network
+        x_norm, t_norm: Normalization points to sample PDF
+        threshold: Maximum reasonable PDF value (default 50.0 for financial returns)
+    
+    Returns:
+        Penalty loss for values exceeding threshold
+    """
+    debug(f"Computing PDF pointwise penalty (threshold={threshold})...")
+    
+    try:
+        xt = torch.cat([x_norm, t_norm], dim=1)
+        p = p_net(xt)
+        
+        # Penalize values above threshold using squared relu for stronger penalty
+        penalty = torch.relu(p - threshold) ** 2
+        loss = torch.mean(penalty)
+        
+        # Log how many points exceed threshold
+        n_exceed = (p > threshold).sum().item()
+        if n_exceed > 0:
+            debug(f"PDF pointwise penalty: {loss.item():.6e} ({n_exceed} points exceed {threshold})")
+        
+        return loss
+        
+    except Exception as e:
+        error(f"Error computing PDF pointwise penalty: {str(e)}")
+        raise
+
+
+def compute_pdf_gradient_penalty(p_net, x_norm, t_norm):
+    """
+    Penalize large spatial gradients in PDF (Total Variation / smoothness penalty).
+    This discourages sharp spikes and promotes smooth distributions.
+    
+    Args:
+        p_net: Solution network
+        x_norm, t_norm: Points to compute gradient
+    
+    Returns:
+        TV/gradient penalty loss
+    """
+    debug("Computing PDF gradient penalty (TV regularization)...")
+    
+    try:
+        x_norm.requires_grad_(True)
+        xt = torch.cat([x_norm, t_norm], dim=1)
+        p = p_net(xt)
+        
+        # Compute spatial gradient dp/dx
+        dp_dx = torch.autograd.grad(
+            outputs=p,
+            inputs=x_norm,
+            grad_outputs=torch.ones_like(p),
+            create_graph=True,
+            retain_graph=True
+        )[0]
+        
+        # L1 norm for TV, or L2 for smoothness
+        loss_tv = torch.mean(torch.abs(dp_dx))  # TV (L1)
+        # loss_tv = torch.mean(dp_dx ** 2)  # Smoothness (L2) - alternative
+        
+        debug(f"PDF gradient penalty (TV): {loss_tv.item():.6e} (max |dp/dx|: {torch.abs(dp_dx).max().item():.6e})")
+        
+        return loss_tv
+        
+    except Exception as e:
+        error(f"Error computing PDF gradient penalty: {str(e)}")
+        raise
+
+
 def compute_total_loss(p_net, drift_net, diffusion_net, data_dict, loss_weights):
     """
     Compute the unified loss function combining all components (HYBRID MODEL).
@@ -477,6 +553,9 @@ def compute_total_loss(p_net, drift_net, diffusion_net, data_dict, loss_weights)
         w_norm = loss_weights.get('w_norm', 0.1)
         w_mean_rev = loss_weights.get('w_mean_rev', 0.0)
         w_vol_grad = loss_weights.get('w_vol_grad', 0.0)
+        # NEW: PDF regularization weights
+        w_pdf_penalty = loss_weights.get('w_pdf_penalty', 0.0)
+        w_pdf_grad = loss_weights.get('w_pdf_grad', 0.0)
         
         debug(f"Loss weights - PDE: {w_pde}, Data: {w_data}, CDF: {w_cdf}, IC: {w_ic}, BC: {w_bc}, Reg: {w_reg}, Norm: {w_norm}, MeanRev: {w_mean_rev}, VolGrad: {w_vol_grad}")
         
@@ -526,6 +605,15 @@ def compute_total_loss(p_net, drift_net, diffusion_net, data_dict, loss_weights)
             loss_mean_rev = torch.tensor(0.0, device=config.DEVICE)
             loss_vol_grad = torch.tensor(0.0, device=config.DEVICE)
         
+        # NEW: Compute PDF regularization losses
+        loss_pdf_penalty = compute_pdf_pointwise_penalty(
+            p_net, data_dict['x_norm'], data_dict['t_norm'],
+            threshold=config.PDF_PENALTY_THRESHOLD if hasattr(config, 'PDF_PENALTY_THRESHOLD') else 50.0
+        )
+        loss_pdf_grad = compute_pdf_gradient_penalty(
+            p_net, data_dict['x_norm'].clone(), data_dict['t_norm']
+        )
+        
         # Compute weighted total loss
         total_loss = (
             w_pde * loss_pde +
@@ -536,7 +624,9 @@ def compute_total_loss(p_net, drift_net, diffusion_net, data_dict, loss_weights)
             w_reg * loss_reg +
             w_norm * loss_norm +
             w_mean_rev * loss_mean_rev +
-            w_vol_grad * loss_vol_grad
+            w_vol_grad * loss_vol_grad +
+            w_pdf_penalty * loss_pdf_penalty +
+            w_pdf_grad * loss_pdf_grad
         )
         
         # Store components for logging
@@ -550,7 +640,9 @@ def compute_total_loss(p_net, drift_net, diffusion_net, data_dict, loss_weights)
             'reg': loss_reg.item(),
             'norm': loss_norm.item(),
             'mean_rev': loss_mean_rev.item(),
-            'vol_grad': loss_vol_grad.item()
+            'vol_grad': loss_vol_grad.item(),
+            'pdf_penalty': loss_pdf_penalty.item(),
+            'pdf_grad': loss_pdf_grad.item()
         }
         
         # Log detailed loss breakdown

@@ -403,6 +403,20 @@ class Trainer:
                 # Check gradients
                 grad_norm = self.check_gradients()
                 
+                # NEW: Monitor PDF statistics to detect explosions
+                if epoch % self.config.PRINT_EVERY == 0 or epoch < 10:
+                    with torch.no_grad():
+                        # Sample PDF at middle time to check for spikes
+                        x_test = self.data_dict['x_norm'][:100]
+                        t_test = torch.full_like(x_test, 0.5)
+                        xt_test = torch.cat([x_test, t_test], dim=1)
+                        p_sample = self.p_net(xt_test)
+                        
+                        pdf_max = p_sample.max().item()
+                        pdf_mean = p_sample.mean().item()
+                        pdf_over_50 = (p_sample > 50).sum().item()
+                        pdf_over_100 = (p_sample > 100).sum().item()
+                
                 # Print progress
                 if epoch % self.config.PRINT_EVERY == 0 or epoch < 10:
                     elapsed = time.time() - start_time
@@ -411,6 +425,8 @@ class Trainer:
                     info(f"    Data -> CDF: {loss_components['cdf']:.4e} | PDF: {loss_components['data']:.4e} | IC: {loss_components['ic']:.4e}")
                     info(f"    Physics -> PDE: {loss_components['pde']:.4e} | BC: {loss_components['bc']:.4e} | Norm: {loss_components['norm']:.4e}")
                     info(f"    Finance -> MeanRev: {loss_components['mean_rev']:.4e} | VolGrad: {loss_components['vol_grad']:.4e}")
+                    info(f"    PDF Stats -> Max: {pdf_max:.2f} | Mean: {pdf_mean:.4f} | >50: {pdf_over_50} | >100: {pdf_over_100}")
+                    info(f"    PDF Reg -> Penalty: {loss_components.get('pdf_penalty', 0):.4e} | Grad: {loss_components.get('pdf_grad', 0):.4e}")
                 
                 # GPU memory management
                 if self.gpu_memory_manager.should_clear_cache(threshold=0.85):

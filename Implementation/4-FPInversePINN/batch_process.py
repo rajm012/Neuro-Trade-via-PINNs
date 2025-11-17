@@ -206,6 +206,12 @@ def batch_process_parallel(stock_list=None, n_processes=4):
     """
     Process stocks in parallel using multiprocessing.
     
+    ⚠️  WARNING: This mode does NOT work efficiently with GPU training!
+    Python multiprocessing + CUDA causes processes to block each other.
+    Use --mode sequential instead for GPU training.
+    
+    This mode is only useful for CPU-based training or debugging.
+    
     Args:
         stock_list: List of stock names to process (None = all stocks)
         n_processes: Number of parallel processes
@@ -215,6 +221,16 @@ def batch_process_parallel(stock_list=None, n_processes=4):
     """
     if stock_list is None:
         stock_list = list(config.STOCK_FILES.keys())
+    
+    warning("\n" + "="*70)
+    warning("⚠️  PARALLEL MODE - GPU COMPATIBILITY WARNING")
+    warning("="*70)
+    warning("Parallel mode with multiprocessing does NOT work efficiently with CUDA!")
+    warning("All processes will block on GPU access, running sequentially anyway.")
+    warning("RECOMMENDATION: Use --mode sequential instead for 100% GPU utilization.")
+    warning("="*70)
+    info("Proceeding anyway (for testing/debugging)...")
+    info("")
     
     info("\n" + "="*70)
     info("BATCH PROCESSING - PARALLEL MODE")

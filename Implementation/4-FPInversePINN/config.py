@@ -388,9 +388,9 @@ DIFFUSION_NET_CONFIG = {
 # TRAINING PARAMETERS
 # ===========================
 LEARNING_RATE = 5e-5  # CRITICAL FIX: Reduced from 5e-4 for better stability
-NUM_EPOCHS = 40000    # Increased for difficult stocks
-PRINT_EVERY = 100
-SAVE_EVERY = 2000     # Less frequent saves to speed up training
+NUM_EPOCHS = 8000     # OPTIMIZED: 8k epochs sufficient with new fixes (was 40k)
+PRINT_EVERY = 200     # Less frequent printing for speed (was 100)
+SAVE_EVERY = 4000     # Less frequent saves to speed up training (was 2000)
 
 # Optimizer selection: 'adam' or 'lbfgs'
 OPTIMIZER = 'adam'
@@ -433,12 +433,16 @@ LOSS_WEIGHTS = {
     'w_vol_grad': 5.0,   # NEW: Vol clustering gradient constraint on diffusion
 }
 
+# NEW: PDF Regularization Parameters (CRITICAL for preventing spikes)
+PDF_PENALTY_THRESHOLD = 50.0  # Maximum reasonable PDF value
+PDF_MAX_CLAMP = 100.0         # Hard upper bound for PDF (if using clamp)
+
 # Adaptive weight scheduling (NEW) - UPDATED for hybrid model
 USE_PROGRESSIVE_WEIGHTS = True
 PROGRESSIVE_WEIGHT_SCHEDULE = {
-    # Phase 1: Focus on data matching (CDF) and basic physics
+    # Phase 1: Focus on data matching (CDF) and basic physics (0-2k epochs)
     'phase1': {
-        'epochs': 5000,
+        'epochs': 2000,      # REDUCED from 5000
         'w_pde': 0.5,
         'w_data': 0.0,       # Turn off PDF loss, use CDF
         'w_cdf': 1000.0,
@@ -446,11 +450,13 @@ PROGRESSIVE_WEIGHT_SCHEDULE = {
         'w_bc': 1.0,
         'w_norm': 100.0,
         'w_mean_rev': 1.0,   # Start FI rules gently
-        'w_vol_grad': 0.5
+        'w_vol_grad': 0.5,
+        'w_pdf_penalty': 0.1,  # NEW: Start PDF spike penalty
+        'w_pdf_grad': 0.01     # NEW: Start gradient penalty
     },
-    # Phase 2: Balance data, physics, and financial rules
+    # Phase 2: Balance data, physics, and financial rules (2k-5k epochs)
     'phase2': {
-        'epochs': 15000,
+        'epochs': 5000,      # REDUCED from 15000
         'w_pde': 0.75,
         'w_data': 0.0,
         'w_cdf': 1000.0,
@@ -458,11 +464,13 @@ PROGRESSIVE_WEIGHT_SCHEDULE = {
         'w_bc': 2.0,
         'w_norm': 75.0,
         'w_mean_rev': 3.0,   # Increase FI rules
-        'w_vol_grad': 1.5
+        'w_vol_grad': 1.5,
+        'w_pdf_penalty': 0.5,  # NEW: Increase PDF spike penalty
+        'w_pdf_grad': 0.05     # NEW: Increase gradient penalty
     },
-    # Phase 3: Emphasize physics and financial rules
+    # Phase 3: Emphasize physics and financial rules (5k-8k epochs)
     'phase3': {
-        'epochs': 30000,
+        'epochs': 8000,      # REDUCED from 30000
         'w_pde': 1.5,
         'w_data': 0.0,
         'w_cdf': 500.0,      # Reduce data emphasis
@@ -470,7 +478,9 @@ PROGRESSIVE_WEIGHT_SCHEDULE = {
         'w_bc': 2.0,
         'w_norm': 50.0,
         'w_mean_rev': 10.0,  # Full FI rule strength
-        'w_vol_grad': 5.0
+        'w_vol_grad': 5.0,
+        'w_pdf_penalty': 1.0,  # NEW: Full PDF spike penalty
+        'w_pdf_grad': 0.1      # NEW: Full gradient penalty
     }
 }
 

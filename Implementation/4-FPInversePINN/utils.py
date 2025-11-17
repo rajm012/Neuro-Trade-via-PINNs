@@ -16,6 +16,128 @@ from networks import SolutionNetwork, DriftNetwork, DiffusionNetwork
 from logger import log, info, debug, warning, error
 
 
+def diagnose_pdf_statistics(model, x_min, x_max, device, n_samples=1000, t_value=0.5):
+    """
+    Comprehensive PDF diagnostic tool to detect spikes and unphysical behavior.
+    
+    Args:
+        model: Trained solution network (p_net)
+        x_min, x_max: Domain bounds
+        device: torch device
+        n_samples: Number of points to sample
+        t_value: Time value to sample at (default 0.5 for mid-time)
+    
+    Returns:
+        Dictionary with diagnostic statistics
+    """
+    info("\n" + "="*70)
+    info("PDF DIAGNOSTIC REPORT")
+    info("="*70)
+    
+    model.eval()
+    
+    with torch.no_grad():
+        # Sample PDF across spatial domain
+        x_test = torch.linspace(x_min, x_max, n_samples, device=device).unsqueeze(1)
+        t_test = torch.full((n_samples, 1), t_value, device=device)
+        xt_test = torch.cat([x_test, t_test], dim=1)
+        
+        p_pred = model(xt_test).squeeze()
+        
+        # Compute statistics
+        dx = (x_max - x_min) / (n_samples - 1)
+        
+        stats = {
+            'pdf_max': p_pred.max().item(),
+            'pdf_min': p_pred.min().item(),
+            'pdf_mean': p_pred.mean().item(),
+            'pdf_std': p_pred.std().item(),
+            'pdf_integral': (p_pred.sum() * dx).item(),
+            'count_over_50': (p_pred > 50).sum().item(),
+            'count_over_100': (p_pred > 100).sum().item(),
+            'count_over_500': (p_pred > 500).sum().item(),
+            'count_over_1000': (p_pred > 1000).sum().item(),
+        }
+        
+        # Compute gradient statistics (discrete approximation)
+        dp = torch.abs(p_pred[1:] - p_pred[:-1]) / dx
+        stats['max_gradient'] = dp.max().item()
+        stats['mean_gradient'] = dp.mean().item()
+        
+        # Print report
+        info(f"\nPDF Statistics (sampled at t={t_value}):")
+        info(f"  Max value:        {stats['pdf_max']:.6e}")
+        info(f"  Mean value:       {stats['pdf_mean']:.6e}")
+        info(f"  Std deviation:    {stats['pdf_std']:.6e}")
+        info(f"  Integral (∫p dx): {stats['pdf_integral']:.6f}")
+        
+        info(f"\nSpike Detection:")
+        info(f"  Points > 50:      {stats['count_over_50']}")
+        info(f"  Points > 100:     {stats['count_over_100']}")
+        info(f"  Points > 500:     {stats['count_over_500']}")
+        info(f"  Points > 1000:    {stats['count_over_1000']}")
+        
+        info(f"\nGradient Statistics:")
+        info(f"  Max |dp/dx|:      {stats['max_gradient']:.6e}")
+        info(f"  Mean |dp/dx|:     {stats['mean_gradient']:.6e}")
+        
+        # Diagnosis
+        info(f"\n" + "="*70)
+        info("DIAGNOSIS:")
+        if stats['pdf_max'] > 1000:
+            warning("❌ SEVERE PROBLEM: PDF max > 1000 (extreme spike detected!)")
+        elif stats['pdf_max'] > 100:
+            warning("⚠️  PROBLEM: PDF max > 100 (spike detected)")
+        elif stats['pdf_max'] > 50:
+            warning("⚠️  CAUTION: PDF max > 50 (mild spike)")
+        else:
+            info("✅ PDF max is reasonable (<50)")
+        
+        if abs(stats['pdf_integral'] - 1.0) > 0.1:
+            warning(f"⚠️  NORMALIZATION ISSUE: Integral = {stats['pdf_integral']:.3f} (should be ≈1.0)")
+        else:
+            info(f"✅ Normalization OK (integral = {stats['pdf_integral']:.3f})")
+        
+        if stats['max_gradient'] > 1000:
+            warning("⚠️  EXTREME GRADIENTS: Sharp spikes present")
+        
+        info("="*70 + "\n")
+    
+    return stats
+
+
+def check_network_outputs(p_net, drift_net, diffusion_net, x_sample, t_sample):
+    """
+    Quick check of network output ranges to detect anomalies.
+    
+    Args:
+        p_net, drift_net, diffusion_net: Networks
+        x_sample, t_sample: Sample points
+    
+    Returns:
+        Dictionary with output ranges
+    """
+    with torch.no_grad():
+        xt = torch.cat([x_sample, t_sample], dim=1)
+        
+        p_out = p_net(xt)
+        a_out = drift_net(xt)
+        b_out = diffusion_net(xt)
+        
+        results = {
+            'p_range': (p_out.min().item(), p_out.max().item()),
+            'a_range': (a_out.min().item(), a_out.max().item()),
+            'b_range': (b_out.min().item(), b_out.max().item()),
+        }
+        
+        info(f"Network output ranges:")
+        info(f"  p(x,t): [{results['p_range'][0]:.6e}, {results['p_range'][1]:.6e}]")
+        info(f"  a(x,t): [{results['a_range'][0]:.6f}, {results['a_range'][1]:.6f}]")
+        info(f"  b(x,t): [{results['b_range'][0]:.6e}, {results['b_range'][1]:.6e}]")
+        
+        return results
+
+
 def load_trained_models(results_dir, device=None):
     """
     Load trained models from a results directory.

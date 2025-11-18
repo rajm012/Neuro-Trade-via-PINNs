@@ -1,0 +1,70 @@
+{
+  "stock_name": "ITC",
+  "num_epochs": 10000,
+  "learning_rate": 5e-05,
+  "optimizer": "adam",
+  "loss_weights": {
+    "w_pde": 1.0,
+    "w_data": 0.0,
+    "w_cdf": 1000.0,
+    "w_ic": 2.0,
+    "w_bc": 2.0,
+    "w_reg": 1e-05,
+    "w_norm": 50.0,
+    "w_mean_rev": 10.0,
+    "w_vol_grad": 5.0
+  },
+  "p_net_config": {
+    "input_dim": 2,
+    "hidden_layers": [
+      256,
+      256,
+      256,
+      256
+    ],
+    "output_dim": 1,
+    "activation": "swish",
+    "min_output": 1e-08,
+    "max_output": 1000.0,
+    "use_upper_bound": true,
+    "use_batch_norm": false,
+    "dropout": 0.0,
+    "use_fourier": true,
+    "fourier_scale": 10.0
+  },
+  "drift_net_config": {
+    "input_dim": 7,
+    "hidden_layers": [
+      128,
+      128,
+      128
+    ],
+    "output_dim": 1,
+    "activation": "swish",
+    "max_drift": 20.0,
+    "use_fourier": true,
+    "fourier_scale": 10.0
+  },
+  "diffusion_net_config": {
+    "input_dim": 7,
+    "hidden_layers": [
+      128,
+      128,
+      128
+    ],
+    "output_dim": 1,
+    "activation": "swish",
+    "min_diffusion": 1e-05,
+    "max_diffusion": 2.0,
+    "use_upper_bound": true,
+    "use_fourier": true,
+    "fourier_scale": 10.0
+  },
+  "n_colloc": 20000,
+  "device": "cuda:0",
+  "final_loss": 0.34801942110061646,
+  "best_loss": 0.3134060800075531,
+  "best_epoch": 9893,
+  "training_time_seconds": 1659.7750108242035,
+  "total_epochs": 10000
+}

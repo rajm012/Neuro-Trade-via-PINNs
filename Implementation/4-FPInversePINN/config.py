@@ -345,6 +345,45 @@ STOCK_FILES = {
 # ===========================
 # NETWORK ARCHITECTURE
 # ===========================
+# # Solution network p(x,t) - OPTIMIZED for GPU + STABLE
+# P_NET_CONFIG = {
+#     'input_dim': 2,
+#     'hidden_layers': [256, 256, 256, 256],  # LARGER - GPU can handle it
+#     'output_dim': 1,
+#     'activation': 'swish',
+#     'min_output': 1e-8,     # Very small minimum
+#     'max_output': 1000.0,   # CRITICAL: Enable upper bound to prevent NaN
+#     'use_upper_bound': True, # CRITICAL: Always True for stability during training
+#     'use_batch_norm': False, # Batch norm can help
+#     'dropout': 0.0,          # No dropout for PINNs
+#     'use_fourier': True,
+#     'fourier_scale': 10.0
+# }
+
+# # Drift network a(x,t,z) - UPDATED: Now takes features as input
+# DRIFT_NET_CONFIG = {
+#     'input_dim': 2 + N_FEATURES if USE_MULTI_TIMEFRAME_FEATURES else 2,  # (x, t, features)
+#     'hidden_layers': [128, 128, 128],
+#     'output_dim': 1,
+#     'activation': 'swish',
+#     'max_drift': 20.0,       # Allow more extreme drift
+#     'use_fourier': True,
+#     'fourier_scale': 10.0
+# }
+
+# # Diffusion network b(x,t,z) - UPDATED: Now takes features as input
+# DIFFUSION_NET_CONFIG = {
+#     'input_dim': 2 + N_FEATURES if USE_MULTI_TIMEFRAME_FEATURES else 2,  # (x, t, features)
+#     'hidden_layers': [128, 128, 128],
+#     'output_dim': 1,
+#     'activation': 'swish',
+#     'min_diffusion': 1e-5,   # Slightly higher minimum
+#     'max_diffusion': 2.0,    # CRITICAL: Reasonable upper bound
+#     'use_upper_bound': True,  # CRITICAL: Enable bounding to prevent NaN
+#     'use_fourier': True,
+#     'fourier_scale': 10.0
+# }
+
 # Solution network p(x,t) - OPTIMIZED for GPU + STABLE
 P_NET_CONFIG = {
     'input_dim': 2,
@@ -357,7 +396,10 @@ P_NET_CONFIG = {
     'use_batch_norm': False, # Batch norm can help
     'dropout': 0.0,          # No dropout for PINNs
     'use_fourier': True,
-    'fourier_scale': 10.0
+    'fourier_scale': 10.0,
+    'temporal_scale': 5.0,    # NEW: Different scale for temporal dimension
+    'learnable_fourier': False, # NEW: Set True to make frequencies learnable
+    'use_temporal_encoding': False  # NEW: Additional temporal encoding layer
 }
 
 # Drift network a(x,t,z) - UPDATED: Now takes features as input
@@ -368,7 +410,10 @@ DRIFT_NET_CONFIG = {
     'activation': 'swish',
     'max_drift': 20.0,       # Allow more extreme drift
     'use_fourier': True,
-    'fourier_scale': 10.0
+    'fourier_scale': 10.0,
+    'temporal_scale': 5.0,    # NEW: Different scale for temporal dimension
+    'learnable_fourier': False, # NEW: Set True to make frequencies learnable
+    'use_temporal_encoding': False  # NEW: Additional temporal encoding layer
 }
 
 # Diffusion network b(x,t,z) - UPDATED: Now takes features as input
@@ -381,7 +426,10 @@ DIFFUSION_NET_CONFIG = {
     'max_diffusion': 2.0,    # CRITICAL: Reasonable upper bound
     'use_upper_bound': True,  # CRITICAL: Enable bounding to prevent NaN
     'use_fourier': True,
-    'fourier_scale': 10.0
+    'fourier_scale': 10.0,
+    'temporal_scale': 5.0,    # NEW: Different scale for temporal dimension
+    'learnable_fourier': False, # NEW: Set True to make frequencies learnable
+    'use_temporal_encoding': False  # NEW: Additional temporal encoding layer
 }
 
 # ===========================

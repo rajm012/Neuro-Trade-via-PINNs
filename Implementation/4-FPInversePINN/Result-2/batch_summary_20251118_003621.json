@@ -1,0 +1,137 @@
+{
+  "mode": "sequential",
+  "total_stocks": 12,
+  "stocks": [
+    "HDFCBank",
+    "HUL",
+    "ICICIBank",
+    "Infosys",
+    "ITC",
+    "L&T",
+    "Nifty-50",
+    "Reliance",
+    "SBI",
+    "TATAMotors",
+    "TataSteel",
+    "TCS"
+  ],
+  "results": [
+    {
+      "stock": "HDFCBank",
+      "status": "success",
+      "results_dir": "e:\\Modelling\\Project\\Implementation\\4-FPInversePINN\\Results\\HDFCBank_20251117_170823",
+      "final_loss": 0.8200137615203857,
+      "best_loss": 0.6560977697372437,
+      "training_time": 2584.6398079395294,
+      "total_epochs": 8000
+    },
+    {
+      "stock": "HUL",
+      "status": "success",
+      "results_dir": "e:\\Modelling\\Project\\Implementation\\4-FPInversePINN\\Results\\HUL_20251117_175157",
+      "final_loss": 0.4904714524745941,
+      "best_loss": 0.45094960927963257,
+      "training_time": 2273.748695373535,
+      "total_epochs": 8000
+    },
+    {
+      "stock": "ICICIBank",
+      "status": "success",
+      "results_dir": "e:\\Modelling\\Project\\Implementation\\4-FPInversePINN\\Results\\ICICIBank_20251117_183007",
+      "final_loss": 0.5525099039077759,
+      "best_loss": 0.4688724875450134,
+      "training_time": 2332.206090450287,
+      "total_epochs": 8000
+    },
+    {
+      "stock": "Infosys",
+      "status": "success",
+      "results_dir": "e:\\Modelling\\Project\\Implementation\\4-FPInversePINN\\Results\\Infosys_20251117_190917",
+      "final_loss": 0.34851348400115967,
+      "best_loss": 0.28712302446365356,
+      "training_time": 2307.5849285125732,
+      "total_epochs": 8000
+    },
+    {
+      "stock": "ITC",
+      "status": "success",
+      "results_dir": "e:\\Modelling\\Project\\Implementation\\4-FPInversePINN\\Results\\ITC_20251117_194802",
+      "final_loss": 0.43692290782928467,
+      "best_loss": 0.3364597260951996,
+      "training_time": 2339.8288114070892,
+      "total_epochs": 8000
+    },
+    {
+      "stock": "L&T",
+      "status": "success",
+      "results_dir": "e:\\Modelling\\Project\\Implementation\\4-FPInversePINN\\Results\\L&T_20251117_202718",
+      "final_loss": 0.8736805319786072,
+      "best_loss": 0.6214075684547424,
+      "training_time": 2226.8385791778564,
+      "total_epochs": 8000
+    },
+    {
+      "stock": "Nifty-50",
+      "status": "success",
+      "results_dir": "e:\\Modelling\\Project\\Implementation\\4-FPInversePINN\\Results\\Nifty-50_20251117_210441",
+      "final_loss": 1.0030046701431274,
+      "best_loss": 0.7641003727912903,
+      "training_time": 2213.1083931922913,
+      "total_epochs": 8000
+    },
+    {
+      "stock": "Reliance",
+      "status": "success",
+      "results_dir": "e:\\Modelling\\Project\\Implementation\\4-FPInversePINN\\Results\\Reliance_20251117_214150",
+      "final_loss": 0.3445031940937042,
+      "best_loss": 0.2732946276664734,
+      "training_time": 2322.102303981781,
+      "total_epochs": 8000
+    },
+    {
+      "stock": "SBI",
+      "status": "success",
+      "results_dir": "e:\\Modelling\\Project\\Implementation\\4-FPInversePINN\\Results\\SBI_20251117_222047",
+      "final_loss": 0.08106767386198044,
+      "best_loss": 0.04449649900197983,
+      "training_time": 2360.7076630592346,
+      "total_epochs": 8000
+    },
+    {
+      "stock": "TATAMotors",
+      "status": "success",
+      "results_dir": "e:\\Modelling\\Project\\Implementation\\4-FPInversePINN\\Results\\TATAMotors_20251117_230027",
+      "final_loss": 1.1086666584014893,
+      "best_loss": 0.7439236640930176,
+      "training_time": 2502.139928340912,
+      "total_epochs": 8000
+    },
+    {
+      "stock": "TataSteel",
+      "status": "success",
+      "results_dir": "e:\\Modelling\\Project\\Implementation\\4-FPInversePINN\\Results\\TataSteel_20251117_234228",
+      "final_loss": 0.5014477372169495,
+      "best_loss": 0.48821574449539185,
+      "training_time": 1881.9809503555298,
+      "total_epochs": 8000
+    },
+    {
+      "stock": "TCS",
+      "status": "success",
+      "results_dir": "e:\\Modelling\\Project\\Implementation\\4-FPInversePINN\\Results\\TCS_20251118_001358",
+      "final_loss": 0.8168928027153015,
+      "best_loss": 0.6302508115768433,
+      "training_time": 1336.5721697807312,
+      "total_epochs": 8000
+    }
+  ],
+  "total_time_seconds": 26877.513594,
+  "average_time_seconds": 2239.7927995,
+  "successful": 12,
+  "failed": 0,
+  "start_time": "2025-11-17T17:08:23.781621",
+  "end_time": "2025-11-18T00:36:21.295254",
+  "best_loss_overall": 0.04449649900197983,
+  "worst_loss_overall": 0.7641003727912903,
+  "average_loss": 0.48043265876670677
+}

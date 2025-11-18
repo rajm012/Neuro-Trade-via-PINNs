@@ -1,0 +1,36 @@
+======================================================================
+FOKKER-PLANCK INVERSE PROBLEM ANALYSIS REPORT
+Stock: SBI
+======================================================================
+
+TRAINING SUMMARY
+----------------------------------------------------------------------
+Total Epochs: 8000
+Optimizer: adam
+Learning Rate: 5e-05
+Final Total Loss: 8.106767e-02
+Best Total Loss: 4.449650e-02
+Final PDE Loss: 2.567167e-02
+Final Data Loss: 8.343970e+03
+
+NETWORK CONFIGURATION
+----------------------------------------------------------------------
+Solution Network: {'input_dim': 2, 'hidden_layers': [256, 256, 256, 256], 'output_dim': 1, 'activation': 'swish', 'min_output': 1e-08, 'max_output': 1000.0, 'use_upper_bound': True, 'use_batch_norm': False, 'dropout': 0.0, 'use_fourier': True, 'fourier_scale': 10.0}
+Drift Network: {'input_dim': 7, 'hidden_layers': [128, 128, 128], 'output_dim': 1, 'activation': 'swish', 'max_drift': 20.0, 'use_fourier': True, 'fourier_scale': 10.0}
+Diffusion Network: {'input_dim': 7, 'hidden_layers': [128, 128, 128], 'output_dim': 1, 'activation': 'swish', 'min_diffusion': 1e-05, 'max_diffusion': 2.0, 'use_upper_bound': True, 'use_fourier': True, 'fourier_scale': 10.0}
+
+LOSS WEIGHTS
+----------------------------------------------------------------------
+w_pde: 1.0
+w_data: 0.0
+w_cdf: 1000.0
+w_ic: 2.0
+w_bc: 2.0
+w_reg: 1e-05
+w_norm: 50.0
+w_mean_rev: 10.0
+w_vol_grad: 5.0
+
+======================================================================
+Report generated successfully
+======================================================================

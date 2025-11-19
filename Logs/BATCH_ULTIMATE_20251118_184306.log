@@ -1,0 +1,22 @@
+======================================================================
+FP Inverse PINN - Training Log
+Stock: BATCH_ULTIMATE
+Started: 2025-11-18 18:43:06
+Verbosity: normal
+======================================================================
+
+[18:43:06] ✅ GPU Detected: NVIDIA GeForce RTX 4050 Laptop GPU[18:43:06]    CUDA Version: 12.4[18:43:06]    Memory: 6.0 GB[18:43:06] usage: batch_process_new.py [-h] [--stocks STOCKS [STOCKS ...]] [--n-models N_MODELS] [--epochs EPOCHS] [--no-metrics] [--parallel] [--quick-test]
+
+Ultimate Batch Processor - Hybrid Implementation (v3.0)
+
+options:
+  -h, --help            show this help message and exit
+  --stocks STOCKS [STOCKS ...]
+                        Specific stocks to process (default: all)
+  --n-models N_MODELS   Number of ensemble models per stock (default: 5)
+  --epochs EPOCHS       Training epochs (overrides config)
+  --no-metrics          Disable financial metrics (faster)
+  --parallel            Enable parallel processing (experimental, requires multiple GPUs)
+  --quick-test          Quick test mode (3 models, 2000 epochs, no metrics)
+
+Combines best features from all three approaches for maximum performance

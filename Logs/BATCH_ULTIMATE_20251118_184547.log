@@ -1,0 +1,250 @@
+======================================================================
+FP Inverse PINN - Training Log
+Stock: BATCH_ULTIMATE
+Started: 2025-11-18 18:45:47
+Verbosity: normal
+======================================================================
+
+[18:45:47] ✅ GPU Detected: NVIDIA GeForce RTX 4050 Laptop GPU[18:45:47]    CUDA Version: 12.4[18:45:47]    Memory: 6.0 GB[18:45:48] Using custom epochs: 100
+[18:45:48] 
+======================================================================
+[18:45:48] STARTING ULTIMATE BATCH PROCESSOR
+[18:45:48] ======================================================================
+[18:45:48] Configuration:
+[18:45:48]   Ensemble size: 2 models
+[18:45:48]   Financial metrics: Disabled
+[18:45:48]   Parallel mode: Disabled
+[18:45:48] ======================================================================
+
+[18:45:48] 
+======================================================================
+[18:45:48] ULTIMATE BATCH PROCESSOR - HYBRID IMPLEMENTATION
+[18:45:48] ======================================================================
+[18:45:48] Features enabled:
+[18:45:48]   [OK] Enhanced Temporal Features (multi-scale Fourier + learned)
+[18:45:48]   [OK] Ultimate Ensemble Training (multi-init strategies)
+[18:45:48]   [OK] Advanced Financial Metrics (Christoffersen + Wasserstein)
+[18:45:48]   [OK] Uncertainty Calibration Testing
+[18:45:48]   [OK] Grading System (A-F with recommendations)
+[18:45:48] 
+[18:45:48] Configuration:
+[18:45:48]   Stocks: 1 - TCS
+[18:45:48]   Ensemble size: 2 models per stock
+[18:45:48]   Financial metrics: Disabled
+[18:45:48]   Parallel mode: Sequential
+[18:45:48]   Start time: 2025-11-18 18:45:48
+[18:45:48] ======================================================================
+[18:45:48] 
+[PROGRESS] [1/1] Starting ultimate processing: TCS
+[18:45:48] 
+======================================================================
+[18:45:48] ULTIMATE PROCESSING: TCS
+[18:45:48] ======================================================================
+[18:45:48] Start time: 2025-11-18 18:45:48
+[18:45:48] Ensemble size: 2 models
+[18:45:48] Financial metrics: Disabled
+[18:45:48] Advanced features: Multi-init, Christoffersen test, Wasserstein distance
+[18:45:48] 
+======================================================================
+[18:45:48] STEP 1: ULTIMATE ENSEMBLE TRAINING
+[18:45:48] ======================================================================
+[18:45:48] Initialized ensemble trainer for TCS with 2 models
+[18:45:48] 
+======================================================================
+[18:45:48] TRAINING ULTIMATE ENSEMBLE: TCS (2 models)
+[18:45:48] Using 4 different initialization strategies
+[18:45:48] ======================================================================
+[18:45:48] 
+======================================================================
+[18:45:48] TRAINING MODEL 1/2
+[18:45:48] ======================================================================
+[18:45:48] Using random seed: 42
+[18:45:48] Initializing GPU settings...
+[18:45:48] ✅ GPU optimizations enabled:[18:45:48]    - TF32 math mode[18:45:48]    - cuDNN auto-tuner[18:45:48]    - Memory allocator optimized
+[18:45:48] ResidualGuidedResampler: Frequency=1000, Ratio=20.0%
+[18:45:48] Residual-Guided Resampling (R3): Enabled (Freq: 1000, Ratio: 20%)
+[18:45:48] Initialized trainer for TCS
+[18:45:48] ✅ Mixed precision training enabled (FP16 + FP32)
+[18:45:48] Preparing data...
+[18:45:48] Initialized DataPreparation for TCS
+[18:45:48] 
+============================================================
+[18:45:48] STARTING DATA PREPARATION FOR TCS
+[18:45:48] ============================================================
+[18:45:48] Loading data for TCS from e:\Modelling\Project\Data-Working\TCS-Data.csv
+[18:45:48] Loaded 2664 rows
+[18:45:48] Using LOG column for log returns
+[18:45:48] Log returns statistics:
+[18:45:48]   Count: 2664
+[18:45:48]   Mean: 0.000317
+[18:45:48]   Std: 0.014695
+[18:45:48]   Min: -0.098830
+[18:45:48]   Max: 0.093901
+[18:45:48] Domain range: [-0.1027, 0.0978]
+[18:45:48] Computing empirical density...
+[18:45:48] Computing empirical density using KDE with 300 points...
+[18:45:48] KDE computed: integral = 1.000000
+[18:45:48] Saved empirical density to e:\Modelling\Project\Implementation\4-FPInversePINN\Data\TCS_empirical_density.pkl
+[18:45:48] Spatial domain normalization disabled
+[18:45:48] Generating collocation points...
+[18:45:48] Generating 20000 collocation points using lhs...
+[18:45:48] Computing rolling volatility features for windows: [20, 60, 90, 150, 240]
+[18:45:48] Feature matrix generated: torch.Size([20000, 5])
+[18:45:48] Collocation points generated: torch.Size([20000, 1])
+[18:45:48] Generating initial condition...
+[18:45:48] Generating initial condition (empirical_start) with 300 points...
+[18:45:48] IC points generated: torch.Size([300, 1]), integral: 0.999996
+[18:45:48] Generating boundary conditions...
+[18:45:48] Generating boundary condition points (absorbing)...
+[18:45:48] BC points generated: 300 at each boundary
+[18:45:48] Generating normalization points...
+[18:45:48] 
+============================================================
+[18:45:48] DATA PREPARATION COMPLETED SUCCESSFULLY
+[18:45:48] ============================================================
+[18:45:48] Device: cuda:0
+[18:45:48] Data points: 300
+[18:45:48] Collocation points: 20000
+[18:45:48] IC points: 300
+[18:45:48] BC points: 300
+[18:45:48] Normalization points: 100
+[18:45:48] Domain normalization: False
+[18:45:48] ============================================================
+[18:45:48] Data preparation completed
+[18:45:48] Building neural networks...
+[18:45:48] 
+============================================================
+[18:45:48] BUILDING NEURAL NETWORKS
+[18:45:48] ============================================================
+[18:45:48] Device: cuda:0
+[18:45:48] Building Solution Network p(x,t)...
+[18:45:48] FourierFeatureMapping: Separate scales - spatial=10.0, temporal=5.0
+[18:45:48] FourierFeatureMapping: input_dim=2, mapping_size=64, scale=10.0, learnable=False, output_dim=128
+[18:45:48] p(x,t)_MLP: Using Enhanced Fourier Features (mapping_size=64, output dim=128, learnable=False)
+[18:45:48] p(x,t)_MLP: Initialized MLP with 3 residual blocks
+[18:45:48] SolutionNetwork: Using Softplus(beta=10) + floor for positivity
+[18:45:48] SolutionNetwork: Minimum output value: 1.00e-08
+[18:45:48] SolutionNetwork: Upper bound enabled: 1000.00
+[18:45:48] Building Drift Network a(x,t)...
+[18:45:48] FourierFeatureMapping: input_dim=7, mapping_size=64, scale=10.0, learnable=False, output_dim=128
+[18:45:48] a(x,t)_MLP: Using Enhanced Fourier Features (mapping_size=64, output dim=128, learnable=False)
+[18:45:48] a(x,t)_MLP: Initialized MLP with 2 residual blocks
+[18:45:48] DriftNetwork: Using soft tanh bounding: ±20.0
+[18:45:48] Building Diffusion Network b(x,t)...
+[18:45:48] FourierFeatureMapping: input_dim=7, mapping_size=64, scale=10.0, learnable=False, output_dim=128
+[18:45:48] b(x,t)_MLP: Using Enhanced Fourier Features (mapping_size=64, output dim=128, learnable=False)
+[18:45:48] b(x,t)_MLP: Initialized MLP with 2 residual blocks
+[18:45:48] DiffusionNetwork: Using Softplus(beta=10) + floor
+[18:45:48] DiffusionNetwork: Minimum diffusion: 1.00e-05
+[18:45:48] DiffusionNetwork: Upper bound enabled: 2.00
+[18:45:48] All networks built successfully!
+[18:45:48] 
+============================================================
+[18:45:48] NETWORK ARCHITECTURE SUMMARY
+[18:45:48] ============================================================
+[18:45:48] 
+1. Solution Network p(x,t):
+[18:45:48]    Parameters: 428,033
+[18:45:48]    Architecture: [256, 256, 256, 256]
+[18:45:48] 
+2. Drift Network a(x,t):
+[18:45:48]    Parameters: 82,689
+[18:45:48]    Architecture: [128, 128, 128]
+[18:45:48] 
+3. Diffusion Network b(x,t):
+[18:45:48]    Parameters: 82,689
+[18:45:48]    Architecture: [128, 128, 128]
+[18:45:48] 
+Total Parameters: 593,411
+[18:45:48] Estimated Memory: 2.26 MB
+[18:45:48] ============================================================
+[18:45:48] Networks built successfully
+[18:45:48]    Applying default initialization
+[18:45:48]    Applying default initialization
+[18:45:48]    Applying default initialization
+[18:45:50] Warmup scheduler: 1000 epochs (1.00e-05 → 5.00e-05)
+[18:45:50] Optimizer: Adam (lr=5.00e-05) with adaptive LR scheduler
+[18:45:50] 
+======================================================================
+[18:45:50] TRAINING: TCS
+[18:45:50] ======================================================================
+[18:45:50] Device: cuda:0 | Optimizer: adam | Epochs: 100
+[18:45:50] Progressive training: ENABLED (3 phases)
+[18:45:50] ======================================================================
+
+[18:45:50] 
+======================================================================
+[18:45:50] PHASE 1 STARTED (Epoch 0)
+[18:45:50] Loss weights: PDE=0.5, Data=0.0, Norm=100.0
+[18:45:50] ======================================================================
+
+[18:45:52] Epoch     0 | Loss: 7.104219e+02 | Phase: 1 | GPU: 0% | Time: 1s
+[18:45:52]     Data -> CDF: 5.3161e-02 | PDF: 9.7559e+01 | IC: 9.5354e+01
+[18:45:52]     Physics -> PDE: 1.0418e+03 | BC: 1.3790e-01 | Norm: 9.4006e-01
+[18:45:52]     Finance -> MeanRev: 1.5757e-04 | VolGrad: 1.4830e+01
+[18:45:52]     PDF Stats -> Max: 0.44 | Mean: 0.2515 | >50: 0 | >100: 0
+[18:45:52]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.2053e+00
+[18:45:52] Epoch     1 | Loss: 7.104219e+02 | Phase: 1 | GPU: 0% | Time: 1s
+[18:45:52]     Data -> CDF: 5.3161e-02 | PDF: 9.7559e+01 | IC: 9.5354e+01
+[18:45:52]     Physics -> PDE: 1.0418e+03 | BC: 1.3790e-01 | Norm: 9.4006e-01
+[18:45:52]     Finance -> MeanRev: 1.5757e-04 | VolGrad: 1.4830e+01
+[18:45:52]     PDF Stats -> Max: 0.44 | Mean: 0.2515 | >50: 0 | >100: 0
+[18:45:52]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.2053e+00
+[18:45:52] Epoch     2 | Loss: 7.104219e+02 | Phase: 1 | GPU: 0% | Time: 1s
+[18:45:52]     Data -> CDF: 5.3161e-02 | PDF: 9.7559e+01 | IC: 9.5354e+01
+[18:45:52]     Physics -> PDE: 1.0418e+03 | BC: 1.3790e-01 | Norm: 9.4006e-01
+[18:45:52]     Finance -> MeanRev: 1.5757e-04 | VolGrad: 1.4830e+01
+[18:45:52]     PDF Stats -> Max: 0.44 | Mean: 0.2515 | >50: 0 | >100: 0
+[18:45:52]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.2053e+00
+[18:45:52] Epoch     3 | Loss: 7.104219e+02 | Phase: 1 | GPU: 0% | Time: 2s
+[18:45:52]     Data -> CDF: 5.3161e-02 | PDF: 9.7559e+01 | IC: 9.5354e+01
+[18:45:52]     Physics -> PDE: 1.0418e+03 | BC: 1.3790e-01 | Norm: 9.4006e-01
+[18:45:52]     Finance -> MeanRev: 1.5757e-04 | VolGrad: 1.4830e+01
+[18:45:52]     PDF Stats -> Max: 0.44 | Mean: 0.2515 | >50: 0 | >100: 0
+[18:45:52]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.2053e+00
+[18:45:52] Epoch     4 | Loss: 7.104219e+02 | Phase: 1 | GPU: 0% | Time: 2s
+[18:45:52]     Data -> CDF: 5.3161e-02 | PDF: 9.7559e+01 | IC: 9.5354e+01
+[18:45:52]     Physics -> PDE: 1.0418e+03 | BC: 1.3790e-01 | Norm: 9.4006e-01
+[18:45:52]     Finance -> MeanRev: 1.5757e-04 | VolGrad: 1.4830e+01
+[18:45:52]     PDF Stats -> Max: 0.44 | Mean: 0.2515 | >50: 0 | >100: 0
+[18:45:52]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.2053e+00
+[18:45:52] Epoch     5 | Loss: 7.104219e+02 | Phase: 1 | GPU: 0% | Time: 2s
+[18:45:52]     Data -> CDF: 5.3161e-02 | PDF: 9.7559e+01 | IC: 9.5354e+01
+[18:45:52]     Physics -> PDE: 1.0418e+03 | BC: 1.3790e-01 | Norm: 9.4006e-01
+[18:45:52]     Finance -> MeanRev: 1.5757e-04 | VolGrad: 1.4830e+01
+[18:45:52]     PDF Stats -> Max: 0.44 | Mean: 0.2515 | >50: 0 | >100: 0
+[18:45:52]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.2053e+00
+[18:45:53] Epoch     6 | Loss: 7.104219e+02 | Phase: 1 | GPU: 0% | Time: 2s
+[18:45:53]     Data -> CDF: 5.3161e-02 | PDF: 9.7559e+01 | IC: 9.5354e+01
+[18:45:53]     Physics -> PDE: 1.0418e+03 | BC: 1.3790e-01 | Norm: 9.4006e-01
+[18:45:53]     Finance -> MeanRev: 1.5757e-04 | VolGrad: 1.4830e+01
+[18:45:53]     PDF Stats -> Max: 0.44 | Mean: 0.2515 | >50: 0 | >100: 0
+[18:45:53]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.2053e+00
+[18:45:53] Epoch     7 | Loss: 7.104219e+02 | Phase: 1 | GPU: 0% | Time: 2s
+[18:45:53]     Data -> CDF: 5.3161e-02 | PDF: 9.7559e+01 | IC: 9.5354e+01
+[18:45:53]     Physics -> PDE: 1.0418e+03 | BC: 1.3790e-01 | Norm: 9.4006e-01
+[18:45:53]     Finance -> MeanRev: 1.5757e-04 | VolGrad: 1.4830e+01
+[18:45:53]     PDF Stats -> Max: 0.44 | Mean: 0.2515 | >50: 0 | >100: 0
+[18:45:53]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.2053e+00
+[18:45:53] Epoch     8 | Loss: 7.104219e+02 | Phase: 1 | GPU: 0% | Time: 2s
+[18:45:53]     Data -> CDF: 5.3161e-02 | PDF: 9.7559e+01 | IC: 9.5354e+01
+[18:45:53]     Physics -> PDE: 1.0418e+03 | BC: 1.3790e-01 | Norm: 9.4006e-01
+[18:45:53]     Finance -> MeanRev: 1.5757e-04 | VolGrad: 1.4830e+01
+[18:45:53]     PDF Stats -> Max: 0.44 | Mean: 0.2515 | >50: 0 | >100: 0
+[18:45:53]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.2053e+00
+[18:45:53] Epoch     9 | Loss: 7.104219e+02 | Phase: 1 | GPU: 0% | Time: 3s
+[18:45:53]     Data -> CDF: 5.3161e-02 | PDF: 9.7559e+01 | IC: 9.5354e+01
+[18:45:53]     Physics -> PDE: 1.0418e+03 | BC: 1.3790e-01 | Norm: 9.4006e-01
+[18:45:53]     Finance -> MeanRev: 1.5757e-04 | VolGrad: 1.4830e+01
+[18:45:53]     PDF Stats -> Max: 0.44 | Mean: 0.2515 | >50: 0 | >100: 0
+[18:45:53]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.2053e+00
+[18:46:00] [WARNING] 
+Training interrupted by user
+[18:46:00] Stopped after 9.2s | Best loss: 1.922486e+02
+[18:46:00] Results saved to: e:\Modelling\Project\Implementation\4-FPInversePINN\Results\TCS_20251118_184548
+[18:46:00] [WARNING] 
+Batch processing interrupted by user
+
+======================================================================
+Ended: 2025-11-18 18:46:00
+======================================================================

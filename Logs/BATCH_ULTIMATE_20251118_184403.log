@@ -1,0 +1,533 @@
+======================================================================
+FP Inverse PINN - Training Log
+Stock: BATCH_ULTIMATE
+Started: 2025-11-18 18:44:03
+Verbosity: normal
+======================================================================
+
+[18:44:03] ✅ GPU Detected: NVIDIA GeForce RTX 4050 Laptop GPU[18:44:03]    CUDA Version: 12.4[18:44:03]    Memory: 6.0 GB[18:44:04] 
+======================================================================
+[18:44:04] STARTING ULTIMATE BATCH PROCESSOR
+[18:44:04] ======================================================================
+[18:44:04] Configuration:
+[18:44:04]   Ensemble size: 5 models
+[18:44:04]   Financial metrics: Enabled
+[18:44:04]   Parallel mode: Disabled
+[18:44:04] ======================================================================
+
+[18:44:04] 
+======================================================================
+[18:44:04] ULTIMATE BATCH PROCESSOR - HYBRID IMPLEMENTATION
+[18:44:04] ======================================================================
+[18:44:04] Features enabled:
+[18:44:04]   [OK] Enhanced Temporal Features (multi-scale Fourier + learned)
+[18:44:04]   [OK] Ultimate Ensemble Training (multi-init strategies)
+[18:44:04]   [OK] Advanced Financial Metrics (Christoffersen + Wasserstein)
+[18:44:04]   [OK] Uncertainty Calibration Testing
+[18:44:04]   [OK] Grading System (A-F with recommendations)
+[18:44:04] 
+[18:44:04] Configuration:
+[18:44:04]   Stocks: 14 - BAJAJ, HDFCBank, Hindalco, HUL, ICICIBank, Infosys, ITC, L&T, Nifty-50, Reliance, SBI, TATAMotors, TataSteel, TCS
+[18:44:04]   Ensemble size: 5 models per stock
+[18:44:04]   Financial metrics: Enabled
+[18:44:04]   Parallel mode: Sequential
+[18:44:04]   Start time: 2025-11-18 18:44:04
+[18:44:04] ======================================================================
+[18:44:04] 
+[PROGRESS] [1/14] Starting ultimate processing: BAJAJ
+[18:44:04] 
+======================================================================
+[18:44:04] ULTIMATE PROCESSING: BAJAJ
+[18:44:04] ======================================================================
+[18:44:04] Start time: 2025-11-18 18:44:04
+[18:44:04] Ensemble size: 5 models
+[18:44:04] Financial metrics: Enabled
+[18:44:04] Advanced features: Multi-init, Christoffersen test, Wasserstein distance
+[18:44:04] 
+======================================================================
+[18:44:04] STEP 1: ULTIMATE ENSEMBLE TRAINING
+[18:44:04] ======================================================================
+[18:44:04] Initialized ensemble trainer for BAJAJ with 5 models
+[18:44:04] 
+======================================================================
+[18:44:04] TRAINING ULTIMATE ENSEMBLE: BAJAJ (5 models)
+[18:44:04] Using 4 different initialization strategies
+[18:44:04] ======================================================================
+[18:44:04] 
+======================================================================
+[18:44:04] TRAINING MODEL 1/5
+[18:44:04] ======================================================================
+[18:44:04] Using random seed: 42
+[18:44:04] Initializing GPU settings...
+[18:44:04] ✅ GPU optimizations enabled:[18:44:04]    - TF32 math mode[18:44:04]    - cuDNN auto-tuner[18:44:04]    - Memory allocator optimized
+[18:44:04] ResidualGuidedResampler: Frequency=1000, Ratio=20.0%
+[18:44:04] Residual-Guided Resampling (R3): Enabled (Freq: 1000, Ratio: 20%)
+[18:44:04] Initialized trainer for BAJAJ
+[18:44:04] ✅ Mixed precision training enabled (FP16 + FP32)
+[18:44:04]    Applying default initialization
+[18:44:04] [ERROR] ERROR processing BAJAJ: 'NoneType' object has no attribute 'named_parameters'
+[18:44:04] [ERROR] [FAILED] BAJAJ failed after 0.0s - 'NoneType' object has no attribute 'named_parameters'
+[18:44:04] 
+[PROGRESS] [2/14] Starting ultimate processing: HDFCBank
+[18:44:04] 
+======================================================================
+[18:44:04] ULTIMATE PROCESSING: HDFCBank
+[18:44:04] ======================================================================
+[18:44:04] Start time: 2025-11-18 18:44:04
+[18:44:04] Ensemble size: 5 models
+[18:44:04] Financial metrics: Enabled
+[18:44:04] Advanced features: Multi-init, Christoffersen test, Wasserstein distance
+[18:44:04] 
+======================================================================
+[18:44:04] STEP 1: ULTIMATE ENSEMBLE TRAINING
+[18:44:04] ======================================================================
+[18:44:04] Initialized ensemble trainer for HDFCBank with 5 models
+[18:44:04] 
+======================================================================
+[18:44:04] TRAINING ULTIMATE ENSEMBLE: HDFCBank (5 models)
+[18:44:04] Using 4 different initialization strategies
+[18:44:04] ======================================================================
+[18:44:04] 
+======================================================================
+[18:44:04] TRAINING MODEL 1/5
+[18:44:04] ======================================================================
+[18:44:04] Using random seed: 42
+[18:44:04] Initializing GPU settings...
+[18:44:04] ✅ GPU optimizations enabled:[18:44:04]    - TF32 math mode[18:44:04]    - cuDNN auto-tuner[18:44:04]    - Memory allocator optimized
+[18:44:04] ResidualGuidedResampler: Frequency=1000, Ratio=20.0%
+[18:44:04] Residual-Guided Resampling (R3): Enabled (Freq: 1000, Ratio: 20%)
+[18:44:04] Initialized trainer for HDFCBank
+[18:44:04] ✅ Mixed precision training enabled (FP16 + FP32)
+[18:44:04]    Applying default initialization
+[18:44:04] [ERROR] ERROR processing HDFCBank: 'NoneType' object has no attribute 'named_parameters'
+[18:44:04] [ERROR] [FAILED] HDFCBank failed after 0.0s - 'NoneType' object has no attribute 'named_parameters'
+[18:44:04] 
+[PROGRESS] [3/14] Starting ultimate processing: Hindalco
+[18:44:04] 
+======================================================================
+[18:44:04] ULTIMATE PROCESSING: Hindalco
+[18:44:04] ======================================================================
+[18:44:04] Start time: 2025-11-18 18:44:04
+[18:44:04] Ensemble size: 5 models
+[18:44:04] Financial metrics: Enabled
+[18:44:04] Advanced features: Multi-init, Christoffersen test, Wasserstein distance
+[18:44:04] 
+======================================================================
+[18:44:04] STEP 1: ULTIMATE ENSEMBLE TRAINING
+[18:44:04] ======================================================================
+[18:44:04] Initialized ensemble trainer for Hindalco with 5 models
+[18:44:04] 
+======================================================================
+[18:44:04] TRAINING ULTIMATE ENSEMBLE: Hindalco (5 models)
+[18:44:04] Using 4 different initialization strategies
+[18:44:04] ======================================================================
+[18:44:04] 
+======================================================================
+[18:44:04] TRAINING MODEL 1/5
+[18:44:04] ======================================================================
+[18:44:04] Using random seed: 42
+[18:44:04] Initializing GPU settings...
+[18:44:04] ✅ GPU optimizations enabled:[18:44:04]    - TF32 math mode[18:44:04]    - cuDNN auto-tuner[18:44:04]    - Memory allocator optimized
+[18:44:04] ResidualGuidedResampler: Frequency=1000, Ratio=20.0%
+[18:44:04] Residual-Guided Resampling (R3): Enabled (Freq: 1000, Ratio: 20%)
+[18:44:04] Initialized trainer for Hindalco
+[18:44:04] ✅ Mixed precision training enabled (FP16 + FP32)
+[18:44:04]    Applying default initialization
+[18:44:04] [ERROR] ERROR processing Hindalco: 'NoneType' object has no attribute 'named_parameters'
+[18:44:04] [ERROR] [FAILED] Hindalco failed after 0.0s - 'NoneType' object has no attribute 'named_parameters'
+[18:44:04] 
+[PROGRESS] [4/14] Starting ultimate processing: HUL
+[18:44:04] 
+======================================================================
+[18:44:04] ULTIMATE PROCESSING: HUL
+[18:44:04] ======================================================================
+[18:44:04] Start time: 2025-11-18 18:44:04
+[18:44:04] Ensemble size: 5 models
+[18:44:04] Financial metrics: Enabled
+[18:44:04] Advanced features: Multi-init, Christoffersen test, Wasserstein distance
+[18:44:04] 
+======================================================================
+[18:44:04] STEP 1: ULTIMATE ENSEMBLE TRAINING
+[18:44:04] ======================================================================
+[18:44:04] Initialized ensemble trainer for HUL with 5 models
+[18:44:04] 
+======================================================================
+[18:44:04] TRAINING ULTIMATE ENSEMBLE: HUL (5 models)
+[18:44:04] Using 4 different initialization strategies
+[18:44:04] ======================================================================
+[18:44:04] 
+======================================================================
+[18:44:04] TRAINING MODEL 1/5
+[18:44:04] ======================================================================
+[18:44:04] Using random seed: 42
+[18:44:04] Initializing GPU settings...
+[18:44:04] ✅ GPU optimizations enabled:[18:44:04]    - TF32 math mode[18:44:04]    - cuDNN auto-tuner[18:44:04]    - Memory allocator optimized
+[18:44:04] ResidualGuidedResampler: Frequency=1000, Ratio=20.0%
+[18:44:04] Residual-Guided Resampling (R3): Enabled (Freq: 1000, Ratio: 20%)
+[18:44:04] Initialized trainer for HUL
+[18:44:04] ✅ Mixed precision training enabled (FP16 + FP32)
+[18:44:04]    Applying default initialization
+[18:44:04] [ERROR] ERROR processing HUL: 'NoneType' object has no attribute 'named_parameters'
+[18:44:04] [ERROR] [FAILED] HUL failed after 0.0s - 'NoneType' object has no attribute 'named_parameters'
+[18:44:04] 
+[PROGRESS] [5/14] Starting ultimate processing: ICICIBank
+[18:44:04] 
+======================================================================
+[18:44:04] ULTIMATE PROCESSING: ICICIBank
+[18:44:04] ======================================================================
+[18:44:04] Start time: 2025-11-18 18:44:04
+[18:44:04] Ensemble size: 5 models
+[18:44:04] Financial metrics: Enabled
+[18:44:04] Advanced features: Multi-init, Christoffersen test, Wasserstein distance
+[18:44:04] 
+======================================================================
+[18:44:04] STEP 1: ULTIMATE ENSEMBLE TRAINING
+[18:44:04] ======================================================================
+[18:44:04] Initialized ensemble trainer for ICICIBank with 5 models
+[18:44:04] 
+======================================================================
+[18:44:04] TRAINING ULTIMATE ENSEMBLE: ICICIBank (5 models)
+[18:44:04] Using 4 different initialization strategies
+[18:44:04] ======================================================================
+[18:44:04] 
+======================================================================
+[18:44:04] TRAINING MODEL 1/5
+[18:44:04] ======================================================================
+[18:44:04] Using random seed: 42
+[18:44:04] Initializing GPU settings...
+[18:44:04] ✅ GPU optimizations enabled:[18:44:04]    - TF32 math mode[18:44:04]    - cuDNN auto-tuner[18:44:04]    - Memory allocator optimized
+[18:44:04] ResidualGuidedResampler: Frequency=1000, Ratio=20.0%
+[18:44:04] Residual-Guided Resampling (R3): Enabled (Freq: 1000, Ratio: 20%)
+[18:44:04] Initialized trainer for ICICIBank
+[18:44:04] ✅ Mixed precision training enabled (FP16 + FP32)
+[18:44:04]    Applying default initialization
+[18:44:04] [ERROR] ERROR processing ICICIBank: 'NoneType' object has no attribute 'named_parameters'
+[18:44:04] [ERROR] [FAILED] ICICIBank failed after 0.0s - 'NoneType' object has no attribute 'named_parameters'
+[18:44:04] 
+[PROGRESS] [6/14] Starting ultimate processing: Infosys
+[18:44:04] 
+======================================================================
+[18:44:04] ULTIMATE PROCESSING: Infosys
+[18:44:04] ======================================================================
+[18:44:04] Start time: 2025-11-18 18:44:04
+[18:44:04] Ensemble size: 5 models
+[18:44:04] Financial metrics: Enabled
+[18:44:04] Advanced features: Multi-init, Christoffersen test, Wasserstein distance
+[18:44:04] 
+======================================================================
+[18:44:04] STEP 1: ULTIMATE ENSEMBLE TRAINING
+[18:44:04] ======================================================================
+[18:44:04] Initialized ensemble trainer for Infosys with 5 models
+[18:44:04] 
+======================================================================
+[18:44:04] TRAINING ULTIMATE ENSEMBLE: Infosys (5 models)
+[18:44:04] Using 4 different initialization strategies
+[18:44:04] ======================================================================
+[18:44:04] 
+======================================================================
+[18:44:04] TRAINING MODEL 1/5
+[18:44:04] ======================================================================
+[18:44:04] Using random seed: 42
+[18:44:04] Initializing GPU settings...
+[18:44:04] ✅ GPU optimizations enabled:[18:44:04]    - TF32 math mode[18:44:04]    - cuDNN auto-tuner[18:44:04]    - Memory allocator optimized
+[18:44:04] ResidualGuidedResampler: Frequency=1000, Ratio=20.0%
+[18:44:04] Residual-Guided Resampling (R3): Enabled (Freq: 1000, Ratio: 20%)
+[18:44:04] Initialized trainer for Infosys
+[18:44:04] ✅ Mixed precision training enabled (FP16 + FP32)
+[18:44:04]    Applying default initialization
+[18:44:04] [ERROR] ERROR processing Infosys: 'NoneType' object has no attribute 'named_parameters'
+[18:44:04] [ERROR] [FAILED] Infosys failed after 0.0s - 'NoneType' object has no attribute 'named_parameters'
+[18:44:04] 
+[PROGRESS] [7/14] Starting ultimate processing: ITC
+[18:44:04] 
+======================================================================
+[18:44:04] ULTIMATE PROCESSING: ITC
+[18:44:04] ======================================================================
+[18:44:04] Start time: 2025-11-18 18:44:04
+[18:44:04] Ensemble size: 5 models
+[18:44:04] Financial metrics: Enabled
+[18:44:04] Advanced features: Multi-init, Christoffersen test, Wasserstein distance
+[18:44:04] 
+======================================================================
+[18:44:04] STEP 1: ULTIMATE ENSEMBLE TRAINING
+[18:44:04] ======================================================================
+[18:44:04] Initialized ensemble trainer for ITC with 5 models
+[18:44:04] 
+======================================================================
+[18:44:04] TRAINING ULTIMATE ENSEMBLE: ITC (5 models)
+[18:44:04] Using 4 different initialization strategies
+[18:44:04] ======================================================================
+[18:44:04] 
+======================================================================
+[18:44:04] TRAINING MODEL 1/5
+[18:44:04] ======================================================================
+[18:44:04] Using random seed: 42
+[18:44:04] Initializing GPU settings...
+[18:44:04] ✅ GPU optimizations enabled:[18:44:04]    - TF32 math mode[18:44:04]    - cuDNN auto-tuner[18:44:04]    - Memory allocator optimized
+[18:44:04] ResidualGuidedResampler: Frequency=1000, Ratio=20.0%
+[18:44:04] Residual-Guided Resampling (R3): Enabled (Freq: 1000, Ratio: 20%)
+[18:44:04] Initialized trainer for ITC
+[18:44:04] ✅ Mixed precision training enabled (FP16 + FP32)
+[18:44:04]    Applying default initialization
+[18:44:04] [ERROR] ERROR processing ITC: 'NoneType' object has no attribute 'named_parameters'
+[18:44:04] [ERROR] [FAILED] ITC failed after 0.0s - 'NoneType' object has no attribute 'named_parameters'
+[18:44:04] 
+[PROGRESS] [8/14] Starting ultimate processing: L&T
+[18:44:04] 
+======================================================================
+[18:44:04] ULTIMATE PROCESSING: L&T
+[18:44:04] ======================================================================
+[18:44:04] Start time: 2025-11-18 18:44:04
+[18:44:04] Ensemble size: 5 models
+[18:44:04] Financial metrics: Enabled
+[18:44:04] Advanced features: Multi-init, Christoffersen test, Wasserstein distance
+[18:44:04] 
+======================================================================
+[18:44:04] STEP 1: ULTIMATE ENSEMBLE TRAINING
+[18:44:04] ======================================================================
+[18:44:04] Initialized ensemble trainer for L&T with 5 models
+[18:44:04] 
+======================================================================
+[18:44:04] TRAINING ULTIMATE ENSEMBLE: L&T (5 models)
+[18:44:04] Using 4 different initialization strategies
+[18:44:04] ======================================================================
+[18:44:04] 
+======================================================================
+[18:44:04] TRAINING MODEL 1/5
+[18:44:04] ======================================================================
+[18:44:04] Using random seed: 42
+[18:44:04] Initializing GPU settings...
+[18:44:04] ✅ GPU optimizations enabled:[18:44:04]    - TF32 math mode[18:44:04]    - cuDNN auto-tuner[18:44:04]    - Memory allocator optimized
+[18:44:04] ResidualGuidedResampler: Frequency=1000, Ratio=20.0%
+[18:44:04] Residual-Guided Resampling (R3): Enabled (Freq: 1000, Ratio: 20%)
+[18:44:04] Initialized trainer for L&T
+[18:44:04] ✅ Mixed precision training enabled (FP16 + FP32)
+[18:44:04]    Applying default initialization
+[18:44:04] [ERROR] ERROR processing L&T: 'NoneType' object has no attribute 'named_parameters'
+[18:44:04] [ERROR] [FAILED] L&T failed after 0.0s - 'NoneType' object has no attribute 'named_parameters'
+[18:44:04] 
+[PROGRESS] [9/14] Starting ultimate processing: Nifty-50
+[18:44:04] 
+======================================================================
+[18:44:04] ULTIMATE PROCESSING: Nifty-50
+[18:44:04] ======================================================================
+[18:44:04] Start time: 2025-11-18 18:44:04
+[18:44:04] Ensemble size: 5 models
+[18:44:04] Financial metrics: Enabled
+[18:44:04] Advanced features: Multi-init, Christoffersen test, Wasserstein distance
+[18:44:04] 
+======================================================================
+[18:44:04] STEP 1: ULTIMATE ENSEMBLE TRAINING
+[18:44:04] ======================================================================
+[18:44:04] Initialized ensemble trainer for Nifty-50 with 5 models
+[18:44:04] 
+======================================================================
+[18:44:04] TRAINING ULTIMATE ENSEMBLE: Nifty-50 (5 models)
+[18:44:04] Using 4 different initialization strategies
+[18:44:04] ======================================================================
+[18:44:04] 
+======================================================================
+[18:44:04] TRAINING MODEL 1/5
+[18:44:04] ======================================================================
+[18:44:04] Using random seed: 42
+[18:44:04] Initializing GPU settings...
+[18:44:04] ✅ GPU optimizations enabled:[18:44:04]    - TF32 math mode[18:44:04]    - cuDNN auto-tuner[18:44:04]    - Memory allocator optimized
+[18:44:04] ResidualGuidedResampler: Frequency=1000, Ratio=20.0%
+[18:44:04] Residual-Guided Resampling (R3): Enabled (Freq: 1000, Ratio: 20%)
+[18:44:04] Initialized trainer for Nifty-50
+[18:44:04] ✅ Mixed precision training enabled (FP16 + FP32)
+[18:44:04]    Applying default initialization
+[18:44:04] [ERROR] ERROR processing Nifty-50: 'NoneType' object has no attribute 'named_parameters'
+[18:44:04] [ERROR] [FAILED] Nifty-50 failed after 0.0s - 'NoneType' object has no attribute 'named_parameters'
+[18:44:04] 
+[PROGRESS] [10/14] Starting ultimate processing: Reliance
+[18:44:04] 
+======================================================================
+[18:44:04] ULTIMATE PROCESSING: Reliance
+[18:44:04] ======================================================================
+[18:44:04] Start time: 2025-11-18 18:44:04
+[18:44:04] Ensemble size: 5 models
+[18:44:04] Financial metrics: Enabled
+[18:44:04] Advanced features: Multi-init, Christoffersen test, Wasserstein distance
+[18:44:04] 
+======================================================================
+[18:44:04] STEP 1: ULTIMATE ENSEMBLE TRAINING
+[18:44:04] ======================================================================
+[18:44:04] Initialized ensemble trainer for Reliance with 5 models
+[18:44:04] 
+======================================================================
+[18:44:04] TRAINING ULTIMATE ENSEMBLE: Reliance (5 models)
+[18:44:04] Using 4 different initialization strategies
+[18:44:04] ======================================================================
+[18:44:04] 
+======================================================================
+[18:44:04] TRAINING MODEL 1/5
+[18:44:04] ======================================================================
+[18:44:04] Using random seed: 42
+[18:44:04] Initializing GPU settings...
+[18:44:04] ✅ GPU optimizations enabled:[18:44:04]    - TF32 math mode[18:44:04]    - cuDNN auto-tuner[18:44:04]    - Memory allocator optimized
+[18:44:04] ResidualGuidedResampler: Frequency=1000, Ratio=20.0%
+[18:44:04] Residual-Guided Resampling (R3): Enabled (Freq: 1000, Ratio: 20%)
+[18:44:04] Initialized trainer for Reliance
+[18:44:04] ✅ Mixed precision training enabled (FP16 + FP32)
+[18:44:04]    Applying default initialization
+[18:44:04] [ERROR] ERROR processing Reliance: 'NoneType' object has no attribute 'named_parameters'
+[18:44:04] [ERROR] [FAILED] Reliance failed after 0.0s - 'NoneType' object has no attribute 'named_parameters'
+[18:44:04] 
+[PROGRESS] [11/14] Starting ultimate processing: SBI
+[18:44:04] 
+======================================================================
+[18:44:04] ULTIMATE PROCESSING: SBI
+[18:44:04] ======================================================================
+[18:44:04] Start time: 2025-11-18 18:44:04
+[18:44:04] Ensemble size: 5 models
+[18:44:04] Financial metrics: Enabled
+[18:44:04] Advanced features: Multi-init, Christoffersen test, Wasserstein distance
+[18:44:04] 
+======================================================================
+[18:44:04] STEP 1: ULTIMATE ENSEMBLE TRAINING
+[18:44:04] ======================================================================
+[18:44:04] Initialized ensemble trainer for SBI with 5 models
+[18:44:04] 
+======================================================================
+[18:44:04] TRAINING ULTIMATE ENSEMBLE: SBI (5 models)
+[18:44:04] Using 4 different initialization strategies
+[18:44:04] ======================================================================
+[18:44:04] 
+======================================================================
+[18:44:04] TRAINING MODEL 1/5
+[18:44:04] ======================================================================
+[18:44:04] Using random seed: 42
+[18:44:04] Initializing GPU settings...
+[18:44:04] ✅ GPU optimizations enabled:[18:44:04]    - TF32 math mode[18:44:04]    - cuDNN auto-tuner[18:44:04]    - Memory allocator optimized
+[18:44:04] ResidualGuidedResampler: Frequency=1000, Ratio=20.0%
+[18:44:04] Residual-Guided Resampling (R3): Enabled (Freq: 1000, Ratio: 20%)
+[18:44:04] Initialized trainer for SBI
+[18:44:04] ✅ Mixed precision training enabled (FP16 + FP32)
+[18:44:04]    Applying default initialization
+[18:44:04] [ERROR] ERROR processing SBI: 'NoneType' object has no attribute 'named_parameters'
+[18:44:04] [ERROR] [FAILED] SBI failed after 0.0s - 'NoneType' object has no attribute 'named_parameters'
+[18:44:04] 
+[PROGRESS] [12/14] Starting ultimate processing: TATAMotors
+[18:44:04] 
+======================================================================
+[18:44:04] ULTIMATE PROCESSING: TATAMotors
+[18:44:04] ======================================================================
+[18:44:04] Start time: 2025-11-18 18:44:04
+[18:44:04] Ensemble size: 5 models
+[18:44:04] Financial metrics: Enabled
+[18:44:04] Advanced features: Multi-init, Christoffersen test, Wasserstein distance
+[18:44:04] 
+======================================================================
+[18:44:04] STEP 1: ULTIMATE ENSEMBLE TRAINING
+[18:44:04] ======================================================================
+[18:44:04] Initialized ensemble trainer for TATAMotors with 5 models
+[18:44:04] 
+======================================================================
+[18:44:04] TRAINING ULTIMATE ENSEMBLE: TATAMotors (5 models)
+[18:44:04] Using 4 different initialization strategies
+[18:44:04] ======================================================================
+[18:44:04] 
+======================================================================
+[18:44:04] TRAINING MODEL 1/5
+[18:44:04] ======================================================================
+[18:44:04] Using random seed: 42
+[18:44:04] Initializing GPU settings...
+[18:44:04] ✅ GPU optimizations enabled:[18:44:04]    - TF32 math mode[18:44:04]    - cuDNN auto-tuner[18:44:04]    - Memory allocator optimized
+[18:44:04] ResidualGuidedResampler: Frequency=1000, Ratio=20.0%
+[18:44:04] Residual-Guided Resampling (R3): Enabled (Freq: 1000, Ratio: 20%)
+[18:44:04] Initialized trainer for TATAMotors
+[18:44:04] ✅ Mixed precision training enabled (FP16 + FP32)
+[18:44:04]    Applying default initialization
+[18:44:04] [ERROR] ERROR processing TATAMotors: 'NoneType' object has no attribute 'named_parameters'
+[18:44:04] [ERROR] [FAILED] TATAMotors failed after 0.0s - 'NoneType' object has no attribute 'named_parameters'
+[18:44:04] 
+[PROGRESS] [13/14] Starting ultimate processing: TataSteel
+[18:44:04] 
+======================================================================
+[18:44:04] ULTIMATE PROCESSING: TataSteel
+[18:44:04] ======================================================================
+[18:44:04] Start time: 2025-11-18 18:44:04
+[18:44:04] Ensemble size: 5 models
+[18:44:04] Financial metrics: Enabled
+[18:44:04] Advanced features: Multi-init, Christoffersen test, Wasserstein distance
+[18:44:04] 
+======================================================================
+[18:44:04] STEP 1: ULTIMATE ENSEMBLE TRAINING
+[18:44:04] ======================================================================
+[18:44:04] Initialized ensemble trainer for TataSteel with 5 models
+[18:44:04] 
+======================================================================
+[18:44:04] TRAINING ULTIMATE ENSEMBLE: TataSteel (5 models)
+[18:44:04] Using 4 different initialization strategies
+[18:44:04] ======================================================================
+[18:44:04] 
+======================================================================
+[18:44:04] TRAINING MODEL 1/5
+[18:44:04] ======================================================================
+[18:44:04] Using random seed: 42
+[18:44:04] Initializing GPU settings...
+[18:44:04] ✅ GPU optimizations enabled:[18:44:04]    - TF32 math mode[18:44:04]    - cuDNN auto-tuner[18:44:04]    - Memory allocator optimized
+[18:44:04] ResidualGuidedResampler: Frequency=1000, Ratio=20.0%
+[18:44:04] Residual-Guided Resampling (R3): Enabled (Freq: 1000, Ratio: 20%)
+[18:44:04] Initialized trainer for TataSteel
+[18:44:04] ✅ Mixed precision training enabled (FP16 + FP32)
+[18:44:04]    Applying default initialization
+[18:44:04] [ERROR] ERROR processing TataSteel: 'NoneType' object has no attribute 'named_parameters'
+[18:44:04] [ERROR] [FAILED] TataSteel failed after 0.0s - 'NoneType' object has no attribute 'named_parameters'
+[18:44:04] 
+[PROGRESS] [14/14] Starting ultimate processing: TCS
+[18:44:04] 
+======================================================================
+[18:44:04] ULTIMATE PROCESSING: TCS
+[18:44:04] ======================================================================
+[18:44:04] Start time: 2025-11-18 18:44:04
+[18:44:04] Ensemble size: 5 models
+[18:44:04] Financial metrics: Enabled
+[18:44:04] Advanced features: Multi-init, Christoffersen test, Wasserstein distance
+[18:44:04] 
+======================================================================
+[18:44:04] STEP 1: ULTIMATE ENSEMBLE TRAINING
+[18:44:04] ======================================================================
+[18:44:04] Initialized ensemble trainer for TCS with 5 models
+[18:44:04] 
+======================================================================
+[18:44:04] TRAINING ULTIMATE ENSEMBLE: TCS (5 models)
+[18:44:04] Using 4 different initialization strategies
+[18:44:04] ======================================================================
+[18:44:04] 
+======================================================================
+[18:44:04] TRAINING MODEL 1/5
+[18:44:04] ======================================================================
+[18:44:04] Using random seed: 42
+[18:44:04] Initializing GPU settings...
+[18:44:04] ✅ GPU optimizations enabled:[18:44:04]    - TF32 math mode[18:44:04]    - cuDNN auto-tuner[18:44:04]    - Memory allocator optimized
+[18:44:04] ResidualGuidedResampler: Frequency=1000, Ratio=20.0%
+[18:44:04] Residual-Guided Resampling (R3): Enabled (Freq: 1000, Ratio: 20%)
+[18:44:04] Initialized trainer for TCS
+[18:44:04] ✅ Mixed precision training enabled (FP16 + FP32)
+[18:44:04]    Applying default initialization
+[18:44:04] [ERROR] ERROR processing TCS: 'NoneType' object has no attribute 'named_parameters'
+[18:44:04] [ERROR] [FAILED] TCS failed after 0.0s - 'NoneType' object has no attribute 'named_parameters'
+[18:44:04] 
+======================================================================
+[18:44:04] ULTIMATE BATCH PROCESSING COMPLETE
+[18:44:04] ======================================================================
+[18:44:04] Total time: 0.1s (0.0 min, 0.00 hours)
+[18:44:04] Average time: 0.0s per stock
+[18:44:04] Success rate: 0/14 (0.0%)
+[18:44:04] 
+======================================================================
+[18:44:04] Summary saved: e:\Modelling\Project\Implementation\4-FPInversePINN\Results\batch_ultimate_summary_20251118_184404.json
+[18:44:04] ======================================================================
+[18:44:04] 
+✨ ULTIMATE BATCH PROCESSING COMPLETE ✨
+[18:44:04] Hybrid implementation combining features from all three approaches
+[18:44:04] ======================================================================
+[18:44:04] 
+✅ Ultimate batch processing completed successfully!
+[18:44:04] Summary: e:\Modelling\Project\Implementation\4-FPInversePINN\Results\batch_ultimate_summary_20251118_184404.json
+
+======================================================================
+Ended: 2025-11-18 18:44:04
+======================================================================

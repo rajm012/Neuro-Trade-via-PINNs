@@ -1,0 +1,55 @@
+{
+  "data": {
+    "source_folder": "../Data-Working",
+    "file_pattern": "*-Data.csv",
+    "date_column": "Date",
+    "price_column": "Price",
+    "log_return_column": "LOG"
+  },
+  "output": {
+    "results_folder": "./Results",
+    "plots_folder": "./Plots",
+    "data_folder": "./Data"
+  },
+  "analysis": {
+    "dt_daily": 0.003968253968253968,
+    "dt_annual": 1.0,
+    "trading_days_per_year": 252,
+    "confidence_level": 0.95,
+    "alpha": 0.05,
+    "var_confidence_level": 0.95
+  },
+  "simulation": {
+    "n_paths": 1000,
+    "T_years": 1.0,
+    "seed": 42
+  },
+  "stocks": [
+    "BAJAJ",
+    "HDFCBank",
+    "Hindalco",
+    "HUL",
+    "ICICIBank",
+    "Infosys",
+    "ITC",
+    "L&T",
+    "Nifty-50",
+    "Reliance",
+    "SBI",
+    "TATAMotors",
+    "TataSteel",
+    "TCS"
+  ],
+  "tests": {
+    "normality_tests": ["ks_test", "jarque_bera", "shapiro_wilk"],
+    "tail_risk_tests": ["excess_kurtosis", "skewness"],
+    "volatility_tests": ["acf_squared_returns"],
+    "var_exceedance_threshold": 0.95
+  },
+  "reporting": {
+    "generate_individual_reports": true,
+    "generate_summary_report": true,
+    "generate_latex": false,
+    "verbose": true
+  }
+}

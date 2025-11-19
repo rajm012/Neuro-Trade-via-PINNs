@@ -346,3 +346,46 @@ if __name__ == "__main__":
     print(f"95% CI for μ: [{params['mu_ci'][0]:.4f}, {params['mu_ci'][1]:.4f}]")
     print(f"95% CI for σ: [{params['sigma_ci'][0]:.4f}, {params['sigma_ci'][1]:.4f}]")
     print(f"AIC: {params['aic']:.2f}, BIC: {params['bic']:.2f}")
+
+
+
+"""
+🏆 Top Recommendations:
+1. ICICIBank (BEST OVERALL)
+Why it's perfect:
+✅ Lowest MAPE: 4.17% - Excellent forecast accuracy
+✅ Low RMSE: 61.82 - Good absolute error
+✅ Strong rejection of normality (shows GBM limitations)
+✅ Moderate volatility (30.7%) - not too extreme
+✅ Negative skewness (-0.11) + high kurtosis (9.32) - shows fat tails
+📊 Perfect for demonstrating: "Despite best-case GBM performance, still fails normality"
+
+2. Nifty-50 (BENCHMARK INDEX)
+Why it's compelling:
+✅ EXTREME kurtosis: 20.31 - Highest in your dataset!
+✅ EXTREME skewness: -1.36 - Most crash-prone
+✅ Low MAPE: 4.83% - Good forecast despite extreme stats
+✅ Index represents entire market
+📊 Perfect for demonstrating: "Even the diversified index violates GBM assumptions severely"
+
+3. TataSteel (BEST FORECAST)
+Why it stands out:
+✅ LOWEST RMSE: 19.27 - Best absolute accuracy
+✅ LOWEST MAE: 15.75 - Consistently accurate
+✅ Low MAPE: 10.44% - Good percentage error
+✅ Still rejects normality (JB p < 0.0001)
+📊 Perfect for demonstrating: "Even best-performing stock fails normality tests"
+
+4. BAJAJ (WORST CASE)
+Why it's instructive:
+❌ HIGHEST MAPE: 34.6% - Worst forecast
+❌ HIGHEST RMSE: 3463.5 - Massive errors
+❌ High kurtosis (8.63) + negative skew (-0.32)
+📊 Perfect for demonstrating: "GBM catastrophically fails for volatile stocks"
+📊 My Recommendation for Your Paper:
+Show 2-3 plots in this order:
+ICICIBank - "Best case: GBM performs reasonably but still violates assumptions"
+Nifty-50 - "Index case: Extreme fat tails and crash risk even in diversified portfolio"
+BAJAJ - "Worst case: Complete GBM failure for high-volatility stocks"
+This gives a balanced narrative: even when GBM performs well (ICICIBank), it still fails fundamental assumptions. The index (Nifty-50) shows systematic market-wide violations. And BAJAJ demonstrates catastrophic failure in volatile conditions.
+"""

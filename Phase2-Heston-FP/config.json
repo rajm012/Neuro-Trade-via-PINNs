@@ -1,0 +1,81 @@
+{
+  "data": {
+    "source_folder": "../Data-Working",
+    "file_pattern": "*-Data.csv",
+    "date_column": "Date",
+    "price_column": "Price",
+    "log_return_column": "LOG"
+  },
+  "output": {
+    "results_folder": "./Results",
+    "plots_folder": "./Plots",
+    "data_folder": "./Data"
+  },
+  "analysis": {
+    "dt_daily": 0.003968253968253968,
+    "trading_days_per_year": 252,
+    "confidence_level": 0.95,
+    "var_confidence_level": 0.95,
+    "es_confidence_level": 0.95
+  },
+  "heston_parameters": {
+    "kappa": 3.5,
+    "xi": 0.6,
+    "rho": -0.7,
+    "heuristic_note": "Calibrated for Indian equity markets: kappa=3.5 (faster mean reversion), xi=0.6 (high vol-of-vol for emerging markets), rho=-0.7 (strong leverage effect). theta and v0 are estimated from data."
+  },
+  "grid_specification": {
+    "price_grid": {
+      "lower_factor": 0.4,
+      "upper_factor": 1.6,
+      "n_points": 100,
+      "boundary_type": "absorbing"
+    },
+    "volatility_grid": {
+      "v_min": 0.001,
+      "v_max": 0.8,
+      "n_points": 50,
+      "lower_boundary": "reflecting",
+      "upper_boundary": "absorbing"
+    },
+    "time_grid": {
+      "dt_factor": 0.25,
+      "dt_calculation": "dt_factor / 252"
+    }
+  },
+  "solver": {
+    "method": "ADI",
+    "scheme": "Peaceman-Rachford",
+    "conservative_discretization": true,
+    "max_iterations": 1000,
+    "tolerance": 1e-6
+  },
+  "simulation": {
+    "T_days": 60,
+    "n_mc_paths": 10000,
+    "seed": 42
+  },
+  "stocks": [
+    "BAJAJ",
+    "HDFCBank",
+    "Hindalco",
+    "HUL",
+    "ICICIBank",
+    "Infosys",
+    "ITC",
+    "L&T",
+    "Nifty-50",
+    "Reliance",
+    "SBI",
+    "TATAMotors",
+    "TataSteel",
+    "TCS"
+  ],
+  "reporting": {
+    "generate_individual_reports": true,
+    "generate_summary_report": true,
+    "save_density_evolution": true,
+    "save_risk_metrics": true,
+    "verbose": true
+  }
+}

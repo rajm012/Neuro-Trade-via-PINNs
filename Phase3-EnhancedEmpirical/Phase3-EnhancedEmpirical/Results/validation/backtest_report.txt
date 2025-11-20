@@ -1,0 +1,56 @@
+================================================================================
+PORTFOLIO VAR BACKTEST REPORT (99% Confidence)
+================================================================================
+
+PARAMETRIC VaR:
+--------------------------------------------------------------------------------
+  Violations: 40 / 2413
+  Expected: 24.1
+  Violation Rate: 0.0166
+
+  Kupiec Test (Unconditional Coverage):
+    LR Statistic: 8.7995
+    P-value: 0.0030
+    Reject H0: True
+
+  Christoffersen Test (Conditional Coverage):
+    LR Independence: 4.7932
+    LR Conditional: 13.5928
+    P-value: 0.0011
+    Reject H0: True
+
+HISTORICAL VaR:
+--------------------------------------------------------------------------------
+  Violations: 36 / 2413
+  Expected: 24.1
+  Violation Rate: 0.0149
+
+  Kupiec Test (Unconditional Coverage):
+    LR Statistic: 5.1236
+    P-value: 0.0236
+    Reject H0: True
+
+  Christoffersen Test (Conditional Coverage):
+    LR Independence: 5.8948
+    LR Conditional: 11.0184
+    P-value: 0.0040
+    Reject H0: True
+
+EVT VaR:
+--------------------------------------------------------------------------------
+  Violations: 19 / 2413
+  Expected: 24.1
+  Violation Rate: 0.0079
+
+  Kupiec Test (Unconditional Coverage):
+    LR Statistic: 1.1884
+    P-value: 0.2757
+    Reject H0: False
+
+  Christoffersen Test (Conditional Coverage):
+    LR Independence: 0.0000
+    LR Conditional: 1.1884
+    P-value: 0.5520
+    Reject H0: False
+
+================================================================================

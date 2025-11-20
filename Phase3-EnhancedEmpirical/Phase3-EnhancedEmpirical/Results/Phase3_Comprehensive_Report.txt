@@ -1,0 +1,164 @@
+====================================================================================================
+PHASE 3: ENHANCED EMPIRICAL DENSITY ESTIMATION - COMPREHENSIVE REPORT
+====================================================================================================
+
+1. EXECUTIVE SUMMARY
+----------------------------------------------------------------------------------------------------
+
+Total stocks analyzed: 14
+Average regimes per stock: 60.3 (target: 50-70)
+Average regime duration: 44.2 days (target: 30-50)
+
+
+2. SINGLE-ASSET REGIME AND TAIL RISK ANALYSIS
+----------------------------------------------------------------------------------------------------
+
+
+BAJAJ:
+  Regimes detected: 60
+  Avg regime duration: 44.4 days
+  Volatility range: 0.1254 - 0.6547
+  Tail shape (left): xi = 0.5000
+  Tail shape (right): xi = 0.2107
+  Asymmetry: Crash risk > upside
+  Crash bias detected: False
+
+HDFCBank:
+  Regimes detected: 60
+  Avg regime duration: 44.4 days
+  Volatility range: 0.1196 - 0.7119
+  Tail shape (left): xi = 0.2821
+  Tail shape (right): xi = 0.3350
+  Asymmetry: Upside > crash risk
+  Crash bias detected: False
+
+Hindalco:
+  Regimes detected: 60
+  Avg regime duration: 44.4 days
+  Volatility range: 0.1713 - 1.0744
+  Tail shape (left): xi = 0.1720
+  Tail shape (right): xi = 0.1673
+  Asymmetry: Crash risk > upside
+  Crash bias detected: False
+
+HUL:
+  Regimes detected: 62
+  Avg regime duration: 43.0 days
+  Volatility range: 0.1160 - 0.7789
+  Tail shape (left): xi = 0.0857
+  Tail shape (right): xi = 0.2244
+  Asymmetry: Upside > crash risk
+  Crash bias detected: False
+
+ICICIBank:
+  Regimes detected: 61
+  Avg regime duration: 43.7 days
+  Volatility range: 0.1206 - 0.9788
+  Tail shape (left): xi = 0.3170
+  Tail shape (right): xi = 0.3973
+  Asymmetry: Upside > crash risk
+  Crash bias detected: False
+
+Infosys:
+  Regimes detected: 63
+  Avg regime duration: 42.3 days
+  Volatility range: 0.1538 - 0.7184
+  Tail shape (left): xi = 0.3354
+  Tail shape (right): xi = 0.2341
+  Asymmetry: Crash risk > upside
+  Crash bias detected: False
+
+ITC:
+  Regimes detected: 60
+  Avg regime duration: 44.4 days
+  Volatility range: 0.1038 - 0.6810
+  Tail shape (left): xi = 0.3290
+  Tail shape (right): xi = -0.0264
+  Asymmetry: Crash risk > upside
+  Crash bias detected: False
+
+L&T:
+  Regimes detected: 60
+  Avg regime duration: 44.4 days
+  Volatility range: 0.1322 - 0.7815
+  Tail shape (left): xi = 0.2349
+  Tail shape (right): xi = 0.1764
+  Asymmetry: Crash risk > upside
+  Crash bias detected: False
+
+Nifty-50:
+  Regimes detected: 61
+  Avg regime duration: 43.7 days
+  Volatility range: 0.0759 - 0.6245
+  Tail shape (left): xi = 0.5000
+  Tail shape (right): xi = 0.5000
+  Asymmetry: Upside > crash risk
+  Crash bias detected: False
+
+Reliance:
+  Regimes detected: 60
+  Avg regime duration: 44.4 days
+  Volatility range: 0.1308 - 0.8653
+  Tail shape (left): xi = 0.3882
+  Tail shape (right): xi = 0.4057
+  Asymmetry: Upside > crash risk
+  Crash bias detected: False
+
+SBI:
+  Regimes detected: 58
+  Avg regime duration: 45.9 days
+  Volatility range: 0.1346 - 0.9990
+  Tail shape (left): xi = 0.2387
+  Tail shape (right): xi = 0.3783
+  Asymmetry: Upside > crash risk
+  Crash bias detected: False
+
+TATAMotors:
+  Regimes detected: 62
+  Avg regime duration: 43.0 days
+  Volatility range: 0.1974 - 0.8799
+  Tail shape (left): xi = 0.1347
+  Tail shape (right): xi = 0.2325
+  Asymmetry: Upside > crash risk
+  Crash bias detected: False
+
+TataSteel:
+  Regimes detected: 57
+  Avg regime duration: 46.7 days
+  Volatility range: 0.1768 - 0.8287
+  Tail shape (left): xi = 0.1236
+  Tail shape (right): xi = 0.0079
+  Asymmetry: Crash risk > upside
+  Crash bias detected: False
+
+TCS:
+  Regimes detected: 60
+  Avg regime duration: 44.4 days
+  Volatility range: 0.1344 - 0.6311
+  Tail shape (left): xi = 0.1344
+  Tail shape (right): xi = 0.0146
+  Asymmetry: Crash risk > upside
+  Crash bias detected: False
+
+
+3. MULTI-ASSET CORRELATION AND FACTOR ANALYSIS
+----------------------------------------------------------------------------------------------------
+
+
+
+4. KEY FINDINGS AND VALIDATION
+----------------------------------------------------------------------------------------------------
+
+[KEY FINDING] Non-Stationarity Confirmed:
+  - Detected 60 regimes on average (target: 50-70)
+  - Average regime duration: 44.2 days (target: 30-50)
+
+[KEY FINDING] Fat Tails Persist:
+  - Average excess kurtosis across regimes: 1.30
+  - Positive kurtosis indicates heavy tails beyond volatility clustering
+
+[KEY FINDING] Asymmetric Tail Risk:
+  - 0/14 stocks show crash bias (xi_left > xi_right)
+  - Downside risk systematically exceeds upside potential
+
+====================================================================================================

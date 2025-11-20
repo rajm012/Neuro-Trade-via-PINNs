@@ -1,0 +1,221 @@
+2025-11-20 07:59:43 | INFO     | Phase3 | setup_logger | Logger initialized. Log file: Phase3-EnhancedEmpirical\Results\logs\phase3_20251120_075943.log
+2025-11-20 07:59:43 | INFO     | Phase3 | log_section | ================================================================================
+2025-11-20 07:59:43 | INFO     | Phase3 | log_section |   PHASE 3: ENHANCED EMPIRICAL ANALYSIS
+2025-11-20 07:59:43 | INFO     | Phase3 | log_section | ================================================================================
+2025-11-20 07:59:43 | INFO     | Phase3 | log_section | ================================================================================
+2025-11-20 07:59:43 | INFO     | Phase3 | log_section |   LOADING DATA
+2025-11-20 07:59:43 | INFO     | Phase3 | log_section | ================================================================================
+2025-11-20 07:59:43 | INFO     | Phase3 | load_data | Loaded BAJAJ: 2663 observations from 2015-01-05 00:00:00 to 2025-10-03 00:00:00
+2025-11-20 07:59:43 | INFO     | Phase3 | load_data | Loaded HDFCBank: 2664 observations from 2015-01-05 00:00:00 to 2025-10-03 00:00:00
+2025-11-20 07:59:43 | INFO     | Phase3 | load_data | Loaded Hindalco: 2663 observations from 2015-01-05 00:00:00 to 2025-10-03 00:00:00
+2025-11-20 07:59:43 | INFO     | Phase3 | load_data | Loaded HUL: 2663 observations from 2015-01-05 00:00:00 to 2025-10-03 00:00:00
+2025-11-20 07:59:43 | INFO     | Phase3 | load_data | Loaded ICICIBank: 2663 observations from 2015-01-05 00:00:00 to 2025-10-03 00:00:00
+2025-11-20 07:59:43 | INFO     | Phase3 | load_data | Loaded Infosys: 2663 observations from 2015-01-05 00:00:00 to 2025-10-03 00:00:00
+2025-11-20 07:59:43 | INFO     | Phase3 | load_data | Loaded ITC: 2664 observations from 2015-01-05 00:00:00 to 2025-10-03 00:00:00
+2025-11-20 07:59:43 | INFO     | Phase3 | load_data | Loaded L&T: 2663 observations from 2015-01-05 00:00:00 to 2025-10-03 00:00:00
+2025-11-20 07:59:43 | INFO     | Phase3 | load_data | Loaded Nifty-50: 2664 observations from 2015-01-05 00:00:00 to 2025-10-03 00:00:00
+2025-11-20 07:59:43 | INFO     | Phase3 | load_data | Loaded Reliance: 2664 observations from 2015-01-05 00:00:00 to 2025-10-03 00:00:00
+2025-11-20 07:59:43 | INFO     | Phase3 | load_data | Loaded SBI: 2664 observations from 2015-01-05 00:00:00 to 2025-10-03 00:00:00
+2025-11-20 07:59:43 | INFO     | Phase3 | load_data | Loaded TATAMotors: 2663 observations from 2015-01-05 00:00:00 to 2025-10-03 00:00:00
+2025-11-20 07:59:43 | INFO     | Phase3 | load_data | Loaded TataSteel: 2664 observations from 2015-01-05 00:00:00 to 2025-10-03 00:00:00
+2025-11-20 07:59:43 | INFO     | Phase3 | load_data | Loaded TCS: 2663 observations from 2015-01-05 00:00:00 to 2025-10-03 00:00:00
+2025-11-20 07:59:43 | INFO     | Phase3 | load_data | Total stocks loaded: 14
+2025-11-20 07:59:43 | INFO     | Phase3 | log_subsection | --------------------------------------------------------------------------------
+2025-11-20 07:59:43 | INFO     | Phase3 | log_subsection |   SINGLE-ASSET ANALYSIS: BAJAJ
+2025-11-20 07:59:43 | INFO     | Phase3 | log_subsection | --------------------------------------------------------------------------------
+2025-11-20 07:59:43 | INFO     | Phase3 | run_single_asset_analysis | [1/2] Regime Detection for BAJAJ...
+2025-11-20 07:59:46 | INFO     | Phase3 | run_single_asset_analysis |    Detected 60 regimes (avg duration: 44.4 days)
+2025-11-20 07:59:46 | INFO     | Phase3 | run_single_asset_analysis |    Identified 60 high-volatility crisis regimes
+2025-11-20 07:59:48 | INFO     | Phase3 | run_single_asset_analysis |    Saved regime plot to Phase3-EnhancedEmpirical\Results\BAJAJ_regimes.png
+2025-11-20 07:59:48 | INFO     | Phase3 | run_single_asset_analysis | [2/2] Tail Risk Analysis for BAJAJ...
+2025-11-20 07:59:48 | INFO     | Phase3 | run_single_asset_analysis |    Shape parameters: xi_left=0.5000, xi_right=0.2107
+2025-11-20 07:59:48 | INFO     | Phase3 | run_single_asset_analysis |    Asymmetry: Crash risk > upside
+2025-11-20 07:59:48 | INFO     | Phase3 | run_single_asset_analysis |    VaR 99% backtest: 26 violations (expected: 26.6), p-value: 0.9020
+2025-11-20 07:59:48 | INFO     | Phase3 | run_single_asset_analysis | [OK] Completed single-asset analysis for BAJAJ
+2025-11-20 07:59:48 | INFO     | Phase3 | log_subsection | --------------------------------------------------------------------------------
+2025-11-20 07:59:48 | INFO     | Phase3 | log_subsection |   SINGLE-ASSET ANALYSIS: HDFCBank
+2025-11-20 07:59:48 | INFO     | Phase3 | log_subsection | --------------------------------------------------------------------------------
+2025-11-20 07:59:48 | INFO     | Phase3 | run_single_asset_analysis | [1/2] Regime Detection for HDFCBank...
+2025-11-20 07:59:52 | INFO     | Phase3 | run_single_asset_analysis |    Detected 60 regimes (avg duration: 44.4 days)
+2025-11-20 07:59:52 | INFO     | Phase3 | run_single_asset_analysis |    Identified 60 high-volatility crisis regimes
+2025-11-20 07:59:53 | INFO     | Phase3 | run_single_asset_analysis |    Saved regime plot to Phase3-EnhancedEmpirical\Results\HDFCBank_regimes.png
+2025-11-20 07:59:53 | INFO     | Phase3 | run_single_asset_analysis | [2/2] Tail Risk Analysis for HDFCBank...
+2025-11-20 07:59:53 | INFO     | Phase3 | run_single_asset_analysis |    Shape parameters: xi_left=0.2821, xi_right=0.3350
+2025-11-20 07:59:53 | INFO     | Phase3 | run_single_asset_analysis |    Asymmetry: Upside > crash risk
+2025-11-20 07:59:53 | INFO     | Phase3 | run_single_asset_analysis |    VaR 99% backtest: 23 violations (expected: 26.6), p-value: 0.4680
+2025-11-20 07:59:53 | INFO     | Phase3 | run_single_asset_analysis | [OK] Completed single-asset analysis for HDFCBank
+2025-11-20 07:59:53 | INFO     | Phase3 | log_subsection | --------------------------------------------------------------------------------
+2025-11-20 07:59:53 | INFO     | Phase3 | log_subsection |   SINGLE-ASSET ANALYSIS: Hindalco
+2025-11-20 07:59:53 | INFO     | Phase3 | log_subsection | --------------------------------------------------------------------------------
+2025-11-20 07:59:53 | INFO     | Phase3 | run_single_asset_analysis | [1/2] Regime Detection for Hindalco...
+2025-11-20 07:59:57 | INFO     | Phase3 | run_single_asset_analysis |    Detected 60 regimes (avg duration: 44.4 days)
+2025-11-20 07:59:57 | INFO     | Phase3 | run_single_asset_analysis |    Identified 60 high-volatility crisis regimes
+2025-11-20 07:59:59 | INFO     | Phase3 | run_single_asset_analysis |    Saved regime plot to Phase3-EnhancedEmpirical\Results\Hindalco_regimes.png
+2025-11-20 07:59:59 | INFO     | Phase3 | run_single_asset_analysis | [2/2] Tail Risk Analysis for Hindalco...
+2025-11-20 07:59:59 | INFO     | Phase3 | run_single_asset_analysis |    Shape parameters: xi_left=0.1720, xi_right=0.1673
+2025-11-20 07:59:59 | INFO     | Phase3 | run_single_asset_analysis |    Asymmetry: Crash risk > upside
+2025-11-20 07:59:59 | INFO     | Phase3 | run_single_asset_analysis |    VaR 99% backtest: 28 violations (expected: 26.6), p-value: 0.7913
+2025-11-20 07:59:59 | INFO     | Phase3 | run_single_asset_analysis | [OK] Completed single-asset analysis for Hindalco
+2025-11-20 07:59:59 | INFO     | Phase3 | log_subsection | --------------------------------------------------------------------------------
+2025-11-20 07:59:59 | INFO     | Phase3 | log_subsection |   SINGLE-ASSET ANALYSIS: HUL
+2025-11-20 07:59:59 | INFO     | Phase3 | log_subsection | --------------------------------------------------------------------------------
+2025-11-20 07:59:59 | INFO     | Phase3 | run_single_asset_analysis | [1/2] Regime Detection for HUL...
+2025-11-20 08:00:07 | INFO     | Phase3 | run_single_asset_analysis |    Detected 62 regimes (avg duration: 43.0 days)
+2025-11-20 08:00:07 | INFO     | Phase3 | run_single_asset_analysis |    Identified 62 high-volatility crisis regimes
+2025-11-20 08:00:09 | INFO     | Phase3 | run_single_asset_analysis |    Saved regime plot to Phase3-EnhancedEmpirical\Results\HUL_regimes.png
+2025-11-20 08:00:09 | INFO     | Phase3 | run_single_asset_analysis | [2/2] Tail Risk Analysis for HUL...
+2025-11-20 08:00:09 | INFO     | Phase3 | run_single_asset_analysis |    Shape parameters: xi_left=0.0857, xi_right=0.2244
+2025-11-20 08:00:09 | INFO     | Phase3 | run_single_asset_analysis |    Asymmetry: Upside > crash risk
+2025-11-20 08:00:09 | INFO     | Phase3 | run_single_asset_analysis |    VaR 99% backtest: 30 violations (expected: 26.6), p-value: 0.5200
+2025-11-20 08:00:09 | INFO     | Phase3 | run_single_asset_analysis | [OK] Completed single-asset analysis for HUL
+2025-11-20 08:00:09 | INFO     | Phase3 | log_subsection | --------------------------------------------------------------------------------
+2025-11-20 08:00:09 | INFO     | Phase3 | log_subsection |   SINGLE-ASSET ANALYSIS: ICICIBank
+2025-11-20 08:00:09 | INFO     | Phase3 | log_subsection | --------------------------------------------------------------------------------
+2025-11-20 08:00:09 | INFO     | Phase3 | run_single_asset_analysis | [1/2] Regime Detection for ICICIBank...
+2025-11-20 08:00:13 | INFO     | Phase3 | run_single_asset_analysis |    Detected 61 regimes (avg duration: 43.7 days)
+2025-11-20 08:00:13 | INFO     | Phase3 | run_single_asset_analysis |    Identified 61 high-volatility crisis regimes
+2025-11-20 08:00:14 | INFO     | Phase3 | run_single_asset_analysis |    Saved regime plot to Phase3-EnhancedEmpirical\Results\ICICIBank_regimes.png
+2025-11-20 08:00:14 | INFO     | Phase3 | run_single_asset_analysis | [2/2] Tail Risk Analysis for ICICIBank...
+2025-11-20 08:00:14 | INFO     | Phase3 | run_single_asset_analysis |    Shape parameters: xi_left=0.3170, xi_right=0.3973
+2025-11-20 08:00:14 | INFO     | Phase3 | run_single_asset_analysis |    Asymmetry: Upside > crash risk
+2025-11-20 08:00:14 | INFO     | Phase3 | run_single_asset_analysis |    VaR 99% backtest: 27 violations (expected: 26.6), p-value: 0.9427
+2025-11-20 08:00:14 | INFO     | Phase3 | run_single_asset_analysis | [OK] Completed single-asset analysis for ICICIBank
+2025-11-20 08:00:14 | INFO     | Phase3 | log_subsection | --------------------------------------------------------------------------------
+2025-11-20 08:00:14 | INFO     | Phase3 | log_subsection |   SINGLE-ASSET ANALYSIS: Infosys
+2025-11-20 08:00:14 | INFO     | Phase3 | log_subsection | --------------------------------------------------------------------------------
+2025-11-20 08:00:14 | INFO     | Phase3 | run_single_asset_analysis | [1/2] Regime Detection for Infosys...
+2025-11-20 08:00:18 | INFO     | Phase3 | run_single_asset_analysis |    Detected 63 regimes (avg duration: 42.3 days)
+2025-11-20 08:00:18 | INFO     | Phase3 | run_single_asset_analysis |    Identified 63 high-volatility crisis regimes
+2025-11-20 08:00:20 | INFO     | Phase3 | run_single_asset_analysis |    Saved regime plot to Phase3-EnhancedEmpirical\Results\Infosys_regimes.png
+2025-11-20 08:00:20 | INFO     | Phase3 | run_single_asset_analysis | [2/2] Tail Risk Analysis for Infosys...
+2025-11-20 08:00:20 | INFO     | Phase3 | run_single_asset_analysis |    Shape parameters: xi_left=0.3354, xi_right=0.2341
+2025-11-20 08:00:20 | INFO     | Phase3 | run_single_asset_analysis |    Asymmetry: Crash risk > upside
+2025-11-20 08:00:20 | INFO     | Phase3 | run_single_asset_analysis |    VaR 99% backtest: 26 violations (expected: 26.6), p-value: 0.9020
+2025-11-20 08:00:20 | INFO     | Phase3 | run_single_asset_analysis | [OK] Completed single-asset analysis for Infosys
+2025-11-20 08:00:20 | INFO     | Phase3 | log_subsection | --------------------------------------------------------------------------------
+2025-11-20 08:00:20 | INFO     | Phase3 | log_subsection |   SINGLE-ASSET ANALYSIS: ITC
+2025-11-20 08:00:20 | INFO     | Phase3 | log_subsection | --------------------------------------------------------------------------------
+2025-11-20 08:00:20 | INFO     | Phase3 | run_single_asset_analysis | [1/2] Regime Detection for ITC...
+2025-11-20 08:00:24 | INFO     | Phase3 | run_single_asset_analysis |    Detected 60 regimes (avg duration: 44.4 days)
+2025-11-20 08:00:24 | INFO     | Phase3 | run_single_asset_analysis |    Identified 60 high-volatility crisis regimes
+2025-11-20 08:00:25 | INFO     | Phase3 | run_single_asset_analysis |    Saved regime plot to Phase3-EnhancedEmpirical\Results\ITC_regimes.png
+2025-11-20 08:00:25 | INFO     | Phase3 | run_single_asset_analysis | [2/2] Tail Risk Analysis for ITC...
+2025-11-20 08:00:25 | INFO     | Phase3 | run_single_asset_analysis |    Shape parameters: xi_left=0.3290, xi_right=-0.0264
+2025-11-20 08:00:25 | INFO     | Phase3 | run_single_asset_analysis |    Asymmetry: Crash risk > upside
+2025-11-20 08:00:25 | INFO     | Phase3 | run_single_asset_analysis |    VaR 99% backtest: 23 violations (expected: 26.6), p-value: 0.4680
+2025-11-20 08:00:25 | INFO     | Phase3 | run_single_asset_analysis | [OK] Completed single-asset analysis for ITC
+2025-11-20 08:00:25 | INFO     | Phase3 | log_subsection | --------------------------------------------------------------------------------
+2025-11-20 08:00:25 | INFO     | Phase3 | log_subsection |   SINGLE-ASSET ANALYSIS: L&T
+2025-11-20 08:00:25 | INFO     | Phase3 | log_subsection | --------------------------------------------------------------------------------
+2025-11-20 08:00:25 | INFO     | Phase3 | run_single_asset_analysis | [1/2] Regime Detection for L&T...
+2025-11-20 08:00:29 | INFO     | Phase3 | run_single_asset_analysis |    Detected 60 regimes (avg duration: 44.4 days)
+2025-11-20 08:00:29 | INFO     | Phase3 | run_single_asset_analysis |    Identified 60 high-volatility crisis regimes
+2025-11-20 08:00:31 | INFO     | Phase3 | run_single_asset_analysis |    Saved regime plot to Phase3-EnhancedEmpirical\Results\L&T_regimes.png
+2025-11-20 08:00:31 | INFO     | Phase3 | run_single_asset_analysis | [2/2] Tail Risk Analysis for L&T...
+2025-11-20 08:00:31 | INFO     | Phase3 | run_single_asset_analysis |    Shape parameters: xi_left=0.2349, xi_right=0.1764
+2025-11-20 08:00:31 | INFO     | Phase3 | run_single_asset_analysis |    Asymmetry: Crash risk > upside
+2025-11-20 08:00:31 | INFO     | Phase3 | run_single_asset_analysis |    VaR 99% backtest: 26 violations (expected: 26.6), p-value: 0.9020
+2025-11-20 08:00:31 | INFO     | Phase3 | run_single_asset_analysis | [OK] Completed single-asset analysis for L&T
+2025-11-20 08:00:31 | INFO     | Phase3 | log_subsection | --------------------------------------------------------------------------------
+2025-11-20 08:00:31 | INFO     | Phase3 | log_subsection |   SINGLE-ASSET ANALYSIS: Nifty-50
+2025-11-20 08:00:31 | INFO     | Phase3 | log_subsection | --------------------------------------------------------------------------------
+2025-11-20 08:00:31 | INFO     | Phase3 | run_single_asset_analysis | [1/2] Regime Detection for Nifty-50...
+2025-11-20 08:00:35 | INFO     | Phase3 | run_single_asset_analysis |    Detected 61 regimes (avg duration: 43.7 days)
+2025-11-20 08:00:35 | INFO     | Phase3 | run_single_asset_analysis |    Identified 61 high-volatility crisis regimes
+2025-11-20 08:00:38 | INFO     | Phase3 | run_single_asset_analysis |    Saved regime plot to Phase3-EnhancedEmpirical\Results\Nifty-50_regimes.png
+2025-11-20 08:00:38 | INFO     | Phase3 | run_single_asset_analysis | [2/2] Tail Risk Analysis for Nifty-50...
+2025-11-20 08:00:38 | INFO     | Phase3 | run_single_asset_analysis |    Shape parameters: xi_left=0.5000, xi_right=0.5000
+2025-11-20 08:00:38 | INFO     | Phase3 | run_single_asset_analysis |    Asymmetry: Upside > crash risk
+2025-11-20 08:00:38 | INFO     | Phase3 | run_single_asset_analysis |    VaR 99% backtest: 26 violations (expected: 26.6), p-value: 0.9004
+2025-11-20 08:00:38 | INFO     | Phase3 | run_single_asset_analysis | [OK] Completed single-asset analysis for Nifty-50
+2025-11-20 08:00:38 | INFO     | Phase3 | log_subsection | --------------------------------------------------------------------------------
+2025-11-20 08:00:38 | INFO     | Phase3 | log_subsection |   SINGLE-ASSET ANALYSIS: Reliance
+2025-11-20 08:00:38 | INFO     | Phase3 | log_subsection | --------------------------------------------------------------------------------
+2025-11-20 08:00:38 | INFO     | Phase3 | run_single_asset_analysis | [1/2] Regime Detection for Reliance...
+2025-11-20 08:00:47 | INFO     | Phase3 | run_single_asset_analysis |    Detected 60 regimes (avg duration: 44.4 days)
+2025-11-20 08:00:47 | INFO     | Phase3 | run_single_asset_analysis |    Identified 60 high-volatility crisis regimes
+2025-11-20 08:00:50 | INFO     | Phase3 | run_single_asset_analysis |    Saved regime plot to Phase3-EnhancedEmpirical\Results\Reliance_regimes.png
+2025-11-20 08:00:50 | INFO     | Phase3 | run_single_asset_analysis | [2/2] Tail Risk Analysis for Reliance...
+2025-11-20 08:00:50 | INFO     | Phase3 | run_single_asset_analysis |    Shape parameters: xi_left=0.3882, xi_right=0.4057
+2025-11-20 08:00:50 | INFO     | Phase3 | run_single_asset_analysis |    Asymmetry: Upside > crash risk
+2025-11-20 08:00:50 | INFO     | Phase3 | run_single_asset_analysis |    VaR 99% backtest: 22 violations (expected: 26.6), p-value: 0.3516
+2025-11-20 08:00:50 | INFO     | Phase3 | run_single_asset_analysis | [OK] Completed single-asset analysis for Reliance
+2025-11-20 08:00:50 | INFO     | Phase3 | log_subsection | --------------------------------------------------------------------------------
+2025-11-20 08:00:50 | INFO     | Phase3 | log_subsection |   SINGLE-ASSET ANALYSIS: SBI
+2025-11-20 08:00:50 | INFO     | Phase3 | log_subsection | --------------------------------------------------------------------------------
+2025-11-20 08:00:50 | INFO     | Phase3 | run_single_asset_analysis | [1/2] Regime Detection for SBI...
+2025-11-20 08:00:59 | INFO     | Phase3 | run_single_asset_analysis |    Detected 58 regimes (avg duration: 45.9 days)
+2025-11-20 08:00:59 | INFO     | Phase3 | run_single_asset_analysis |    Identified 58 high-volatility crisis regimes
+2025-11-20 08:01:02 | INFO     | Phase3 | run_single_asset_analysis |    Saved regime plot to Phase3-EnhancedEmpirical\Results\SBI_regimes.png
+2025-11-20 08:01:02 | INFO     | Phase3 | run_single_asset_analysis | [2/2] Tail Risk Analysis for SBI...
+2025-11-20 08:01:03 | INFO     | Phase3 | run_single_asset_analysis |    Shape parameters: xi_left=0.2387, xi_right=0.3783
+2025-11-20 08:01:03 | INFO     | Phase3 | run_single_asset_analysis |    Asymmetry: Upside > crash risk
+2025-11-20 08:01:03 | INFO     | Phase3 | run_single_asset_analysis |    VaR 99% backtest: 28 violations (expected: 26.6), p-value: 0.7928
+2025-11-20 08:01:03 | INFO     | Phase3 | run_single_asset_analysis | [OK] Completed single-asset analysis for SBI
+2025-11-20 08:01:03 | INFO     | Phase3 | log_subsection | --------------------------------------------------------------------------------
+2025-11-20 08:01:03 | INFO     | Phase3 | log_subsection |   SINGLE-ASSET ANALYSIS: TATAMotors
+2025-11-20 08:01:03 | INFO     | Phase3 | log_subsection | --------------------------------------------------------------------------------
+2025-11-20 08:01:03 | INFO     | Phase3 | run_single_asset_analysis | [1/2] Regime Detection for TATAMotors...
+2025-11-20 08:01:12 | INFO     | Phase3 | run_single_asset_analysis |    Detected 62 regimes (avg duration: 43.0 days)
+2025-11-20 08:01:12 | INFO     | Phase3 | run_single_asset_analysis |    Identified 62 high-volatility crisis regimes
+2025-11-20 08:01:16 | INFO     | Phase3 | run_single_asset_analysis |    Saved regime plot to Phase3-EnhancedEmpirical\Results\TATAMotors_regimes.png
+2025-11-20 08:01:16 | INFO     | Phase3 | run_single_asset_analysis | [2/2] Tail Risk Analysis for TATAMotors...
+2025-11-20 08:01:16 | INFO     | Phase3 | run_single_asset_analysis |    Shape parameters: xi_left=0.1347, xi_right=0.2325
+2025-11-20 08:01:16 | INFO     | Phase3 | run_single_asset_analysis |    Asymmetry: Upside > crash risk
+2025-11-20 08:01:16 | INFO     | Phase3 | run_single_asset_analysis |    VaR 99% backtest: 26 violations (expected: 26.6), p-value: 0.9020
+2025-11-20 08:01:16 | INFO     | Phase3 | run_single_asset_analysis | [OK] Completed single-asset analysis for TATAMotors
+2025-11-20 08:01:16 | INFO     | Phase3 | log_subsection | --------------------------------------------------------------------------------
+2025-11-20 08:01:16 | INFO     | Phase3 | log_subsection |   SINGLE-ASSET ANALYSIS: TataSteel
+2025-11-20 08:01:16 | INFO     | Phase3 | log_subsection | --------------------------------------------------------------------------------
+2025-11-20 08:01:16 | INFO     | Phase3 | run_single_asset_analysis | [1/2] Regime Detection for TataSteel...
+2025-11-20 08:01:25 | INFO     | Phase3 | run_single_asset_analysis |    Detected 57 regimes (avg duration: 46.7 days)
+2025-11-20 08:01:25 | INFO     | Phase3 | run_single_asset_analysis |    Identified 57 high-volatility crisis regimes
+2025-11-20 08:01:29 | INFO     | Phase3 | run_single_asset_analysis |    Saved regime plot to Phase3-EnhancedEmpirical\Results\TataSteel_regimes.png
+2025-11-20 08:01:29 | INFO     | Phase3 | run_single_asset_analysis | [2/2] Tail Risk Analysis for TataSteel...
+2025-11-20 08:01:29 | INFO     | Phase3 | run_single_asset_analysis |    Shape parameters: xi_left=0.1236, xi_right=0.0079
+2025-11-20 08:01:29 | INFO     | Phase3 | run_single_asset_analysis |    Asymmetry: Crash risk > upside
+2025-11-20 08:01:29 | INFO     | Phase3 | run_single_asset_analysis |    VaR 99% backtest: 27 violations (expected: 26.6), p-value: 0.9442
+2025-11-20 08:01:29 | INFO     | Phase3 | run_single_asset_analysis | [OK] Completed single-asset analysis for TataSteel
+2025-11-20 08:01:29 | INFO     | Phase3 | log_subsection | --------------------------------------------------------------------------------
+2025-11-20 08:01:29 | INFO     | Phase3 | log_subsection |   SINGLE-ASSET ANALYSIS: TCS
+2025-11-20 08:01:29 | INFO     | Phase3 | log_subsection | --------------------------------------------------------------------------------
+2025-11-20 08:01:29 | INFO     | Phase3 | run_single_asset_analysis | [1/2] Regime Detection for TCS...
+2025-11-20 08:01:34 | INFO     | Phase3 | run_single_asset_analysis |    Detected 60 regimes (avg duration: 44.4 days)
+2025-11-20 08:01:34 | INFO     | Phase3 | run_single_asset_analysis |    Identified 60 high-volatility crisis regimes
+2025-11-20 08:01:36 | INFO     | Phase3 | run_single_asset_analysis |    Saved regime plot to Phase3-EnhancedEmpirical\Results\TCS_regimes.png
+2025-11-20 08:01:36 | INFO     | Phase3 | run_single_asset_analysis | [2/2] Tail Risk Analysis for TCS...
+2025-11-20 08:01:36 | INFO     | Phase3 | run_single_asset_analysis |    Shape parameters: xi_left=0.1344, xi_right=0.0146
+2025-11-20 08:01:36 | INFO     | Phase3 | run_single_asset_analysis |    Asymmetry: Crash risk > upside
+2025-11-20 08:01:36 | INFO     | Phase3 | run_single_asset_analysis |    VaR 99% backtest: 27 violations (expected: 26.6), p-value: 0.9427
+2025-11-20 08:01:36 | INFO     | Phase3 | run_single_asset_analysis | [OK] Completed single-asset analysis for TCS
+2025-11-20 08:01:36 | INFO     | Phase3 | log_section | ================================================================================
+2025-11-20 08:01:36 | INFO     | Phase3 | log_section |   MULTI-ASSET ANALYSIS
+2025-11-20 08:01:36 | INFO     | Phase3 | log_section | ================================================================================
+2025-11-20 08:01:36 | INFO     | Phase3 | run_multi_asset_analysis | Multi-asset data: 14 assets, 2663 observations
+2025-11-20 08:01:36 | INFO     | Phase3 | log_subsection | --------------------------------------------------------------------------------
+2025-11-20 08:01:36 | INFO     | Phase3 | log_subsection |   Dynamic Correlation Estimation
+2025-11-20 08:01:36 | INFO     | Phase3 | log_subsection | --------------------------------------------------------------------------------
+2025-11-20 08:01:36 | INFO     | Phase3 | run_multi_asset_analysis | [ROLLING] Estimating dynamic correlations...
+2025-11-20 08:01:36 | INFO     | Phase3 | run_multi_asset_analysis |    Mean correlation: 0.3169 (std: 0.0992)
+2025-11-20 08:01:36 | INFO     | Phase3 | run_multi_asset_analysis | [DCC_GARCH] Estimating dynamic correlations...
+2025-11-20 08:01:36 | INFO     | Phase3 | run_multi_asset_analysis |    Mean correlation: 0.3182 (std: 0.1036)
+2025-11-20 08:01:36 | INFO     | Phase3 | run_multi_asset_analysis |    Identified 1 high-correlation periods
+2025-11-20 08:01:36 | INFO     | Phase3 | run_multi_asset_analysis | [EWMA] Estimating dynamic correlations...
+2025-11-20 08:01:36 | INFO     | Phase3 | run_multi_asset_analysis |    Mean correlation: 0.3182 (std: 0.1036)
+2025-11-20 08:01:37 | INFO     | Phase3 | run_multi_asset_analysis |    Identified 1 high-correlation periods
+2025-11-20 08:01:37 | INFO     | Phase3 | log_subsection | --------------------------------------------------------------------------------
+2025-11-20 08:01:37 | INFO     | Phase3 | log_subsection |   Portfolio Factor Analysis (PCA)
+2025-11-20 08:01:37 | INFO     | Phase3 | log_subsection | --------------------------------------------------------------------------------
+2025-11-20 08:01:37 | INFO     | Phase3 | run_multi_asset_analysis |    Extracted 3 factors explaining 58.86% of variance
+2025-11-20 08:01:37 | INFO     | Phase3 | run_multi_asset_analysis |    Factor_1: Banking Sector Factor (41.97%)
+2025-11-20 08:01:37 | INFO     | Phase3 | run_multi_asset_analysis |    Factor_2: IT Sector Factor (9.64%)
+2025-11-20 08:01:37 | INFO     | Phase3 | run_multi_asset_analysis |    Factor_3: Mixed Sector Factor (7.26%)
+2025-11-20 08:01:37 | ERROR    | Phase3 | run | Error in multi-asset analysis: index 3 is out of bounds for axis 0 with size 3
+2025-11-20 08:01:37 | INFO     | Phase3 | log_section | ================================================================================
+2025-11-20 08:01:37 | INFO     | Phase3 | log_section |   GENERATING COMPREHENSIVE REPORT
+2025-11-20 08:01:37 | INFO     | Phase3 | log_section | ================================================================================
+2025-11-20 08:01:37 | INFO     | Phase3 | generate_comprehensive_report | Comprehensive report saved to Phase3-EnhancedEmpirical\Results\Phase3_Comprehensive_Report.txt
+2025-11-20 08:01:37 | INFO     | Phase3 | log_section | ================================================================================
+2025-11-20 08:01:37 | INFO     | Phase3 | log_section |   PHASE 3 ANALYSIS COMPLETE
+2025-11-20 08:01:37 | INFO     | Phase3 | log_section | ================================================================================
+2025-11-20 08:01:37 | INFO     | Phase3 | run | Results saved to: Phase3-EnhancedEmpirical/Results

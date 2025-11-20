@@ -1,0 +1,81 @@
+{
+    "data": {
+        "data_dir": "",
+        "stocks": [
+            "..\\Data-Working\\BAJAJ-Data.csv",
+            "..\\Data-Working\\HDFCBank-Data.csv",
+            "..\\Data-Working\\Hindalco-Data.csv",
+            "..\\Data-Working\\HUL-Data.csv",
+            "..\\Data-Working\\ICICIBank-Data.csv",
+            "..\\Data-Working\\Infosys-Data.csv",
+            "..\\Data-Working\\ITC-Data.csv",
+            "..\\Data-Working\\L&T-Data.csv",
+            "..\\Data-Working\\Nifty-50-Data.csv",
+            "..\\Data-Working\\Reliance-Data.csv",
+            "..\\Data-Working\\SBI-Data.csv",
+            "..\\Data-Working\\TATAMotors-Data.csv",
+            "..\\Data-Working\\TataSteel-Data.csv",
+            "..\\Data-Working\\TCS-Data.csv"
+        ],
+        "date_column": "Date",
+        "price_column": "Price",
+        "date_format": "%Y-%m-%d"
+    },
+    "regime_detection": {
+        "volatility_window": 22,
+        "pelt_penalty": 5.0,
+        "min_regime_size": 20,
+        "target_regimes_min": 50,
+        "target_regimes_max": 70,
+        "penalty_search_range": [3.0, 10.0],
+        "penalty_search_steps": 15
+    },
+    "tail_risk": {
+        "threshold_quantile": 0.95,
+        "confidence_levels": [0.95, 0.99, 0.995],
+        "bootstrap_samples": 1000,
+        "tail_types": ["left", "right"]
+    },
+    "adaptive_kde": {
+        "volatility_window": 22,
+        "annualization_factor": 252,
+        "bandwidth_method": "ISJ",
+        "grid_points": 2048
+    },
+    "multi_asset": {
+        "correlation_methods": ["rolling", "dcc_garch", "ewma"],
+        "correlation_window": 60,
+        "dcc_params": {
+            "p": 1,
+            "q": 1
+        },
+        "ewma_lambda": 0.94,
+        "pca_n_components": 3,
+        "portfolio_weights": "equal"
+    },
+    "validation": {
+        "cv_folds": 5,
+        "test_size": 0.2,
+        "backtest_window": 252,
+        "var_kupiec_significance": 0.05
+    },
+    "output": {
+        "results_dir": "Phase3-EnhancedEmpirical/Results",
+        "save_plots": true,
+        "plot_format": "png",
+        "plot_dpi": 300,
+        "save_csv": true,
+        "generate_report": true
+    },
+    "crisis_periods": {
+        "covid_crash": {
+            "start": "2020-02-15",
+            "end": "2020-04-15",
+            "expected_volatility_min": 0.035
+        },
+        "post_covid_recovery": {
+            "start": "2020-06-01",
+            "end": "2021-03-31"
+        }
+    }
+}

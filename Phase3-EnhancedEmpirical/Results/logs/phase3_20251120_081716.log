@@ -1,0 +1,156 @@
+2025-11-20 08:17:16 | INFO     | Phase3Validation | setup_logger | Logger initialized. Log file: Results\logs\phase3_20251120_081716.log
+2025-11-20 08:17:16 | INFO     | Phase3Validation | log_section | ================================================================================
+2025-11-20 08:17:16 | INFO     | Phase3Validation | log_section |   PHASE 3: COMPREHENSIVE VALIDATION SUITE
+2025-11-20 08:17:16 | INFO     | Phase3Validation | log_section | ================================================================================
+2025-11-20 08:17:16 | INFO     | Phase3Validation | run_validation_suite | Loading data...
+2025-11-20 08:17:16 | INFO     | Phase3Validation | run_validation_suite | Loaded 14 assets, 2663 observations
+2025-11-20 08:17:16 | INFO     | Phase3Validation | log_section | ================================================================================
+2025-11-20 08:17:16 | INFO     | Phase3Validation | log_section |   1. CORRELATION DIAGNOSTICS
+2025-11-20 08:17:16 | INFO     | Phase3Validation | log_section | ================================================================================
+2025-11-20 08:17:16 | INFO     | Phase3Validation | run_validation_suite | Computing static correlation matrix...
+2025-11-20 08:17:16 | INFO     | Phase3Validation | run_validation_suite | Computing rolling correlation time-series...
+2025-11-20 08:17:16 | INFO     | Phase3Validation | run_validation_suite | Detecting high-correlation episodes...
+2025-11-20 08:17:16 | INFO     | Phase3Validation | run_validation_suite |   Detected 2 high-correlation episodes
+2025-11-20 08:17:16 | INFO     | Phase3Validation | run_validation_suite |     Episode 1: 2020-03-13 to 2020-06-23, duration=102 days, peak=0.685
+2025-11-20 08:17:16 | INFO     | Phase3Validation | run_validation_suite |     Episode 2: 2022-02-15 to 2022-03-30, duration=43 days, peak=0.569
+2025-11-20 08:17:16 | INFO     | Phase3Validation | run_validation_suite | Generating correlation heatmap...
+2025-11-20 08:17:17 | INFO     | Phase3Validation | run_validation_suite | Generating rolling correlation plot...
+2025-11-20 08:17:18 | INFO     | Phase3Validation | run_validation_suite | Saving correlation data...
+2025-11-20 08:17:18 | INFO     | Phase3Validation | run_validation_suite | Top 10 correlated pairs:
+2025-11-20 08:17:18 | INFO     | Phase3Validation | run_validation_suite |   HDFCBank - Nifty-50: 0.7299
+2025-11-20 08:17:18 | INFO     | Phase3Validation | run_validation_suite |   ICICIBank - Nifty-50: 0.7138
+2025-11-20 08:17:18 | INFO     | Phase3Validation | run_validation_suite |   Hindalco - TataSteel: 0.6920
+2025-11-20 08:17:18 | INFO     | Phase3Validation | run_validation_suite |   L&T - Nifty-50: 0.6781
+2025-11-20 08:17:18 | INFO     | Phase3Validation | run_validation_suite |   Nifty-50 - Reliance: 0.6568
+2025-11-20 08:17:18 | INFO     | Phase3Validation | run_validation_suite |   ICICIBank - SBI: 0.6566
+2025-11-20 08:17:18 | INFO     | Phase3Validation | run_validation_suite |   Nifty-50 - SBI: 0.6531
+2025-11-20 08:17:18 | INFO     | Phase3Validation | run_validation_suite |   Nifty-50 - TataSteel: 0.6004
+2025-11-20 08:17:18 | INFO     | Phase3Validation | run_validation_suite |   Hindalco - Nifty-50: 0.5976
+2025-11-20 08:17:18 | INFO     | Phase3Validation | run_validation_suite |   Infosys - TCS: 0.5830
+2025-11-20 08:17:18 | INFO     | Phase3Validation | run_validation_suite | Correlation summary: mean=0.357, std=0.144, range=[0.166, 0.730]
+2025-11-20 08:17:18 | INFO     | Phase3Validation | log_section | ================================================================================
+2025-11-20 08:17:18 | INFO     | Phase3Validation | log_section |   2. PCA ROBUSTNESS ANALYSIS
+2025-11-20 08:17:18 | INFO     | Phase3Validation | log_section | ================================================================================
+2025-11-20 08:17:18 | INFO     | Phase3Validation | run_validation_suite | Fitting PCA model...
+2025-11-20 08:17:18 | INFO     | Phase3Validation | run_validation_suite | Generating scree plot...
+2025-11-20 08:17:18 | INFO     | Phase3Validation | run_validation_suite | Generating factor loadings heatmap...
+2025-11-20 08:17:19 | INFO     | Phase3Validation | run_validation_suite | Generating hierarchical clustering...
+2025-11-20 08:17:19 | INFO     | Phase3Validation | run_validation_suite | Clustering assets by factor loadings...
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite | Asset clusters:
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |   Cluster_1: BAJAJ, HDFCBank, ICICIBank, L&T, Nifty-50, Reliance, SBI
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |   Cluster_2: Infosys, TCS
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |   Cluster_3: Hindalco, TATAMotors, TataSteel
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |   Cluster_4: HUL, ITC
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite | Saving factor loadings...
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite | Factor interpretations (top 5 factors):
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |   Factor_1 (Variance: 41.97%):
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Top positive: ['Nifty-50', 'ICICIBank', 'L&T']
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Top negative: ['HUL', 'TCS', 'Infosys']
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |   Factor_2 (Variance: 9.64%):
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Top positive: ['TCS', 'Infosys', 'HUL']
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Top negative: ['SBI', 'TataSteel', 'ICICIBank']
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |   Factor_3 (Variance: 7.26%):
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Top positive: ['HUL', 'ITC', 'BAJAJ']
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Top negative: ['Hindalco', 'TataSteel', 'Infosys']
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |   Factor_4 (Variance: 6.30%):
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Top positive: ['ICICIBank', 'SBI', 'HDFCBank']
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Top negative: ['BAJAJ', 'HUL', 'Hindalco']
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |   Factor_5 (Variance: 5.64%):
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Top positive: ['ITC', 'TataSteel', 'SBI']
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Top negative: ['BAJAJ', 'Reliance', 'HDFCBank']
+2025-11-20 08:17:27 | INFO     | Phase3Validation | log_section | ================================================================================
+2025-11-20 08:17:27 | INFO     | Phase3Validation | log_section |   3. TAIL DEPENDENCE ANALYSIS
+2025-11-20 08:17:27 | INFO     | Phase3Validation | log_section | ================================================================================
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite | Computing tail dependence for top correlated pairs...
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite | Tail dependence results:
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |   HDFCBank - Nifty-50:
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Correlation: 0.7299
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Lower tail: 0.5075 (joint crashes: 68)
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Upper tail: 0.4478 (joint booms: 60)
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Asymmetry: 0.0597
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |   ICICIBank - Nifty-50:
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Correlation: 0.7138
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Lower tail: 0.5299 (joint crashes: 71)
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Upper tail: 0.4403 (joint booms: 59)
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Asymmetry: 0.0896
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |   Hindalco - TataSteel:
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Correlation: 0.6920
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Lower tail: 0.4925 (joint crashes: 66)
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Upper tail: 0.3731 (joint booms: 50)
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Asymmetry: 0.1194
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |   L&T - Nifty-50:
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Correlation: 0.6781
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Lower tail: 0.4925 (joint crashes: 66)
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Upper tail: 0.3955 (joint booms: 53)
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Asymmetry: 0.0970
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |   Nifty-50 - Reliance:
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Correlation: 0.6568
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Lower tail: 0.4478 (joint crashes: 60)
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Upper tail: 0.3060 (joint booms: 41)
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Asymmetry: 0.1418
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |   ICICIBank - SBI:
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Correlation: 0.6566
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Lower tail: 0.4851 (joint crashes: 65)
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Upper tail: 0.4328 (joint booms: 58)
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Asymmetry: 0.0522
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |   Nifty-50 - SBI:
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Correlation: 0.6531
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Lower tail: 0.5299 (joint crashes: 71)
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Upper tail: 0.3507 (joint booms: 47)
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Asymmetry: 0.1791
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |   Nifty-50 - TataSteel:
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Correlation: 0.6004
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Lower tail: 0.4328 (joint crashes: 58)
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Upper tail: 0.2910 (joint booms: 39)
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Asymmetry: 0.1418
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |   Hindalco - Nifty-50:
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Correlation: 0.5976
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Lower tail: 0.4627 (joint crashes: 62)
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Upper tail: 0.2687 (joint booms: 36)
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Asymmetry: 0.1940
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |   Infosys - TCS:
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Correlation: 0.5830
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Lower tail: 0.4552 (joint crashes: 61)
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Upper tail: 0.3731 (joint booms: 50)
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite |     Asymmetry: 0.0821
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite | Computing full tail dependence matrices...
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite | Generating lower tail dependence heatmap...
+2025-11-20 08:17:27 | INFO     | Phase3Validation | run_validation_suite | Generating upper tail dependence heatmap...
+2025-11-20 08:17:28 | INFO     | Phase3Validation | run_validation_suite | Generating tail scatter plots for top 3 pairs...
+2025-11-20 08:17:30 | INFO     | Phase3Validation | log_section | ================================================================================
+2025-11-20 08:17:30 | INFO     | Phase3Validation | log_section |   4. PORTFOLIO VAR BACKTESTING
+2025-11-20 08:17:30 | INFO     | Phase3Validation | log_section | ================================================================================
+2025-11-20 08:17:30 | INFO     | Phase3Validation | run_validation_suite | Running VaR backtests (99% confidence)...
+2025-11-20 08:17:30 | INFO     | Phase3Validation | run_validation_suite | 
+  Testing PARAMETRIC VaR...
+2025-11-20 08:17:30 | INFO     | Phase3Validation | run_validation_suite |     Violations: 40 / 2413 (expected: 24.1)
+2025-11-20 08:17:30 | INFO     | Phase3Validation | run_validation_suite |     Kupiec p-value: 0.0030
+2025-11-20 08:17:30 | INFO     | Phase3Validation | run_validation_suite |     Christoffersen p-value: 0.0011
+2025-11-20 08:17:33 | INFO     | Phase3Validation | run_validation_suite | 
+  Testing HISTORICAL VaR...
+2025-11-20 08:17:33 | INFO     | Phase3Validation | run_validation_suite |     Violations: 36 / 2413 (expected: 24.1)
+2025-11-20 08:17:33 | INFO     | Phase3Validation | run_validation_suite |     Kupiec p-value: 0.0236
+2025-11-20 08:17:33 | INFO     | Phase3Validation | run_validation_suite |     Christoffersen p-value: 0.0040
+2025-11-20 08:17:35 | INFO     | Phase3Validation | run_validation_suite | 
+  Testing EVT VaR...
+2025-11-20 08:18:50 | INFO     | Phase3Validation | run_validation_suite |     Violations: 19 / 2413 (expected: 24.1)
+2025-11-20 08:18:50 | INFO     | Phase3Validation | run_validation_suite |     Kupiec p-value: 0.2757
+2025-11-20 08:18:50 | INFO     | Phase3Validation | run_validation_suite |     Christoffersen p-value: 0.5520
+2025-11-20 08:19:25 | INFO     | Phase3Validation | log_section | ================================================================================
+2025-11-20 08:19:25 | INFO     | Phase3Validation | log_section |   VALIDATION SUITE COMPLETE
+2025-11-20 08:19:25 | INFO     | Phase3Validation | log_section | ================================================================================
+2025-11-20 08:19:25 | INFO     | Phase3Validation | run_validation_suite | All validation outputs saved to: Phase3-EnhancedEmpirical\Results\validation
+2025-11-20 08:19:25 | INFO     | Phase3Validation | run_validation_suite | 
+Generated files:
+2025-11-20 08:19:25 | INFO     | Phase3Validation | run_validation_suite |   - correlation_heatmap.png
+2025-11-20 08:19:25 | INFO     | Phase3Validation | run_validation_suite |   - rolling_correlation.png
+2025-11-20 08:19:25 | INFO     | Phase3Validation | run_validation_suite |   - static_correlation_matrix.csv
+2025-11-20 08:19:25 | INFO     | Phase3Validation | run_validation_suite |   - pca_scree_plot.png
+2025-11-20 08:19:25 | INFO     | Phase3Validation | run_validation_suite |   - pca_loadings_heatmap.png
+2025-11-20 08:19:25 | INFO     | Phase3Validation | run_validation_suite |   - pca_hierarchical_clustering.png
+2025-11-20 08:19:25 | INFO     | Phase3Validation | run_validation_suite |   - factor_loadings.csv
+2025-11-20 08:19:25 | INFO     | Phase3Validation | run_validation_suite |   - tail_dependence_lower.png
+2025-11-20 08:19:25 | INFO     | Phase3Validation | run_validation_suite |   - tail_dependence_upper.png
+2025-11-20 08:19:25 | INFO     | Phase3Validation | run_validation_suite |   - tail_dependence_top_pairs.csv
+2025-11-20 08:19:25 | INFO     | Phase3Validation | run_validation_suite |   - backtest_*.png (3 files)
+2025-11-20 08:19:25 | INFO     | Phase3Validation | run_validation_suite |   - backtest_report.txt

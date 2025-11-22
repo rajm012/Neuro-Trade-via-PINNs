@@ -365,8 +365,9 @@ class Trainer:
                     error(f"NaN/Inf detected in loss at epoch {epoch}!")
                     error(f"Loss components: {loss_components}")
                     error("Training stopped to prevent further instability")
-                    # Save current state before stopping
-                    self.save_checkpoint(epoch, emergency=True)
+                    # Save current state before stopping (use last valid loss)
+                    valid_loss = self.history['total_loss'][-1] if self.history['total_loss'] else float('inf')
+                    self.save_checkpoint(epoch, valid_loss)
                     break
                 
                 epoch_time = time.time() - epoch_start

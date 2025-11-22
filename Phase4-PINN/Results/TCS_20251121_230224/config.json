@@ -1,0 +1,79 @@
+{
+  "stock_name": "TCS",
+  "num_epochs": 10000,
+  "learning_rate": 1e-05,
+  "optimizer": "adam",
+  "loss_weights": {
+    "w_pde": 10.0,
+    "w_data": 0.0,
+    "w_cdf": 1500.0,
+    "w_ic": 2.0,
+    "w_bc": 2.0,
+    "w_norm": 50.0,
+    "w_reg": 1e-06,
+    "w_mean_rev": 2.0,
+    "w_vol_grad": 2.0,
+    "w_pdf_penalty": 0.2,
+    "w_pdf_grad": 0.02
+  },
+  "p_net_config": {
+    "input_dim": 2,
+    "hidden_layers": [
+      256,
+      256,
+      256,
+      256
+    ],
+    "output_dim": 1,
+    "activation": "swish",
+    "min_output": 1e-08,
+    "max_output": 1000.0,
+    "use_upper_bound": true,
+    "use_fourier": true,
+    "fourier_scale": 10.0,
+    "temporal_scale": 5.0,
+    "learnable_fourier": false,
+    "use_temporal_encoding": false
+  },
+  "drift_net_config": {
+    "input_dim": 7,
+    "hidden_layers": [
+      128,
+      128,
+      128
+    ],
+    "output_dim": 1,
+    "activation": "swish",
+    "max_drift": 20.0,
+    "use_fourier": true,
+    "fourier_scale": 10.0,
+    "temporal_scale": 5.0,
+    "learnable_fourier": false,
+    "use_temporal_encoding": false
+  },
+  "diffusion_net_config": {
+    "input_dim": 7,
+    "hidden_layers": [
+      128,
+      128,
+      128
+    ],
+    "output_dim": 1,
+    "activation": "swish",
+    "min_diffusion": 1e-05,
+    "max_diffusion": 2.0,
+    "use_upper_bound": true,
+    "use_fourier": true,
+    "fourier_scale": 10.0,
+    "temporal_scale": 5.0,
+    "learnable_fourier": false,
+    "use_temporal_encoding": false
+  },
+  "n_colloc": 20000,
+  "device": "cuda:0",
+  "final_loss": 1.0036416053771973,
+  "best_loss": 0.042189039289951324,
+  "best_epoch": 3992,
+  "training_time_seconds": 2544.7328872680664,
+  "total_epochs": 8993
+}

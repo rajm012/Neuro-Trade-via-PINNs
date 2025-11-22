@@ -1,0 +1,9 @@
+Metric,GBM (Phase 1),Heston (Phase 2),Empirical (Phase 3),PINN (Phase 4),Target
+Normality (Jarque-Bera p-value),N/A,N/A,N/A,Captures heavy tails,> 0.05
+VaR 95% Coverage,N/A,N/A,N/A,96.6%,95.0% ± 1%
+ES 95% Error,N/A,N/A,N/A,8.0%,< 10%
+Density Correlation,N/A,N/A,N/A,0.37,> 0.95
+Mean Reversion λ,None,None,N/A,-0.180,Discovered
+Volatility Smile,None,Implied,Observed,Discovered,Present
+Regime Adaptation,None,Fixed params,PELT detected,Automatic,Dynamic
+Training Time,< 1s,~1 min,~5 min,119 min,One-time

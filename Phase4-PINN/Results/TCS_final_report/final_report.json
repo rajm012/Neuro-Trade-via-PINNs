@@ -1,0 +1,104 @@
+{
+  "timestamp": "2025-11-22T10:26:24.966058",
+  "stock": "TCS",
+  "version": "1.0.0",
+  "comparison_table": {
+    "Metric": {
+      "0": "Normality (Jarque-Bera p-value)",
+      "1": "VaR 95% Coverage",
+      "2": "ES 95% Error",
+      "3": "Density Correlation",
+      "4": "Mean Reversion \u03bb",
+      "5": "Volatility Smile",
+      "6": "Regime Adaptation",
+      "7": "Training Time"
+    },
+    "GBM (Phase 1)": {
+      "0": "N/A",
+      "1": "N/A",
+      "2": "N/A",
+      "3": "N/A",
+      "4": "None",
+      "5": "None",
+      "6": "None",
+      "7": "< 1s"
+    },
+    "Heston (Phase 2)": {
+      "0": "N/A",
+      "1": "N/A",
+      "2": "N/A",
+      "3": "N/A",
+      "4": "None",
+      "5": "Implied",
+      "6": "Fixed params",
+      "7": "~1 min"
+    },
+    "Empirical (Phase 3)": {
+      "0": "N/A",
+      "1": "N/A",
+      "2": "N/A",
+      "3": "N/A",
+      "4": "N/A",
+      "5": "Observed",
+      "6": "PELT detected",
+      "7": "~5 min"
+    },
+    "PINN (Phase 4)": {
+      "0": "Captures heavy tails",
+      "1": "96.4%",
+      "2": "8.0%",
+      "3": "0.72",
+      "4": "-0.665",
+      "5": "Discovered",
+      "6": "Automatic",
+      "7": "114 min"
+    },
+    "Target": {
+      "0": "> 0.05",
+      "1": "95.0% \u00b1 1%",
+      "2": "< 10%",
+      "3": "> 0.95",
+      "4": "Discovered",
+      "5": "Present",
+      "6": "Dynamic",
+      "7": "One-time"
+    }
+  },
+  "phase4_metrics": {
+    "final_loss": 1.1765822172164917,
+    "training_time": 6888.9685208797455,
+    "density_correlation": 0.7191467821319071,
+    "var_coverage_95": 0.9643449419568823,
+    "es_error_95": 0.08,
+    "mean_reversion_lambda": -0.6645183805837748,
+    "smile_curvature": 0.006032994845395522,
+    "leverage_ratio": "0.25959086",
+    "pde_residual": 0.001,
+    "integral_error": 4.082618665357529e-08,
+    "crps_improvement_vs_heston": 0.25
+  },
+  "success_criteria": {
+    "technical_success": {
+      "loss_convergence": false,
+      "probability_conservation": true,
+      "density_correlation": false,
+      "pde_residual": false
+    },
+    "financial_success": {
+      "mean_reversion": "False",
+      "volatility_smile": "True",
+      "var_coverage": "False",
+      "crps_improvement": true
+    },
+    "interpretability_success": {
+      "drift_matches_theory": true,
+      "diffusion_leverage_effect": "False",
+      "regime_correlation": true
+    },
+    "overall_pass": false
+  },
+  "recommendations": [
+    "Increase data matching weight or training epochs",
+    "Weak mean reversion detected - verify drift network training"
+  ]
+}

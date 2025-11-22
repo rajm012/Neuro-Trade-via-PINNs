@@ -1,0 +1,57 @@
+{
+  "ks_test": {
+    "test_name": "Kolmogorov-Smirnov",
+    "statistic": 0.48600895148078815,
+    "p_value": 3.7689061494399082e-25,
+    "alpha": 0.05,
+    "reject_null": "True",
+    "interpretation": "Reject H0 (distributions differ) at \u03b1=0.05"
+  },
+  "ad_test": {
+    "test_name": "Anderson-Darling",
+    "statistic": 5219.354891577582,
+    "critical_values": {
+      "0.1": 1.933,
+      "0.05": 2.492,
+      "0.025": 3.07,
+      "0.01": 3.857
+    },
+    "reject_at": [
+      0.1,
+      0.05,
+      0.025,
+      0.01
+    ],
+    "interpretation": "Reject H0 at \u03b1=0.01"
+  },
+  "density_correlation": {
+    "test_name": "Density Correlation",
+    "pearson_r": 0.3716162512819935,
+    "pearson_p": 2.94401582699378e-11,
+    "spearman_rho": 0.5421615795731063,
+    "spearman_p": 2.537481948695508e-24,
+    "interpretation": "Pearson: 0.3716 (p=2.9440e-11), Spearman: 0.5422 (p=2.5375e-24)"
+  },
+  "prob_conservation": {
+    "test_name": "Probability Conservation",
+    "integral": 0.9999998979345261,
+    "error": 1.0206547385038789e-07,
+    "threshold": 0.01,
+    "passes": "True",
+    "interpretation": "Probability conserved (\u222bp dx = 1.000000, error=1.0207e-07)"
+  },
+  "chi2_test": {
+    "test_name": "Chi-squared",
+    "statistic": 1.2178666245714194,
+    "degrees_of_freedom": 19,
+    "p_value": 0.9999999954246391,
+    "alpha": 0.05,
+    "reject_null": "False",
+    "interpretation": "Fail to reject H0 (good fit) at \u03b1=0.05"
+  },
+  "crps": {
+    "metric_name": "CRPS",
+    "value": 0.01639507562782705,
+    "interpretation": "CRPS = 0.016395 (lower is better)"
+  }
+}

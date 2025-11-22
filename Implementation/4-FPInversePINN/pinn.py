@@ -129,6 +129,11 @@ def compute_pde_loss(p_net, drift_net, diffusion_net, x_colloc, t_colloc, z_coll
     
     try:
         residual = compute_fp_residual(p_net, drift_net, diffusion_net, x_colloc, t_colloc, z_colloc)
+        
+        # CRITICAL: Clip residual to prevent explosion during early training
+        # This prevents PDE from going to infinity before networks stabilize
+        residual = torch.clamp(residual, min=-100.0, max=100.0)
+        
         loss = torch.mean(residual ** 2)
         
         debug(f"PDE loss: {loss.item():.6e}")

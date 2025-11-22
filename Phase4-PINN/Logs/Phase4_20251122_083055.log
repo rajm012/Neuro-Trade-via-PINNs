@@ -1,0 +1,577 @@
+======================================================================
+FP Inverse PINN - Training Log
+Stock: Phase4
+Started: 2025-11-22 08:30:55
+Verbosity: normal
+======================================================================
+
+[08:30:55] ======================================================================[08:30:55] PHASE 4 - PINN COMPLETE PIPELINE[08:30:55] Stock: TCS[08:30:55] Date: 2025-11-22 08:30:55[08:30:55] ======================================================================[08:30:55] 
+======================================================================
+[08:30:55] STEP 1: TRAINING PINN
+[08:30:55] ======================================================================
+[08:30:55] Initializing GPU settings...
+[08:30:55] ✅ GPU optimizations enabled:[08:30:55]    - TF32 math mode[08:30:55]    - cuDNN auto-tuner[08:30:55]    - Memory allocator optimized
+[08:30:55] ResidualGuidedResampler: Frequency=1000, Ratio=20.0%
+[08:30:55] Residual-Guided Resampling (R3): Enabled (Freq: 1000, Ratio: 20%)
+[08:30:55] Initialized trainer for TCS
+[08:30:55] ✅ Mixed precision training enabled (FP16 + FP32)
+[08:30:55] Preparing data...
+[08:30:55] Initialized DataPreparation for TCS
+[08:30:55] 
+============================================================
+[08:30:55] STARTING DATA PREPARATION FOR TCS
+[08:30:55] ============================================================
+[08:30:55] Loading data for TCS from E:\Modelling\Project\Data-Working\TCS-Data.csv
+[08:30:55] Loaded 2664 rows
+[08:30:55] Using LOG column for log returns
+[08:30:55] Log returns statistics:
+[08:30:55]   Count: 2664
+[08:30:55]   Mean: 0.000317
+[08:30:55]   Std: 0.014695
+[08:30:55]   Min: -0.098830
+[08:30:55]   Max: 0.093901
+[08:30:55] Domain range: [-0.1027, 0.0978]
+[08:30:55] Computing empirical density...
+[08:30:55] Computing empirical density using KDE with 300 points...
+[08:30:56] KDE computed: integral = 1.000000
+[08:30:56] Saved empirical density to E:\Modelling\Project\Phase4-PINN\Results\Empirical\TCS_empirical_density.pkl
+[08:30:56] Spatial domain normalization disabled
+[08:30:56] Generating collocation points...
+[08:30:56] Generating 20000 collocation points using lhs...
+[08:30:56] Computing rolling volatility features for windows: [20, 60, 90, 150, 240]
+[08:30:56] Feature matrix generated: torch.Size([20000, 5])
+[08:30:56] Collocation points generated: torch.Size([20000, 1])
+[08:30:56] Generating initial condition...
+[08:30:56] Generating initial condition (empirical_start) with 300 points...
+[08:30:56] IC points generated: torch.Size([300, 1]), integral: 0.999996
+[08:30:56] Generating boundary conditions...
+[08:30:56] Generating boundary condition points (absorbing)...
+[08:30:56] BC points generated: 300 at each boundary
+[08:30:56] Generating normalization points...
+[08:30:56] 
+============================================================
+[08:30:56] DATA PREPARATION COMPLETED SUCCESSFULLY
+[08:30:56] ============================================================
+[08:30:56] Device: cuda:0
+[08:30:56] Data points: 300
+[08:30:56] Collocation points: 20000
+[08:30:56] IC points: 300
+[08:30:56] BC points: 300
+[08:30:56] Normalization points: 100
+[08:30:56] Domain normalization: False
+[08:30:56] ============================================================
+[08:30:56] Data preparation completed
+[08:30:56] Building neural networks...
+[08:30:56] 
+============================================================
+[08:30:56] BUILDING NEURAL NETWORKS
+[08:30:56] ============================================================
+[08:30:56] Device: cuda:0
+[08:30:56] Building Solution Network p(x,t)...
+[08:30:56] FourierFeatureMapping: Separate scales - spatial=10.0, temporal=5.0
+[08:30:56] FourierFeatureMapping: input_dim=2, mapping_size=64, scale=10.0, learnable=False, output_dim=128
+[08:30:56] p(x,t)_MLP: Using Enhanced Fourier Features (mapping_size=64, output dim=128, learnable=False)
+[08:30:56] p(x,t)_MLP: Initialized MLP with 3 residual blocks
+[08:30:56] SolutionNetwork: Using Softplus(beta=10) + floor for positivity
+[08:30:56] SolutionNetwork: Minimum output value: 1.00e-08
+[08:30:56] SolutionNetwork: Upper bound enabled: 1000.00
+[08:30:56] Building Drift Network a(x,t)...
+[08:30:56] FourierFeatureMapping: input_dim=7, mapping_size=128, scale=10.0, learnable=False, output_dim=256
+[08:30:56] a(x,t)_MLP: Using Enhanced Fourier Features (mapping_size=128, output dim=256, learnable=False)
+[08:30:56] a(x,t)_MLP: Initialized MLP with 2 residual blocks
+[08:30:56] DriftNetwork: Using soft tanh bounding: ±20.0
+[08:30:56] Building Diffusion Network b(x,t)...
+[08:30:56] FourierFeatureMapping: input_dim=7, mapping_size=128, scale=10.0, learnable=False, output_dim=256
+[08:30:56] b(x,t)_MLP: Using Enhanced Fourier Features (mapping_size=128, output dim=256, learnable=False)
+[08:30:56] b(x,t)_MLP: Initialized MLP with 2 residual blocks
+[08:30:56] DiffusionNetwork: Using Softplus(beta=10) + floor
+[08:30:56] DiffusionNetwork: Minimum diffusion: 1.00e-05
+[08:30:56] DiffusionNetwork: Upper bound enabled: 2.00
+[08:30:56] All networks built successfully!
+[08:30:56] 
+============================================================
+[08:30:56] NETWORK ARCHITECTURE SUMMARY
+[08:30:56] ============================================================
+[08:30:56] 
+1. Solution Network p(x,t):
+[08:30:56]    Parameters: 1,773,569
+[08:30:56]    Architecture: [512, 512, 512, 512, 256]
+[08:30:56] 
+2. Drift Network a(x,t):
+[08:30:56]    Parameters: 361,985
+[08:30:56]    Architecture: [256, 256, 256, 128]
+[08:30:56] 
+3. Diffusion Network b(x,t):
+[08:30:56]    Parameters: 361,985
+[08:30:56]    Architecture: [256, 256, 256, 128]
+[08:30:56] 
+Total Parameters: 2,497,539
+[08:30:56] Estimated Memory: 9.53 MB
+[08:30:56] ============================================================
+[08:30:56] Networks built successfully
+[08:30:58] Warmup scheduler: 2000 epochs (1.00e-07 → 1.00e-05)
+[08:30:58] Optimizer: Adam (lr=1.00e-05) with adaptive LR scheduler
+[08:30:58] 
+======================================================================
+[08:30:58] TRAINING: TCS
+[08:30:58] ======================================================================
+[08:30:58] Device: cuda:0 | Optimizer: adam | Epochs: 10000
+[08:30:58] Progressive training: ENABLED (3 phases)
+[08:30:58] ======================================================================
+
+[08:30:58] 
+======================================================================
+[08:30:58] PHASE 1 STARTED (Epoch 0)
+[08:30:58] Loss weights: PDE=0.01, Data=0.0, Norm=100.0
+[08:30:58] ======================================================================
+
+[08:30:59] Epoch     0 | Loss: 5.824379e+02 | Phase: 1 | GPU: 1% | Time: 2s
+[08:30:59]     Data -> CDF: 1.0288e-01 | PDF: 2.8349e+01 | IC: 9.5337e+01
+[08:30:59]     Physics -> PDE: 1.0217e+03 | BC: 9.6435e-02 | Norm: 9.5435e-01
+[08:30:59]     Finance -> MeanRev: 7.0233e-05 | VolGrad: 4.5079e+00
+[08:30:59]     PDF Stats -> Max: 0.17 | Mean: 0.0774 | >50: 0 | >100: 0
+[08:30:59]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.0390e+00
+[08:31:00] Epoch     1 | Loss: 5.824379e+02 | Phase: 1 | GPU: 1% | Time: 2s
+[08:31:00]     Data -> CDF: 1.0288e-01 | PDF: 2.8349e+01 | IC: 9.5337e+01
+[08:31:00]     Physics -> PDE: 1.0217e+03 | BC: 9.6435e-02 | Norm: 9.5435e-01
+[08:31:00]     Finance -> MeanRev: 7.0233e-05 | VolGrad: 4.5079e+00
+[08:31:00]     PDF Stats -> Max: 0.17 | Mean: 0.0774 | >50: 0 | >100: 0
+[08:31:00]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.0390e+00
+[08:31:00] Epoch     2 | Loss: 5.824379e+02 | Phase: 1 | GPU: 1% | Time: 2s
+[08:31:00]     Data -> CDF: 1.0288e-01 | PDF: 2.8349e+01 | IC: 9.5337e+01
+[08:31:00]     Physics -> PDE: 1.0217e+03 | BC: 9.6435e-02 | Norm: 9.5435e-01
+[08:31:00]     Finance -> MeanRev: 7.0233e-05 | VolGrad: 4.5079e+00
+[08:31:00]     PDF Stats -> Max: 0.17 | Mean: 0.0774 | >50: 0 | >100: 0
+[08:31:00]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.0390e+00
+[08:31:01] Epoch     3 | Loss: 5.824379e+02 | Phase: 1 | GPU: 1% | Time: 3s
+[08:31:01]     Data -> CDF: 1.0288e-01 | PDF: 2.8349e+01 | IC: 9.5337e+01
+[08:31:01]     Physics -> PDE: 1.0217e+03 | BC: 9.6435e-02 | Norm: 9.5435e-01
+[08:31:01]     Finance -> MeanRev: 7.0233e-05 | VolGrad: 4.5079e+00
+[08:31:01]     PDF Stats -> Max: 0.17 | Mean: 0.0774 | >50: 0 | >100: 0
+[08:31:01]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.0390e+00
+[08:31:01] Epoch     4 | Loss: 5.824379e+02 | Phase: 1 | GPU: 1% | Time: 3s
+[08:31:01]     Data -> CDF: 1.0288e-01 | PDF: 2.8349e+01 | IC: 9.5337e+01
+[08:31:01]     Physics -> PDE: 1.0217e+03 | BC: 9.6435e-02 | Norm: 9.5435e-01
+[08:31:01]     Finance -> MeanRev: 7.0233e-05 | VolGrad: 4.5079e+00
+[08:31:01]     PDF Stats -> Max: 0.17 | Mean: 0.0774 | >50: 0 | >100: 0
+[08:31:01]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.0390e+00
+[08:31:02] Epoch     5 | Loss: 5.824379e+02 | Phase: 1 | GPU: 1% | Time: 4s
+[08:31:02]     Data -> CDF: 1.0288e-01 | PDF: 2.8349e+01 | IC: 9.5337e+01
+[08:31:02]     Physics -> PDE: 1.0217e+03 | BC: 9.6435e-02 | Norm: 9.5435e-01
+[08:31:02]     Finance -> MeanRev: 7.0233e-05 | VolGrad: 4.5079e+00
+[08:31:02]     PDF Stats -> Max: 0.17 | Mean: 0.0774 | >50: 0 | >100: 0
+[08:31:02]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.0390e+00
+[08:31:02] Epoch     6 | Loss: 5.824379e+02 | Phase: 1 | GPU: 1% | Time: 4s
+[08:31:02]     Data -> CDF: 1.0288e-01 | PDF: 2.8349e+01 | IC: 9.5337e+01
+[08:31:02]     Physics -> PDE: 1.0217e+03 | BC: 9.6435e-02 | Norm: 9.5435e-01
+[08:31:02]     Finance -> MeanRev: 7.0233e-05 | VolGrad: 4.5079e+00
+[08:31:02]     PDF Stats -> Max: 0.17 | Mean: 0.0774 | >50: 0 | >100: 0
+[08:31:02]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.0390e+00
+[08:31:02] Epoch     7 | Loss: 5.824014e+02 | Phase: 1 | GPU: 1% | Time: 5s
+[08:31:02]     Data -> CDF: 1.0281e-01 | PDF: 2.8310e+01 | IC: 9.5333e+01
+[08:31:02]     Physics -> PDE: 1.0202e+03 | BC: 9.6301e-02 | Norm: 9.5434e-01
+[08:31:02]     Finance -> MeanRev: 7.0200e-05 | VolGrad: 4.5078e+00
+[08:31:02]     PDF Stats -> Max: 0.17 | Mean: 0.0774 | >50: 0 | >100: 0
+[08:31:02]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.0381e+00
+[08:31:03] Epoch     8 | Loss: 5.823649e+02 | Phase: 1 | GPU: 1% | Time: 5s
+[08:31:03]     Data -> CDF: 1.0274e-01 | PDF: 2.8265e+01 | IC: 9.5329e+01
+[08:31:03]     Physics -> PDE: 1.0186e+03 | BC: 9.6141e-02 | Norm: 9.5434e-01
+[08:31:03]     Finance -> MeanRev: 7.0159e-05 | VolGrad: 4.5076e+00
+[08:31:03]     PDF Stats -> Max: 0.17 | Mean: 0.0774 | >50: 0 | >100: 0
+[08:31:03]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.0373e+00
+[08:31:03] Epoch     9 | Loss: 5.823272e+02 | Phase: 1 | GPU: 1% | Time: 5s
+[08:31:03]     Data -> CDF: 1.0268e-01 | PDF: 2.8239e+01 | IC: 9.5325e+01
+[08:31:03]     Physics -> PDE: 1.0170e+03 | BC: 9.5993e-02 | Norm: 9.5434e-01
+[08:31:03]     Finance -> MeanRev: 7.0132e-05 | VolGrad: 4.5073e+00
+[08:31:03]     PDF Stats -> Max: 0.17 | Mean: 0.0774 | >50: 0 | >100: 0
+[08:31:03]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.0363e+00
+[08:32:20] Epoch   200 | Loss: 5.372297e+02 | Phase: 1 | GPU: 1% | Time: 82s
+[08:32:20]     Data -> CDF: 7.1411e-02 | PDF: 1.8042e+01 | IC: 8.8540e+01
+[08:32:20]     Physics -> PDE: 4.1424e+02 | BC: 1.3122e-01 | Norm: 9.0251e-01
+[08:32:20]     Finance -> MeanRev: 6.1527e-05 | VolGrad: 4.4216e+00
+[08:32:20]     PDF Stats -> Max: 0.19 | Mean: 0.1231 | >50: 0 | >100: 0
+[08:32:20]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.2713e+00
+[08:33:39] Epoch   400 | Loss: 3.980995e+02 | Phase: 1 | GPU: 1% | Time: 161s
+[08:33:39]     Data -> CDF: 4.8574e-02 | PDF: 4.7658e+01 | IC: 6.8007e+01
+[08:33:39]     Physics -> PDE: 1.7096e+02 | BC: 1.9394e+00 | Norm: 5.4414e-01
+[08:33:39]     Finance -> MeanRev: 7.0232e-05 | VolGrad: 2.8386e+00
+[08:33:39]     PDF Stats -> Max: 1.19 | Mean: 0.9152 | >50: 0 | >100: 0
+[08:33:39]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 7.7973e+00
+[08:34:58] Epoch   600 | Loss: 2.546117e+02 | Phase: 1 | GPU: 1% | Time: 240s
+[08:34:58]     Data -> CDF: 4.9497e-02 | PDF: 1.8926e+03 | IC: 4.9284e+01
+[08:34:58]     Physics -> PDE: 2.0327e+01 | BC: 5.3981e+00 | Norm: 2.5896e-02
+[08:34:58]     Finance -> MeanRev: 1.4755e-04 | VolGrad: 1.9505e-01
+[08:34:58]     PDF Stats -> Max: 5.54 | Mean: 4.2043 | >50: 0 | >100: 0
+[08:34:58]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 3.9840e+01
+[08:36:17] Epoch   800 | Loss: 1.358939e+02 | Phase: 1 | GPU: 1% | Time: 320s
+[08:36:17]     Data -> CDF: 5.2112e-02 | PDF: 5.0363e+03 | IC: 2.6892e+01
+[08:36:17]     Physics -> PDE: 2.8870e+01 | BC: 1.1235e+00 | Norm: 2.0325e-04
+[08:36:17]     Finance -> MeanRev: 9.6139e-05 | VolGrad: 3.8733e-03
+[08:36:17]     PDF Stats -> Max: 7.75 | Mean: 4.8296 | >50: 0 | >100: 0
+[08:36:17]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 8.2442e+01
+[08:37:37] Epoch  1000 | Loss: 1.995403e+01 | Phase: 1 | GPU: 1% | Time: 399s
+[08:37:37]     Data -> CDF: 4.9359e-02 | PDF: 7.4059e+03 | IC: 3.9243e+00
+[08:37:37]     Physics -> PDE: 1.9140e+01 | BC: 1.2912e-01 | Norm: 9.2918e-05
+[08:37:37]     Finance -> MeanRev: 6.4401e-05 | VolGrad: 1.1367e-04
+[08:37:37]     PDF Stats -> Max: 11.07 | Mean: 5.4244 | >50: 0 | >100: 0
+[08:37:37]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.5759e+02
+[08:37:37] Resampling 20.0% of collocation points...
+[08:37:44] Resampled 4000 points (max loss: 8.78e+02, mean: 1.95e+01)
+[08:39:03] Epoch  1200 | Loss: 1.984771e+00 | Phase: 1 | GPU: 1% | Time: 486s
+[08:39:03]     Data -> CDF: 3.3607e-02 | PDF: 5.5158e+03 | IC: 3.9052e-01
+[08:39:03]     Physics -> PDE: 2.5048e+00 | BC: 3.9709e-03 | Norm: 2.3515e-06
+[08:39:03]     Finance -> MeanRev: 3.4990e-05 | VolGrad: 2.6065e-06
+[08:39:03]     PDF Stats -> Max: 12.53 | Mean: 5.2637 | >50: 0 | >100: 0
+[08:39:03]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7546e+02
+[08:40:37] Epoch  1400 | Loss: 5.443544e-01 | Phase: 1 | GPU: 1% | Time: 579s
+[08:40:37]     Data -> CDF: 3.2757e-02 | PDF: 4.7888e+03 | IC: 1.0470e-01
+[08:40:37]     Physics -> PDE: 1.5833e+00 | BC: 1.6195e-03 | Norm: 5.1517e-06
+[08:40:37]     Finance -> MeanRev: 2.4425e-05 | VolGrad: 7.1854e-07
+[08:40:37]     PDF Stats -> Max: 12.58 | Mean: 5.2039 | >50: 0 | >100: 0
+[08:40:37]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7024e+02
+[08:42:25] Epoch  1600 | Loss: 1.137627e-01 | Phase: 1 | GPU: 1% | Time: 688s
+[08:42:25]     Data -> CDF: 3.2404e-02 | PDF: 4.5663e+03 | IC: 1.9268e-02
+[08:42:25]     Physics -> PDE: 1.2552e+00 | BC: 1.3183e-03 | Norm: 6.5260e-06
+[08:42:25]     Finance -> MeanRev: 2.0905e-05 | VolGrad: 4.1856e-07
+[08:42:25]     PDF Stats -> Max: 12.58 | Mean: 5.2065 | >50: 0 | >100: 0
+[08:42:25]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.6940e+02
+[08:44:01] Epoch  1800 | Loss: 6.788002e-02 | Phase: 1 | GPU: 1% | Time: 783s
+[08:44:01]     Data -> CDF: 3.1824e-02 | PDF: 4.3273e+03 | IC: 1.0500e-02
+[08:44:01]     Physics -> PDE: 1.0881e+00 | BC: 7.4480e-04 | Norm: 8.5531e-06
+[08:44:01]     Finance -> MeanRev: 1.9621e-05 | VolGrad: 2.7998e-07
+[08:44:01]     PDF Stats -> Max: 12.63 | Mean: 5.2050 | >50: 0 | >100: 0
+[08:44:01]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.6978e+02
+[08:45:36] Epoch  2000 | Loss: 5.674183e-02 | Phase: 1 | GPU: 1% | Time: 878s
+[08:45:36]     Data -> CDF: 3.1611e-02 | PDF: 4.2185e+03 | IC: 7.3485e-03
+[08:45:36]     Physics -> PDE: 1.6604e+00 | BC: 4.9344e-04 | Norm: 3.0529e-09
+[08:45:36]     Finance -> MeanRev: 1.8816e-05 | VolGrad: 1.9523e-07
+[08:45:36]     PDF Stats -> Max: 12.69 | Mean: 5.2108 | >50: 0 | >100: 0
+[08:45:36]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7057e+02
+[08:45:36] Resampling 20.0% of collocation points...
+[08:45:41] Resampled 4000 points (max loss: 3.80e+02, mean: 1.80e+00)
+[08:47:16] Epoch  2200 | Loss: 5.173568e-02 | Phase: 1 | GPU: 1% | Time: 978s
+[08:47:16]     Data -> CDF: 3.1341e-02 | PDF: 4.0780e+03 | IC: 7.8466e-03
+[08:47:16]     Physics -> PDE: 8.2350e-01 | BC: 3.4595e-04 | Norm: 1.0201e-05
+[08:47:16]     Finance -> MeanRev: 2.0278e-05 | VolGrad: 1.6231e-07
+[08:47:16]     PDF Stats -> Max: 12.75 | Mean: 5.2183 | >50: 0 | >100: 0
+[08:47:16]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7043e+02
+[08:48:51] Epoch  2400 | Loss: 4.428168e-02 | Phase: 1 | GPU: 1% | Time: 1074s
+[08:48:51]     Data -> CDF: 3.1234e-02 | PDF: 3.9908e+03 | IC: 6.5898e-03
+[08:48:51]     Physics -> PDE: 7.2912e-01 | BC: 2.6616e-04 | Norm: 8.7353e-06
+[08:48:51]     Finance -> MeanRev: 1.9745e-05 | VolGrad: 1.3206e-07
+[08:48:51]     PDF Stats -> Max: 12.79 | Mean: 5.2149 | >50: 0 | >100: 0
+[08:48:51]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7120e+02
+[08:50:27] Epoch  2600 | Loss: 4.022515e-02 | Phase: 1 | GPU: 1% | Time: 1169s
+[08:50:27]     Data -> CDF: 3.1176e-02 | PDF: 3.9298e+03 | IC: 5.9055e-03
+[08:50:27]     Physics -> PDE: 6.6482e-01 | BC: 2.1714e-04 | Norm: 9.3074e-06
+[08:50:27]     Finance -> MeanRev: 1.9239e-05 | VolGrad: 1.1017e-07
+[08:50:27]     PDF Stats -> Max: 12.81 | Mean: 5.2108 | >50: 0 | >100: 0
+[08:50:27]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7183e+02
+[08:52:02] Epoch  2800 | Loss: 3.454933e-02 | Phase: 1 | GPU: 1% | Time: 1264s
+[08:52:02]     Data -> CDF: 3.1141e-02 | PDF: 3.8848e+03 | IC: 4.9543e-03
+[08:52:02]     Physics -> PDE: 6.1301e-01 | BC: 1.8633e-04 | Norm: 5.6011e-06
+[08:52:02]     Finance -> MeanRev: 1.8787e-05 | VolGrad: 9.3643e-08
+[08:52:02]     PDF Stats -> Max: 12.84 | Mean: 5.2109 | >50: 0 | >100: 0
+[08:52:02]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7248e+02
+[08:53:37] Epoch  3000 | Loss: 3.037333e-02 | Phase: 1 | GPU: 1% | Time: 1359s
+[08:53:37]     Data -> CDF: 3.1105e-02 | PDF: 3.8433e+03 | IC: 4.2275e-03
+[08:53:37]     Physics -> PDE: 5.6788e-01 | BC: 1.6224e-04 | Norm: 4.9328e-06
+[08:53:37]     Finance -> MeanRev: 1.8365e-05 | VolGrad: 8.0608e-08
+[08:53:37]     PDF Stats -> Max: 12.86 | Mean: 5.2074 | >50: 0 | >100: 0
+[08:53:37]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7305e+02
+[08:53:37] Resampling 20.0% of collocation points...
+[08:53:42] Resampled 4000 points (max loss: 1.09e+02, mean: 5.46e-01)
+[08:55:17] Epoch  3200 | Loss: 2.723589e-02 | Phase: 1 | GPU: 1% | Time: 1459s
+[08:55:17]     Data -> CDF: 3.1028e-02 | PDF: 3.8233e+03 | IC: 3.7336e-03
+[08:55:17]     Physics -> PDE: 5.1043e-01 | BC: 1.4703e-04 | Norm: 4.1527e-06
+[08:55:17]     Finance -> MeanRev: 1.9246e-05 | VolGrad: 8.7783e-08
+[08:55:17]     PDF Stats -> Max: 12.89 | Mean: 5.2025 | >50: 0 | >100: 0
+[08:55:17]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7337e+02
+[08:56:53] Epoch  3400 | Loss: 2.611262e-02 | Phase: 1 | GPU: 1% | Time: 1555s
+[08:56:53]     Data -> CDF: 3.0944e-02 | PDF: 3.7642e+03 | IC: 3.6023e-03
+[08:56:53]     Physics -> PDE: 4.5485e-01 | BC: 1.2948e-04 | Norm: 5.2155e-06
+[08:56:53]     Finance -> MeanRev: 1.8957e-05 | VolGrad: 9.5242e-08
+[08:56:53]     PDF Stats -> Max: 12.90 | Mean: 5.1988 | >50: 0 | >100: 0
+[08:56:53]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7369e+02
+[08:58:46] Epoch  3600 | Loss: 2.545297e-02 | Phase: 1 | GPU: 1% | Time: 1668s
+[08:58:46]     Data -> CDF: 3.0897e-02 | PDF: 3.7292e+03 | IC: 3.4577e-03
+[08:58:46]     Physics -> PDE: 4.5943e-01 | BC: 1.1781e-04 | Norm: 5.5129e-06
+[08:58:46]     Finance -> MeanRev: 1.8680e-05 | VolGrad: 1.2766e-07
+[08:58:46]     PDF Stats -> Max: 12.92 | Mean: 5.1952 | >50: 0 | >100: 0
+[08:58:46]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7397e+02
+[09:00:33] Epoch  3800 | Loss: 2.263820e-02 | Phase: 1 | GPU: 1% | Time: 1775s
+[09:00:33]     Data -> CDF: 3.0853e-02 | PDF: 3.6959e+03 | IC: 3.0180e-03
+[09:00:33]     Physics -> PDE: 4.0455e-01 | BC: 1.0857e-04 | Norm: 4.9293e-06
+[09:00:33]     Finance -> MeanRev: 1.8315e-05 | VolGrad: 2.1540e-07
+[09:00:33]     PDF Stats -> Max: 12.94 | Mean: 5.1932 | >50: 0 | >100: 0
+[09:00:33]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7428e+02
+[09:02:11] 
+======================================================================
+[09:02:11] PHASE 2 STARTED (Epoch 4000)
+[09:02:11] Loss weights: PDE=8.0, Data=0.0, Norm=75.0
+[09:02:11] ======================================================================
+
+[09:02:11] Epoch  4000 | Loss: 2.934027e+00 | Phase: 2 | GPU: 1% | Time: 1873s
+[09:02:11]     Data -> CDF: 3.0806e-02 | PDF: 3.6578e+03 | IC: 3.0058e-03
+[09:02:11]     Physics -> PDE: 3.6518e-01 | BC: 9.9895e-05 | Norm: 5.7325e-06
+[09:02:11]     Finance -> MeanRev: 1.7938e-05 | VolGrad: 2.5367e-07
+[09:02:11]     PDF Stats -> Max: 12.93 | Mean: 5.1731 | >50: 0 | >100: 0
+[09:02:11]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7448e+02
+[09:02:11] Resampling 20.0% of collocation points...
+[09:02:16] Resampled 4000 points (max loss: 7.47e+01, mean: 3.58e-01)
+[09:04:59] Epoch  4200 | Loss: 3.376294e+00 | Phase: 2 | GPU: 1% | Time: 2041s
+[09:04:59]     Data -> CDF: 3.0902e-02 | PDF: 3.3794e+03 | IC: 3.6238e-03
+[09:04:59]     Physics -> PDE: 4.1369e-01 | BC: 6.7542e-05 | Norm: 7.0523e-04
+[09:04:59]     Finance -> MeanRev: 1.9073e-05 | VolGrad: 2.8884e-07
+[09:04:59]     PDF Stats -> Max: 12.61 | Mean: 5.0249 | >50: 0 | >100: 0
+[09:04:59]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7227e+02
+[09:07:58] Epoch  4400 | Loss: 2.970916e+00 | Phase: 2 | GPU: 1% | Time: 2220s
+[09:07:58]     Data -> CDF: 3.1892e-02 | PDF: 3.7791e+03 | IC: 5.1836e-03
+[09:07:58]     Physics -> PDE: 3.6340e-01 | BC: 1.2354e-04 | Norm: 5.9984e-04
+[09:07:58]     Finance -> MeanRev: 1.9213e-05 | VolGrad: 2.2880e-07
+[09:07:58]     PDF Stats -> Max: 12.53 | Mean: 5.0261 | >50: 0 | >100: 0
+[09:07:58]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7216e+02
+[09:10:47] Epoch  4600 | Loss: 2.021605e+00 | Phase: 2 | GPU: 1% | Time: 2389s
+[09:10:47]     Data -> CDF: 3.2380e-02 | PDF: 3.9849e+03 | IC: 6.6107e-03
+[09:10:47]     Physics -> PDE: 2.4460e-01 | BC: 1.7841e-04 | Norm: 5.5586e-04
+[09:10:47]     Finance -> MeanRev: 1.9223e-05 | VolGrad: 1.9971e-07
+[09:10:47]     PDF Stats -> Max: 12.50 | Mean: 5.0248 | >50: 0 | >100: 0
+[09:10:47]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7211e+02
+[09:13:43] Epoch  4800 | Loss: 1.748619e+00 | Phase: 2 | GPU: 1% | Time: 2565s
+[09:13:43]     Data -> CDF: 3.2719e-02 | PDF: 4.1281e+03 | IC: 7.5798e-03
+[09:13:43]     Physics -> PDE: 2.1036e-01 | BC: 2.4046e-04 | Norm: 5.2791e-04
+[09:13:43]     Finance -> MeanRev: 1.9249e-05 | VolGrad: 2.0599e-07
+[09:13:43]     PDF Stats -> Max: 12.48 | Mean: 5.0217 | >50: 0 | >100: 0
+[09:13:43]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7205e+02
+[09:16:51] Epoch  5000 | Loss: 1.566631e+00 | Phase: 2 | GPU: 1% | Time: 2753s
+[09:16:51]     Data -> CDF: 3.2923e-02 | PDF: 4.2277e+03 | IC: 8.4517e-03
+[09:16:51]     Physics -> PDE: 1.8759e-01 | BC: 3.0020e-04 | Norm: 4.9452e-04
+[09:16:51]     Finance -> MeanRev: 1.9279e-05 | VolGrad: 2.1878e-07
+[09:16:51]     PDF Stats -> Max: 12.46 | Mean: 5.0194 | >50: 0 | >100: 0
+[09:16:51]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7204e+02
+[09:16:51] Resampling 20.0% of collocation points...
+[09:16:58] Resampled 4000 points (max loss: 4.11e+01, mean: 1.78e-01)
+[09:20:24] Epoch  5200 | Loss: 1.557996e+00 | Phase: 2 | GPU: 1% | Time: 2966s
+[09:20:24]     Data -> CDF: 3.3011e-02 | PDF: 4.2885e+03 | IC: 1.1080e-02
+[09:20:24]     Physics -> PDE: 1.8474e-01 | BC: 3.9153e-04 | Norm: 5.7532e-04
+[09:20:24]     Finance -> MeanRev: 2.0495e-05 | VolGrad: 1.7746e-07
+[09:20:24]     PDF Stats -> Max: 12.39 | Mean: 4.9970 | >50: 0 | >100: 0
+[09:20:24]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7178e+02
+[09:23:37] Epoch  5400 | Loss: 1.399586e+00 | Phase: 2 | GPU: 1% | Time: 3159s
+[09:23:37]     Data -> CDF: 3.2945e-02 | PDF: 4.3231e+03 | IC: 1.1787e-02
+[09:23:37]     Physics -> PDE: 1.6515e-01 | BC: 4.7761e-04 | Norm: 5.2222e-04
+[09:23:37]     Finance -> MeanRev: 2.0640e-05 | VolGrad: 2.4344e-07
+[09:23:37]     PDF Stats -> Max: 12.37 | Mean: 4.9950 | >50: 0 | >100: 0
+[09:23:37]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7182e+02
+[09:27:08] Epoch  5600 | Loss: 1.323405e+00 | Phase: 2 | GPU: 1% | Time: 3370s
+[09:27:08]     Data -> CDF: 3.2853e-02 | PDF: 4.3325e+03 | IC: 1.2201e-02
+[09:27:08]     Physics -> PDE: 1.5577e-01 | BC: 5.6059e-04 | Norm: 4.8832e-04
+[09:27:08]     Finance -> MeanRev: 2.0737e-05 | VolGrad: 2.8925e-07
+[09:27:08]     PDF Stats -> Max: 12.36 | Mean: 4.9927 | >50: 0 | >100: 0
+[09:27:08]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7184e+02
+[09:30:38] Epoch  5800 | Loss: 1.232273e+00 | Phase: 2 | GPU: 1% | Time: 3581s
+[09:30:38]     Data -> CDF: 3.2790e-02 | PDF: 4.3488e+03 | IC: 1.2626e-02
+[09:30:38]     Physics -> PDE: 1.4456e-01 | BC: 6.5364e-04 | Norm: 4.4954e-04
+[09:30:38]     Finance -> MeanRev: 2.0749e-05 | VolGrad: 3.4038e-07
+[09:30:38]     PDF Stats -> Max: 12.36 | Mean: 4.9903 | >50: 0 | >100: 0
+[09:30:38]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7185e+02
+[09:34:16] Epoch  6000 | Loss: 1.161842e+00 | Phase: 2 | GPU: 1% | Time: 3798s
+[09:34:16]     Data -> CDF: 3.2746e-02 | PDF: 4.3603e+03 | IC: 1.2870e-02
+[09:34:16]     Physics -> PDE: 1.3582e-01 | BC: 7.5367e-04 | Norm: 4.3040e-04
+[09:34:16]     Finance -> MeanRev: 2.0739e-05 | VolGrad: 4.5928e-07
+[09:34:16]     PDF Stats -> Max: 12.35 | Mean: 4.9869 | >50: 0 | >100: 0
+[09:34:16]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7184e+02
+[09:34:16] Resampling 20.0% of collocation points...
+[09:34:24] Resampled 4000 points (max loss: 2.60e+01, mean: 1.31e-01)
+[09:37:31] Epoch  6200 | Loss: 1.124267e+00 | Phase: 2 | GPU: 1% | Time: 3993s
+[09:37:31]     Data -> CDF: 3.2666e-02 | PDF: 4.4110e+03 | IC: 1.4022e-02
+[09:37:31]     Physics -> PDE: 1.3121e-01 | BC: 9.3266e-04 | Norm: 3.7034e-04
+[09:37:31]     Finance -> MeanRev: 2.1809e-05 | VolGrad: 5.4102e-07
+[09:37:31]     PDF Stats -> Max: 12.33 | Mean: 4.9898 | >50: 0 | >100: 0
+[09:37:31]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7159e+02
+[09:40:36] Epoch  6400 | Loss: 1.033921e+00 | Phase: 2 | GPU: 1% | Time: 4178s
+[09:40:36]     Data -> CDF: 3.2577e-02 | PDF: 4.4101e+03 | IC: 1.3751e-02
+[09:40:36]     Physics -> PDE: 1.2021e-01 | BC: 1.0146e-03 | Norm: 3.4746e-04
+[09:40:36]     Finance -> MeanRev: 2.1902e-05 | VolGrad: 6.1060e-07
+[09:40:36]     PDF Stats -> Max: 12.34 | Mean: 4.9894 | >50: 0 | >100: 0
+[09:40:36]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7166e+02
+[09:44:02] Epoch  6600 | Loss: 9.596199e-01 | Phase: 2 | GPU: 1% | Time: 4384s
+[09:44:02]     Data -> CDF: 3.2497e-02 | PDF: 4.4062e+03 | IC: 1.3516e-02
+[09:44:02]     Physics -> PDE: 1.1118e-01 | BC: 1.0957e-03 | Norm: 3.2708e-04
+[09:44:02]     Finance -> MeanRev: 2.1881e-05 | VolGrad: 6.8239e-07
+[09:44:02]     PDF Stats -> Max: 12.35 | Mean: 4.9887 | >50: 0 | >100: 0
+[09:44:02]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7166e+02
+[09:47:32] Epoch  6800 | Loss: 9.457506e-01 | Phase: 2 | GPU: 1% | Time: 4594s
+[09:47:32]     Data -> CDF: 3.2407e-02 | PDF: 4.3927e+03 | IC: 1.3404e-02
+[09:47:32]     Physics -> PDE: 1.0965e-01 | BC: 1.1532e-03 | Norm: 3.0819e-04
+[09:47:32]     Finance -> MeanRev: 2.1842e-05 | VolGrad: 7.5569e-07
+[09:47:32]     PDF Stats -> Max: 12.36 | Mean: 4.9875 | >50: 0 | >100: 0
+[09:47:32]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7166e+02
+[09:51:05] Epoch  7000 | Loss: 9.244677e-01 | Phase: 2 | GPU: 1% | Time: 4808s
+[09:51:05]     Data -> CDF: 3.2306e-02 | PDF: 4.3687e+03 | IC: 1.3356e-02
+[09:51:05]     Physics -> PDE: 1.0714e-01 | BC: 1.2037e-03 | Norm: 2.9300e-04
+[09:51:05]     Finance -> MeanRev: 2.1761e-05 | VolGrad: 8.1137e-07
+[09:51:05]     PDF Stats -> Max: 12.36 | Mean: 4.9872 | >50: 0 | >100: 0
+[09:51:05]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7159e+02
+[09:51:05] Resampling 20.0% of collocation points...
+[09:51:13] Resampled 4000 points (max loss: 2.25e+01, mean: 9.70e-02)
+[09:54:59] Epoch  7200 | Loss: 8.697489e-01 | Phase: 2 | GPU: 1% | Time: 5041s
+[09:54:59]     Data -> CDF: 3.2429e-02 | PDF: 4.4424e+03 | IC: 1.4290e-02
+[09:54:59]     Physics -> PDE: 1.0038e-01 | BC: 1.5468e-03 | Norm: 2.3766e-04
+[09:54:59]     Finance -> MeanRev: 2.2512e-05 | VolGrad: 1.2771e-06
+[09:54:59]     PDF Stats -> Max: 12.36 | Mean: 4.9868 | >50: 0 | >100: 0
+[09:54:59]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7138e+02
+[09:58:34] Epoch  7400 | Loss: 7.890934e-01 | Phase: 2 | GPU: 1% | Time: 5256s
+[09:58:34]     Data -> CDF: 3.2432e-02 | PDF: 4.4660e+03 | IC: 1.4513e-02
+[09:58:34]     Physics -> PDE: 9.0416e-02 | BC: 1.7028e-03 | Norm: 2.1231e-04
+[09:58:34]     Finance -> MeanRev: 2.2390e-05 | VolGrad: 1.5111e-06
+[09:58:34]     PDF Stats -> Max: 12.36 | Mean: 4.9833 | >50: 0 | >100: 0
+[09:58:34]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7142e+02
+[10:02:12] Epoch  7600 | Loss: 7.101187e-01 | Phase: 2 | GPU: 1% | Time: 5474s
+[10:02:12]     Data -> CDF: 3.2419e-02 | PDF: 4.4755e+03 | IC: 1.4806e-02
+[10:02:12]     Physics -> PDE: 8.0634e-02 | BC: 1.7916e-03 | Norm: 1.8856e-04
+[10:02:12]     Finance -> MeanRev: 2.2200e-05 | VolGrad: 1.7216e-06
+[10:02:12]     PDF Stats -> Max: 12.36 | Mean: 4.9822 | >50: 0 | >100: 0
+[10:02:12]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7150e+02
+[10:05:49] Epoch  7800 | Loss: 7.956100e-01 | Phase: 2 | GPU: 1% | Time: 5691s
+[10:05:49]     Data -> CDF: 3.2390e-02 | PDF: 4.4644e+03 | IC: 1.4832e-02
+[10:05:49]     Physics -> PDE: 9.1383e-02 | BC: 1.8257e-03 | Norm: 1.7998e-04
+[10:05:49]     Finance -> MeanRev: 2.2051e-05 | VolGrad: 1.8385e-06
+[10:05:49]     PDF Stats -> Max: 12.36 | Mean: 4.9792 | >50: 0 | >100: 0
+[10:05:49]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7178e+02
+[10:09:07] 
+======================================================================
+[10:09:07] PHASE 3 STARTED (Epoch 8000)
+[10:09:07] Loss weights: PDE=15.0, Data=0.0, Norm=50.0
+[10:09:07] ======================================================================
+
+[10:09:08] Epoch  8000 | Loss: 1.236262e+00 | Phase: 3 | GPU: 1% | Time: 5891s
+[10:09:08]     Data -> CDF: 3.2368e-02 | PDF: 4.4560e+03 | IC: 1.4721e-02
+[10:09:08]     Physics -> PDE: 7.9472e-02 | BC: 1.8327e-03 | Norm: 1.6333e-04
+[10:09:08]     Finance -> MeanRev: 2.1811e-05 | VolGrad: 1.9850e-06
+[10:09:08]     PDF Stats -> Max: 12.37 | Mean: 4.9769 | >50: 0 | >100: 0
+[10:09:08]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7210e+02
+[10:09:08] Resampling 20.0% of collocation points...
+[10:09:16] Resampled 4000 points (max loss: 1.58e+01, mean: 7.28e-02)
+[10:13:02] Epoch  8200 | Loss: 1.297754e+00 | Phase: 3 | GPU: 1% | Time: 6125s
+[10:13:02]     Data -> CDF: 3.2663e-02 | PDF: 4.5148e+03 | IC: 2.1791e-02
+[10:13:02]     Physics -> PDE: 8.2013e-02 | BC: 2.0107e-03 | Norm: 3.4106e-04
+[10:13:02]     Finance -> MeanRev: 2.2972e-05 | VolGrad: 1.9800e-06
+[10:13:02]     PDF Stats -> Max: 12.26 | Mean: 4.9456 | >50: 0 | >100: 0
+[10:13:02]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7120e+02
+[10:16:52] Epoch  8400 | Loss: 1.230437e+00 | Phase: 3 | GPU: 1% | Time: 6355s
+[10:16:52]     Data -> CDF: 3.2852e-02 | PDF: 4.6002e+03 | IC: 2.4262e-02
+[10:16:52]     Physics -> PDE: 7.7156e-02 | BC: 2.2271e-03 | Norm: 3.4432e-04
+[10:16:52]     Finance -> MeanRev: 2.3211e-05 | VolGrad: 1.8731e-06
+[10:16:52]     PDF Stats -> Max: 12.25 | Mean: 4.9443 | >50: 0 | >100: 0
+[10:16:52]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7095e+02
+[10:20:40] Epoch  8600 | Loss: 1.159443e+00 | Phase: 3 | GPU: 1% | Time: 6583s
+[10:20:40]     Data -> CDF: 3.2992e-02 | PDF: 4.6516e+03 | IC: 2.5454e-02
+[10:20:40]     Physics -> PDE: 7.2286e-02 | BC: 2.3532e-03 | Norm: 3.3282e-04
+[10:20:40]     Finance -> MeanRev: 2.3269e-05 | VolGrad: 1.8063e-06
+[10:20:40]     PDF Stats -> Max: 12.24 | Mean: 4.9448 | >50: 0 | >100: 0
+[10:20:40]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7074e+02
+[10:24:27] Epoch  8800 | Loss: 1.111417e+00 | Phase: 3 | GPU: 1% | Time: 6809s
+[10:24:27]     Data -> CDF: 3.3097e-02 | PDF: 4.6809e+03 | IC: 2.5905e-02
+[10:24:27]     Physics -> PDE: 6.9053e-02 | BC: 2.3556e-03 | Norm: 3.2411e-04
+[10:24:27]     Finance -> MeanRev: 2.3223e-05 | VolGrad: 1.7992e-06
+[10:24:27]     PDF Stats -> Max: 12.23 | Mean: 4.9439 | >50: 0 | >100: 0
+[10:24:27]     PDF Reg -> Penalty: 0.0000e+00 | Grad: 1.7052e+02
+[10:25:47] 
+[Early stopping at epoch 8872] Best loss: 2.167038e-02
+[10:25:47] 
+======================================================================
+[10:25:47] TRAINING COMPLETED
+[10:25:47] ======================================================================
+[10:25:47] Time: 6889.0s (114.8min) | Epochs: 8873
+[10:25:47] Final loss: 1.176582e+00 | Best loss: 2.167038e-02 (epoch 3872)
+[10:25:47] GPU memory: 0.05/6.00 GB (0.9%)
+[10:25:47] ======================================================================
+
+[10:25:48] Results saved to: E:\Modelling\Project\Phase4-PINN\Results\TCS_20251122_083055
+[10:25:48] 
+======================================================================
+[10:25:48] STEP 2: STATISTICAL VALIDATION
+[10:25:48] ======================================================================
+[10:25:48] ======================================================================[10:25:48] STATISTICAL VALIDATION TESTS[10:25:48] ======================================================================[10:25:48] 
+1. Kolmogorov-Smirnov Test...[10:25:48]    Reject H0 (distributions differ) at α=0.05[10:25:48] 
+2. Anderson-Darling Test...[10:25:48]    Reject H0 at α=0.01[10:25:48] 
+3. Density Correlation...[10:25:48]    Pearson: 0.7191 (p=4.9133e-49), Spearman: 0.8733 (p=4.3086e-95)[10:25:48] 
+4. Probability Conservation...[10:25:48]    Probability conserved (∫p dx = 1.000000, error=4.0826e-08)[10:25:48] 
+5. Chi-squared Test...[10:25:48]    Fail to reject H0 (good fit) at α=0.05[10:25:48] 
+6. CRPS (Continuous Ranked Probability Score)...[10:25:48]    CRPS = 0.006148 (lower is better)[10:25:48] 
+======================================================================[10:25:48] VALIDATION SUMMARY[10:25:48] ======================================================================[10:25:48] 
+Passing Tests: 1/3[10:25:48] ⚠️  WARNING: Some validation tests failed[10:25:48] ======================================================================[10:25:48] ✅ Validation report saved: E:\Modelling\Project\Phase4-PINN\Validation\TCS_validation.json
+[10:25:48] 
+======================================================================
+[10:25:48] STEP 3: OUT-OF-SAMPLE VALIDATION
+[10:25:48] ======================================================================
+[10:25:48] ======================================================================[10:25:48] ROLLING WINDOW VALIDATION[10:25:48] ======================================================================[10:25:48] 
+Total windows: 19[10:25:48] Train window: 1500 days[10:25:48] Test horizon: 60 days
+[10:25:48] Window 1/19: Train=2015-01-02 to 2021-01-22[10:25:48] Window 2/19: Train=2015-03-31 to 2021-04-26[10:25:48] Window 3/19: Train=2015-06-29 to 2021-07-20[10:25:48] Window 4/19: Train=2015-09-22 to 2021-10-18[10:25:48] Window 5/19: Train=2015-12-22 to 2022-01-12[10:25:48] Window 6/19: Train=2016-03-18 to 2022-04-11[10:25:49] Window 7/19: Train=2016-06-17 to 2022-07-07[10:25:49] Window 8/19: Train=2016-09-15 to 2022-10-04[10:25:49] Window 9/19: Train=2016-12-13 to 2022-12-30[10:25:49] Window 10/19: Train=2017-03-09 to 2023-03-28[10:25:49] Window 11/19: Train=2017-06-07 to 2023-06-27[10:25:49] Window 12/19: Train=2017-09-04 to 2023-09-22[10:25:49] Window 13/19: Train=2017-11-29 to 2023-12-20[10:25:49] Window 14/19: Train=2018-02-26 to 2024-03-15[10:25:49] Window 15/19: Train=2018-05-25 to 2024-06-14[10:25:49] Window 16/19: Train=2018-08-20 to 2024-09-11[10:25:49] Window 17/19: Train=2018-11-20 to 2024-12-09[10:25:49] Window 18/19: Train=2019-02-14 to 2025-03-04[10:25:49] Window 19/19: Train=2019-05-17 to 2025-06-04[10:25:49] 
+======================================================================[10:25:49] ROLLING WINDOW SUMMARY[10:25:49] ======================================================================[10:25:49] 
+Density Correlation:[10:25:49]   Mean: 0.5736[10:25:49]   Std:  0.0506[10:25:49]   Min:  0.4935[10:25:49]   Max:  0.6773[10:25:49] 
+CRPS:[10:25:49]   Mean: 0.006741[10:25:49]   Std:  0.000976[10:25:49] 
+VaR Coverage:[10:25:49]   90%: 1.0000 (target: 0.9000)[10:25:49]   95%: 1.0000 (target: 0.9500)[10:25:49]   99%: 1.0000 (target: 0.9900)[10:25:49] 
+ES Accuracy (Mean Absolute Percentage Error):[10:25:49] 
+======================================================================[10:25:49] CRISIS PERIOD STRESS TEST[10:25:49] ======================================================================[10:25:49] 
+COVID_CRASH: 2020-02-01 to 2020-04-30[10:25:49]   Days: 59[10:25:49]   Return: μ=-0.0005, σ=0.0353[10:25:49]   Density Correlation: 0.8296[10:25:49]   VaR 95% Error: 17.86%[10:25:49]   ES 95% Error: 7.66%[10:25:49] 
+CORRECTION_2022: 2022-01-01 to 2022-03-31[10:25:49]   Days: 61[10:25:49]   Return: μ=0.0000, σ=0.0154[10:25:49]   Density Correlation: 0.6476[10:25:49]   VaR 95% Error: 246.02%[10:25:49]   ES 95% Error: 126.55%[10:25:49] 
+DEMONETIZATION_2016: 2016-11-08 to 2017-01-31[10:25:49]   Days: 59[10:25:49]   Return: μ=-0.0004, σ=0.0168[10:25:49]   Density Correlation: 0.6258[10:25:49]   VaR 95% Error: 190.61%[10:25:49]   ES 95% Error: 90.31%[10:25:49] 
+✅ OOS validation report saved to: E:\Modelling\Project\Phase4-PINN\Validation\TCS_oos_validation.json[10:25:49] 
+======================================================================
+[10:25:49] STEP 4: INTERPRETABILITY ANALYSIS
+[10:25:49] ======================================================================
+[10:25:49] ======================================================================[10:25:49] DRIFT FUNCTION ANALYSIS: a(x,t)[10:25:49] ======================================================================[10:25:49] 
+Time t = 0.25:[10:25:49]   Mean reversion: 72.0% of points satisfy sign(a) = -sign(x)[10:25:49]   Mean reversion strength λ(t): 0.8983[10:25:49]   Asymmetry ratio: 1.0000 (0 = symmetric)[10:25:49]   Range: [-0.0990, 0.2919][10:25:49]   Mean: 0.0486[10:25:49] 
+Time t = 0.50:[10:25:49]   Mean reversion: 9.0% of points satisfy sign(a) = -sign(x)[10:25:49]   Mean reversion strength λ(t): -1.0311[10:25:49]   Asymmetry ratio: 0.3533 (0 = symmetric)[10:25:49]   Range: [-0.2737, 0.1362][10:25:49]   Mean: -0.0291[10:25:49] 
+Time t = 0.75:[10:25:49]   Mean reversion: 48.0% of points satisfy sign(a) = -sign(x)[10:25:49]   Mean reversion strength λ(t): -0.2107[10:25:49]   Asymmetry ratio: 1.0000 (0 = symmetric)[10:25:49]   Range: [-0.0048, 0.2331][10:25:49]   Mean: 0.0506[10:25:49] 
+Time t = 1.00:[10:25:49]   Mean reversion: 37.0% of points satisfy sign(a) = -sign(x)[10:25:49]   Mean reversion strength λ(t): -0.6645[10:25:49]   Asymmetry ratio: 1.0000 (0 = symmetric)[10:25:49]   Range: [-0.1662, 0.1135][10:25:49]   Mean: -0.0972[10:25:49] 
+Mean Reversion Strength Evolution:[10:25:49]   Mean λ: -0.2520[10:25:49]   Std λ:  0.7249[10:25:49]   Range:  [-1.0311, 0.8983][10:25:49] 
+======================================================================[10:25:49] DIFFUSION FUNCTION ANALYSIS: b(x,t)[10:25:49] ======================================================================[10:25:49] 
+Time t = 0.25:[10:25:49]   Volatility smile: 58.0% of points have b(x) > b(0)[10:25:49]   Smile curvature b₂: 0.0005 (✓ U-shaped)[10:25:49]   Leverage effect: b(-x)/b(+x) = 1.4237 (✓ present)[10:25:49]   Range: [0.000010, 0.000041][10:25:49]   Mean: 0.000014[10:25:49] 
+Time t = 0.50:[10:25:49]   Volatility smile: 92.0% of points have b(x) > b(0)[10:25:49]   Smile curvature b₂: 0.0027 (✓ U-shaped)[10:25:49]   Leverage effect: b(-x)/b(+x) = 0.6617 (✗ weak)[10:25:49]   Range: [0.000010, 0.000233][10:25:49]   Mean: 0.000021[10:25:49] 
+Time t = 0.75:[10:25:49]   Volatility smile: 1.0% of points have b(x) > b(0)[10:25:49]   Smile curvature b₂: -0.0701 (✗ inverted)[10:25:49]   Leverage effect: b(-x)/b(+x) = 0.7100 (✗ weak)[10:25:49]   Range: [0.000021, 0.001805][10:25:49]   Mean: 0.000599[10:25:49] 
+Time t = 1.00:[10:25:49]   Volatility smile: 79.0% of points have b(x) > b(0)[10:25:49]   Smile curvature b₂: 0.0060 (✓ U-shaped)[10:25:49]   Leverage effect: b(-x)/b(+x) = 0.2596 (✗ weak)[10:25:49]   Range: [0.000011, 0.000526][10:25:49]   Mean: 0.000036[10:25:49] 
+Volatility Clustering Analysis:[10:25:49]   Corr(b_0.25, b_0.50): 0.3234[10:25:49]   Corr(b_0.50, b_0.75): -0.2919[10:25:49]   Corr(b_0.75, b_1.00): -0.2456[10:25:49]   Mean temporal correlation: -0.0713 (✗ weak)[10:25:49] 
+======================================================================[10:25:49] SENSITIVITY ANALYSIS[10:25:49] ======================================================================[10:25:49] 
+Base point: (x=0.0000, t=0.5000)[10:25:49] 
+Drift a(x,t) at base point: -0.059178[10:25:49]   ∂a/∂x = 2.091613 ✗[10:25:49]   ∂a/∂t = -0.362406[10:25:49] 
+Diffusion b(x,t) at base point: 0.000010[10:25:49]   ∂b/∂x = 0.000000[10:25:49]   ∂b/∂t = 0.000003[10:25:53] 
+✅ Plot saved: discovered_functions.png[10:26:01] 
+✅ Interpretability report saved to: E:\Modelling\Project\Phase4-PINN\Analysis\TCS_interpretability.json[10:26:01] 
+======================================================================
+[10:26:01] STEP 5: RISK APPLICATIONS
+[10:26:01] ======================================================================
+[10:26:01] ======================================================================[10:26:01] VaR BACKTESTING[10:26:01] ======================================================================[10:26:12] 
+Confidence Level: 95%[10:26:12] Periods tested: 2412[10:26:12] Violations: 86 (3.57%)[10:26:12] Expected: 5.00%[10:26:12] Actual Coverage: 96.43% (target: 95%)[10:26:12] Result: ✅ PASS[10:26:12] ✅ VaR backtesting completed
+[10:26:12] 
+======================================================================
+[10:26:12] STEP 6: PHASE COMPARISON & FINAL REPORT
+[10:26:12] ======================================================================
+[10:26:12] ======================================================================[10:26:12] LOADING RESULTS FOR TCS[10:26:12] ======================================================================[10:26:12] ⚠️  Phase 1 results not found[10:26:12] ⚠️  Phase 2 results not found[10:26:12] ⚠️  Phase 3 results not found[10:26:12] 
+======================================================================[10:26:12] GENERATING FINAL REPORT[10:26:12] ======================================================================[10:26:12] 
+======================================================================[10:26:12] PHASE COMPARISON TABLE[10:26:12] ======================================================================[10:26:12]                          Metric GBM (Phase 1) Heston (Phase 2) Empirical (Phase 3)       PINN (Phase 4)     Target
+Normality (Jarque-Bera p-value)           N/A              N/A                 N/A Captures heavy tails     > 0.05
+               VaR 95% Coverage           N/A              N/A                 N/A                96.4% 95.0% ± 1%
+                   ES 95% Error           N/A              N/A                 N/A                 8.0%      < 10%
+            Density Correlation           N/A              N/A                 N/A                 0.72     > 0.95
+               Mean Reversion λ          None             None                 N/A               -0.665 Discovered
+               Volatility Smile          None          Implied            Observed           Discovered    Present
+              Regime Adaptation          None     Fixed params       PELT detected            Automatic    Dynamic
+                  Training Time          < 1s           ~1 min              ~5 min              114 min   One-time[10:26:14] 
+✅ Comparison plot saved: E:\Modelling\Project\Phase4-PINN\Results\TCS_final_report\phase_comparison_plot.png[10:26:24] 
+✅ Final report saved to: E:\Modelling\Project\Phase4-PINN\Results\TCS_final_report[10:26:24]    - phase_comparison.csv[10:26:24]    - phase_comparison_plot.png[10:26:24]    - final_report.json[10:26:24]    - SUMMARY.md[10:26:24] 
+======================================================================
+[10:26:24] PIPELINE COMPLETED SUCCESSFULLY!
+[10:26:24] ======================================================================
+[10:26:24] 
+Results saved to:
+[10:26:24]   Validation: E:\Modelling\Project\Phase4-PINN\Validation\TCS_validation.json
+[10:26:24]   OOS: E:\Modelling\Project\Phase4-PINN\Validation\TCS_oos_validation.json
+[10:26:24]   Interpretability: E:\Modelling\Project\Phase4-PINN\Analysis\TCS_interpretability.json
+[10:26:24]   Final Report: E:\Modelling\Project\Phase4-PINN\Results\TCS_final_report
+[10:26:24] ======================================================================
+
+[10:26:25] 
+✅ All processing completed successfully!
